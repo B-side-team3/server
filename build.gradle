@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'com.bside'
-version = '0.0.1-SNAPSHOT'
+version = ''
 sourceCompatibility = '11'
 
 configurations {
@@ -21,11 +21,6 @@ repositories {
 
 ext {
 	set('snippetsDir', file("build/generated-snippets"))
-}
-
-// 빌드 시 plain.jar 미생성
-jar {
-	enabled = false
 }
 
 dependencies {
@@ -50,6 +45,12 @@ dependencies {
 }
 
 def profile = project.hasProperty("profile") ? project.property("profile").toString() : "dev"
+
+// 빌드 시 plain.jar 미생성 및 jar 파일 이름 지정
+tasks.named('jar') {
+	enabled = false
+	project.setArchivesBaseName("${rootProject.name}-${profile}")
+}
 
 tasks.named('test') {
 	systemProperty("spring.profiles.active", profile)
