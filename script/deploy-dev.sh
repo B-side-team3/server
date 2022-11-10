@@ -18,16 +18,12 @@ echo "> 새 애플리케이션 배포"
 
 BUILD_PATH="/home/service/server/deploy/${PROCESS_NAME}"
 
-curDate=$(date "+%Y-%m-%d %r")
-
-echo "================= [ date : $curDate ] =================" >> /home/service/server/logs/server-dev.log
-
-/usr/bin/java -jar -Djava.net.preferIPv4Stack=true -Dspring.profiles.active=dev $BUILD_PATH >> /home/service/server/logs/server-dev.log 2>&1 &
+JENKINS_NODE_COOKIE=dontKillMe nohup /usr/bin/java -jar -Dspring.profiles.active=dev $BUILD_PATH >> /dev/null 2>&1 &
 
 # 실행 여부 확인
 LOOP_COUNT=0
 while true; do
-  PROCESS_CHECK_CMD=$(netstat -lntp | grep 8080)
+  PROCESS_CHECK_CMD=$(sudo netstat -lntp | grep 8080)
   if [ -n "${PROCESS_CHECK_CMD}" ]; then
     BUILD_SUCCESS=1
     break
