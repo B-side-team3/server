@@ -13,10 +13,14 @@ public enum ErrorCode {
     // common
     INVALID_INPUT_VALUE(1000, "Invalid input value."),
     INVALID_BINDING_VALUE(1001, "Invalid binding value."),
-    METHOD_NOT_ALLOWED(1002, "Method not allowed." );
+    METHOD_NOT_ALLOWED(1002, "Method not allowed." ),
 
     // 인증
-//    UNKNOWN_USER(2000, "Unknown user."),
+    UNKNOWN_USER(2000, "Unknown user."),
+    INVALID_AUTHENTICATION_TYPE(2001, "Invalid authentication type."),
+    AUTHORIZATION_HEADER_NOT_FOUND(2003, "Authorization header not found."),
+    EXPIRED_TOKEN(2004, "Expired token.")
+    ;
 
     private final int code;
     private final String message;
