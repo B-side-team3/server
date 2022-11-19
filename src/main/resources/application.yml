@@ -51,3 +51,12 @@ spring:
           tokenUri: https://kauth.kakao.com/oauth/token
           userInfoUri: https://kapi.kakao.com/v2/user/me
           userNameAttribute: id
+
+app:
+  auth:
+    tokenSecret: BSIDE_ROLEBIT_AUTHENTICATE_ENCRYPT_KEY
+    tokenExpiry: 1800000
+    refreshTokenExpiry: 604800000
+  oauth2:
+    authorizedRedirectUris:
+      - http://localhost:3000/oauth/redirect
