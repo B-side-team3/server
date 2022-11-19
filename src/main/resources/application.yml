@@ -1,3 +1,53 @@
 spring:
   jwt:
-    secret: BSIDE_ROLLBIT_AUTHENTICATE_ENCRYPT_KEY
+    secret: BSIDE_ROLEBIT_AUTHENTICATE_ENCRYPT_KEY
+
+  security:
+    oauth2.client:
+      registration:
+        google:
+          clientId: 462552833508-dvq36robc43l7g2784em9q2snamcscck.apps.googleusercontent.com
+          clientSecret: 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
+          scope:
+            - email
+            - profile
+        naver:
+          clientId: WsZxG6A1bXsWglFZsNuC
+          clientSecret: VsbrDhN1I5
+          clientAuthenticationMethod: post
+          authorizationGrantType: authorization_code
+          redirectUri: localhost:8080/login/oauth2/code/naver
+          scope:
+            - name
+            - email
+            - gender
+            - birthday
+            - age
+            - profile_image
+          clientName: Naver
+        kakao:
+          clientId: ebb5443c2aeafb2e0bc3fa3c57cd4f83
+          clientSecret: uuqgmv8gahYpfbpmDvK6trmKSOP0BHc0
+          clientAuthenticationMethod: post
+          authorizationGrantType: authorization_code
+          redirectUri: localhost:8080/login/oauth2/code/kakao
+          scope:
+            - profile_nickname
+            - profile_image
+            - account_email
+            - gender
+            - age_range
+            - birthday
+          clientName: Kakao
+
+      provider:
+        naver:
+          authorizationUri: https://nid.naver.com/oauth2.0/authorize
+          tokenUri: https://nid.naver.com/oauth2.0/token
+          userInfoUri: https://openapi.naver.com/v1/nid/me
+          userNameAttribute: response
+        kakao:
+          authorizationUri: https://kauth.kakao.com/oauth/authorize
+          tokenUri: https://kauth.kakao.com/oauth/token
+          userInfoUri: https://kapi.kakao.com/v2/user/me
+          userNameAttribute: id
