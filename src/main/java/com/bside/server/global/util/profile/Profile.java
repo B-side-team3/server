@@ -1,4 +1,4 @@
-package com.bside.server.global.utils.profile;
+package com.bside.server.global.util.profile;
 
 public enum Profile {
     DEV("dev"),
