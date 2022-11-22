@@ -1,8 +1,6 @@
 package com.bside.server.global.config;
 
 import com.bside.server.global.auth.security.AuthenticationFilter;
-import com.bside.server.global.auth.security.TokenAuthenticationFilter;
-import com.bside.server.global.auth.token.AuthTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -24,7 +22,6 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 public class SecurityConfig {
 
     private final AuthenticationFilter authenticationFilter;
-    private final AuthTokenProvider tokenProvider;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -61,16 +58,12 @@ public class SecurityConfig {
     }
 
     @Bean
-    public TokenAuthenticationFilter tokenAuthenticationFilter() {
-        return new TokenAuthenticationFilter(tokenProvider);
-    }
-
-    @Bean
     public WebSecurityCustomizer webSecurityCustomizer(){
         return (web) -> web.ignoring()
                 .mvcMatchers(HttpMethod.GET, "/docs/index.html")
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations());
     }
+
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {

@@ -1,4 +1,4 @@
-package com.bside.server.global.utils.profile;
+package com.bside.server.global.util.profile;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
