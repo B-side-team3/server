@@ -6,6 +6,7 @@ import com.bside.server.global.util.profile.ActiveProfile;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Base64;
+import java.util.Date;
 
 @Slf4j
 @Component
@@ -26,6 +28,10 @@ public class JwtValidator {
 
     @Value("${spring.jwt.secret}")
     private String secretKey;
+    @Value("${spring.jwt.tokenExpiry}")
+    private String tokenExpiry;
+    @Value("${spring.jwt.refreshTokenExpiry}")
+    private String refreshTokenExpiry;
 
     private final UserDetailsServiceImpl userDetailsService;
 
@@ -46,6 +52,18 @@ public class JwtValidator {
         Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, null, null);
 
         return authentication;
+    }
+
+    public String createToken(String key) {
+        Claims claims = Jwts.claims().setId(key);
+        Date now = new Date();
+
+        return Jwts.builder()
+            .setClaims(claims)
+            .setIssuedAt(now)
+            .setExpiration(new Date(now.getTime() + tokenExpiry))
+            .signWith(SignatureAlgorithm.HS256, secretKey)
+            .compact();
     }
 
     private String getToken(HttpServletRequest request) {

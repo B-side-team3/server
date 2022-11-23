@@ -1,3 +1,6 @@
 spring:
   jwt:
-    secret: BSIDE_ROLLBIT_AUTHENTICATE_ENCRYPT_KEY
+    secret: BSIDE_ROLEBIT_AUTHENTICATE_ENCRYPT_KEY
+    tokenSecret:
+    tokenExpiry: 1800000 # milliseconds, 30min
+    refreshTokenExpiry: 1209600000 # milliseconds, 14days
