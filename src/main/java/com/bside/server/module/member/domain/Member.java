@@ -28,20 +28,15 @@ public class Member {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "is_admin", nullable = false)
-    private Integer isAdmin;
+    @Column(name = "nickname", nullable = false)
+    private String nickname;
 
-    @Column(name = "join_date", nullable = false)
-    @CreatedDate
-    private LocalDateTime joinDate;
+    @Column(name = "image_url", nullable = false)
+    private String imageUrl;
 
-    @Column(name = "del_date")
-    private LocalDateTime delDate;
+    @Column(name = "is_deleted")
+    private Integer isDeleted;
 
-    public String getRole() {
-        if(this.getIsAdmin() == 0) {
-            return Role.USER.getValue();
-        }
-        return Role.ADMIN.getValue();
-    }
+    @Column(name = "created_date")
+    private String createdDate;
 }
