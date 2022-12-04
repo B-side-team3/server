@@ -20,6 +20,5 @@ spring:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
   jwt:
     secret: BSIDE_ROLEBIT_AUTHENTICATE_ENCRYPT_KEY
-    tokenSecret:
     tokenExpiry: 1800000 # milliseconds, 30min
     refreshTokenExpiry: 1209600000 # milliseconds, 14days
