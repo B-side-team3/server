@@ -14,7 +14,7 @@ public class UserAdapter extends User {
     private Member member;
 
     public UserAdapter(Member member) {
-        super(member.getEmail(), "", Set.of(new SimpleGrantedAuthority(Role.USER.getValue())));
+        super(member.getEmail(), "", Set.of(new SimpleGrantedAuthority(member.getRole())));
         this.member = member;
     }
 }
