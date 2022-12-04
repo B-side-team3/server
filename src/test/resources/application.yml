@@ -21,3 +21,7 @@ spring:
       ddl-auto: none
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  jwt:
+    secret: BSIDE_ROLEBIT_AUTHENTICATE_ENCRYPT_KEY
+    tokenExpiry: 1800000 # milliseconds, 30min
+    refreshTokenExpiry: 1209600000 # milliseconds, 14days
