@@ -2,7 +2,6 @@ package com.bside.server.global.auth.security;
 
 import com.bside.server.global.error.ErrorCode;
 import com.bside.server.global.error.exception.AuthenticationException;
-import com.bside.server.global.util.profile.ActiveProfile;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -88,12 +87,7 @@ public class JwtValidator {
                     .parseClaimsJws(token)
                     .getBody();
         } catch (ExpiredJwtException e) {
-
-            if (ActiveProfile.isDev()) {
-                return e.getClaims();
-            } else {
                 throw new AuthenticationException(ErrorCode.EXPIRED_TOKEN);
-            }
         }
     }
 
