@@ -34,9 +34,20 @@ public class Member {
     @Column(name = "image_url", nullable = false)
     private String imageUrl;
 
+    @Column(name = "is_admin", nullable = false)
+    private Integer isAdmin;
+
+
     @Column(name = "is_deleted")
     private Integer isDeleted;
 
     @Column(name = "created_date")
     private String createdDate;
+
+    public String getRole() {
+        if(this.getIsAdmin() == 0) {
+            return Role.USER.getValue();
+        }
+        return Role.ADMIN.getValue();
+    }
 }
