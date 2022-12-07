@@ -1,7 +1,6 @@
 package com.bside.server.global.auth.security;
 
-import com.bside.server.global.auth.permission.Role;
-import com.bside.server.module.member.domain.Member;
+import com.bside.server.global.common.entity.Member;
 import lombok.Getter;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
