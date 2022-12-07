@@ -1,11 +1,12 @@
-package com.bside.server.module.member.domain;
+package com.bside.server.global.common.entity;
 
 import com.bside.server.global.auth.permission.Role;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -18,12 +19,13 @@ import java.time.LocalDateTime;
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "member")
 @Getter
+@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Integer id;
+    @Column(name = "MEMBER_ID", nullable = false)
+    private Integer memberId;
 
     @Column(name = "email", nullable = false)
     private String email;
@@ -37,12 +39,13 @@ public class Member {
     @Column(name = "is_admin", nullable = false)
     private Integer isAdmin;
 
+    @Column(name = "is_deleted", length = 1)
+    private String isDeleted;
 
-    @Column(name = "is_deleted")
-    private Integer isDeleted;
-
+    @Builder.Default
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "created_date")
-    private String createdDate;
+    private LocalDateTime createdDate = LocalDateTime.now();
 
     public String getRole() {
         if(this.getIsAdmin() == 0) {
