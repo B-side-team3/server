@@ -17,10 +17,15 @@ public class MemberDto {
   private Integer isAdmin;
 
   public MemberDto(Member entity) {
-    from(entity);
+    this.memberId = entity.getMemberId();
+    this.email = entity.getEmail();
+    this.nickname = entity.getNickname();
+    this.imageUrl = entity.getImageUrl();
+    this.isDeleted = entity.getIsDeleted();
+    this.isAdmin = entity.getIsAdmin();
   }
 
-  public Member to() {
+  public Member toEntity() {
     return Member.builder()
         .memberId(memberId)
         .email(email)
@@ -29,14 +34,5 @@ public class MemberDto {
         .isDeleted(isDeleted)
         .isAdmin(isAdmin)
         .build();
-  }
-
-  public void from(Member entity) {
-    memberId = entity.getMemberId();
-    email = entity.getEmail();
-    nickname = entity.getNickname();
-    imageUrl = entity.getImageUrl();
-    isDeleted = entity.getIsDeleted();
-    isAdmin = entity.getIsAdmin();
   }
 }
