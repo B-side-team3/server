@@ -1,7 +1,15 @@
 package com.bside.server.member.dto;
 
 import com.bside.server.member.domain.Member;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class MemberDto {
 
   private Integer memberId;
