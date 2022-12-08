@@ -1,6 +1,6 @@
-package com.bside.server.global.member.domain;
+package com.bside.server.member.dto;
 
-import com.bside.server.global.common.entity.Member;
+import com.bside.server.member.domain.Member;
 
 public class MemberDto {
 

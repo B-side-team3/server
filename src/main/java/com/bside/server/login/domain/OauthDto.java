@@ -1,7 +1,7 @@
-package com.bside.server.global.login.domain;
+package com.bside.server.login.domain;
 
-import com.bside.server.global.common.entity.Member;
-import com.bside.server.global.common.entity.Oauth;
+import com.bside.server.member.domain.Member;
+import com.bside.server.member.domain.Oauth;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
