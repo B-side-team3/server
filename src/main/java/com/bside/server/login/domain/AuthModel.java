@@ -1,4 +1,4 @@
-package com.bside.server.global.login.domain;
+package com.bside.server.login.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;

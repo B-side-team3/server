@@ -1,6 +1,6 @@
-package com.bside.server.global.common.repository;
+package com.bside.server.member.repository;
 
-import com.bside.server.global.common.entity.Member;
+import com.bside.server.member.domain.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MemberRepository extends JpaRepository<Member, Integer> {

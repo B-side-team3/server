@@ -1,7 +1,8 @@
-package com.bside.server.module.member.domain;
+package com.bside.server.global.common.entity;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
+import com.bside.server.member.domain.Member;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
@@ -15,21 +16,21 @@ import com.querydsl.core.types.Path;
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
 public class QMember extends EntityPathBase<Member> {
 
-    private static final long serialVersionUID = -1493891063L;
+    private static final long serialVersionUID = 232874180L;
 
     public static final QMember member = new QMember("member1");
 
-    public final StringPath createdDate = createString("createdDate");
+    public final DateTimePath<java.time.LocalDateTime> createdDate = createDateTime("createdDate", java.time.LocalDateTime.class);
 
     public final StringPath email = createString("email");
-
-    public final NumberPath<Integer> id = createNumber("id", Integer.class);
 
     public final StringPath imageUrl = createString("imageUrl");
 
     public final NumberPath<Integer> isAdmin = createNumber("isAdmin", Integer.class);
 
-    public final NumberPath<Integer> isDeleted = createNumber("isDeleted", Integer.class);
+    public final StringPath isDeleted = createString("isDeleted");
+
+    public final NumberPath<Integer> memberId = createNumber("memberId", Integer.class);
 
     public final StringPath nickname = createString("nickname");
 

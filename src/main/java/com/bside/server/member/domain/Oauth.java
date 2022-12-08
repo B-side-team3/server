@@ -1,4 +1,4 @@
-package com.bside.server.global.common.entity;
+package com.bside.server.member.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
