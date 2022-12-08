@@ -2,6 +2,7 @@ package com.bside.server.global.auth.security;
 
 import com.bside.server.global.error.ErrorCode;
 import com.bside.server.global.error.exception.AuthenticationException;
+import com.bside.server.member.dto.MemberDto;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -55,8 +56,17 @@ public class JwtValidator {
         return authentication;
     }
 
-    public String createToken(String key, Long expireTime) {
-        Claims claims = Jwts.claims().setId(key);
+    public String createToken(MemberDto memberDto) {
+        return doCreateToken(memberDto, tokenExpiry);
+    }
+
+    public String createRefreshToken(MemberDto memberDto) {
+        return doCreateToken(memberDto, refreshTokenExpiry);
+    }
+
+    public String doCreateToken(MemberDto memberDto, long expireTime)  {
+        Claims claims = Jwts.claims();
+        claims.put("email", memberDto.getEmail());
 
         return Jwts.builder()
             .setClaims(claims)

@@ -1,7 +1,7 @@
 package com.bside.server.login.domain;
 
-import com.bside.server.member.domain.Member;
 import com.bside.server.member.domain.Oauth;
+import com.bside.server.member.dto.MemberDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,7 +15,7 @@ public class OauthDto {
 
   private Integer oauthId;
 
-  private Member member;
+  private MemberDto member;
 
   private String type;
 
@@ -27,17 +27,17 @@ public class OauthDto {
 
   public OauthDto(Oauth entity) {
     this.oauthId = entity.getOauthId();
-    this.member = entity.getMember();
+    this.member = new MemberDto(entity.getMember());
     this.type = entity.getType();
     this.accessToken = entity.getAccessToken();
     this.refreshToken = entity.getRefreshToken();
     this.isDeleted = entity.getIsDeleted();
   }
 
-  public Oauth toEntiity() {
+  public Oauth toEntity() {
     return Oauth.builder()
         .oauthId(oauthId)
-        .member(member)
+        .member(member.toEntity())
         .type(type)
         .accessToken(accessToken)
         .refreshToken(refreshToken)
