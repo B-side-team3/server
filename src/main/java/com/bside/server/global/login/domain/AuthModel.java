@@ -23,8 +23,6 @@ public class AuthModel {
 
   private String email;
 
-  private String nickname;
-
   private Boolean authResult;
 
   private String authResultMessgage;
