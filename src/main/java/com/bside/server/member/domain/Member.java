@@ -2,16 +2,13 @@ package com.bside.server.member.domain;
 
 import com.bside.server.global.auth.permission.Role;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-/**
- * 임의로 생성한 user 테이블 entity.
- * todo 추후 정책에 따라 변경한다.
- */
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "member")
@@ -22,7 +19,7 @@ import java.time.LocalDateTime;
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "MEMBER_ID", nullable = false)
+    @Column(name = "member_id", nullable = false)
     private Integer memberId;
 
     @Column(name = "email", nullable = false)
@@ -37,13 +34,13 @@ public class Member {
     @Column(name = "is_admin", nullable = false)
     private Integer isAdmin;
 
-    @Column(name = "is_deleted", length = 1)
-    private String isDeleted;
+    @Column(name = "is_deleted", nullable = false)
+    private Integer isDeleted;
 
-    @Builder.Default
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @CreationTimestamp
     @Column(name = "created_date")
-    private LocalDateTime createdDate = LocalDateTime.now();
+    private LocalDateTime createdDate;
 
     public String getRole() {
         if(this.getIsAdmin() == 0) {

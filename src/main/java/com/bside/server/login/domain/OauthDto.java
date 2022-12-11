@@ -23,7 +23,7 @@ public class OauthDto {
 
   private String refreshToken;
 
-  private String isDeleted;
+  private Integer isDeleted;
 
   public OauthDto(Oauth entity) {
     this.oauthId = entity.getOauthId();
