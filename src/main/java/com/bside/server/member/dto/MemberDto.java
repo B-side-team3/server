@@ -20,7 +20,7 @@ public class MemberDto {
 
   private String imageUrl;
 
-  private String isDeleted;
+  private Integer isDeleted;
 
   private Integer isAdmin;
 

@@ -1,8 +1,7 @@
-package com.bside.server.global.common.entity;
+package com.bside.server.member.domain;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
-import com.bside.server.member.domain.Oauth;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
@@ -17,17 +16,17 @@ import com.querydsl.core.types.dsl.PathInits;
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
 public class QOauth extends EntityPathBase<Oauth> {
 
-    private static final long serialVersionUID = -683488467L;
+    private static final long serialVersionUID = 1161367960L;
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
     public static final QOauth oauth = new QOauth("oauth");
 
-    public final DateTimePath<java.time.LocalDateTime> accessTime = createDateTime("accessTime", java.time.LocalDateTime.class);
-
     public final StringPath accessToken = createString("accessToken");
 
-    public final StringPath isDeleted = createString("isDeleted");
+    public final DateTimePath<java.time.LocalDateTime> createdDate = createDateTime("createdDate", java.time.LocalDateTime.class);
+
+    public final NumberPath<Integer> isDeleted = createNumber("isDeleted", Integer.class);
 
     public final QMember member;
 

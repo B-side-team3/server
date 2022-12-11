@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -13,32 +14,32 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "OAUTH")
+@Entity(name = "oauth")
 public class Oauth {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "OAUTH_ID", nullable = false)
+  @Column(name = "oauth_id", nullable = false)
   private Integer oauthId;
 
   @OneToOne
-  @JoinColumn(name = "MEMBER_ID")
+  @JoinColumn(name = "member_id")
   private Member member;
 
-  @Column(name = "ACCESS_TOKEN")
+  @Column(name = "access_token")
   private String accessToken;
 
-  @Column(name = "REFRESH_TOKEN")
+  @Column(name = "refresh_token")
   private String refreshToken;
 
-  @Column(name = "TYPE")
+  @Column(name = "type")
   private String type;
 
-  @Column(name = "IS_DELETE", columnDefinition = "jwt token 삭제 여부")
-  private String isDeleted;
+  @Column(name = "is_deleted", columnDefinition = "jwt token 삭제 여부")
+  private Integer isDeleted;
 
-  @Builder.Default
   @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-  @Column(name = "ACCESS_TIME")
-  private LocalDateTime accessTime = LocalDateTime.now();
+  @CreationTimestamp
+  @Column(name = "created_date")
+  private LocalDateTime createdDate;
 }
