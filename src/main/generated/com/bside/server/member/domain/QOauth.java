@@ -2,6 +2,7 @@ package com.bside.server.member.domain;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
+import com.bside.server.login.domain.Oauth;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
