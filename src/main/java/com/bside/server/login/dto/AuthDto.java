@@ -1,4 +1,4 @@
-package com.bside.server.login.domain;
+package com.bside.server.login.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -11,7 +11,8 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthModel {
+public class AuthDto
+{
 
   @JsonProperty("access_token")
   private String accessToken;

@@ -1,6 +1,6 @@
-package com.bside.server.login.domain;
+package com.bside.server.login.dto;
 
-import com.bside.server.member.domain.Oauth;
+import com.bside.server.login.domain.Oauth;
 import com.bside.server.member.dto.MemberDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,5 +1,6 @@
-package com.bside.server.member.domain;
+package com.bside.server.login.domain;
 
+import com.bside.server.member.domain.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
