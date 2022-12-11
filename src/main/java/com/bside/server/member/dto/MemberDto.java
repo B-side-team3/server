@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -24,6 +26,8 @@ public class MemberDto {
 
   private Integer isAdmin;
 
+  private LocalDateTime createdDate;
+
   public MemberDto(Member entity) {
     this.memberId = entity.getMemberId();
     this.email = entity.getEmail();
@@ -31,6 +35,7 @@ public class MemberDto {
     this.imageUrl = entity.getImageUrl();
     this.isDeleted = entity.getIsDeleted();
     this.isAdmin = entity.getIsAdmin();
+    this.createdDate = entity.getCreatedDate();
   }
 
   public Member toEntity() {
@@ -41,6 +46,7 @@ public class MemberDto {
         .imageUrl(imageUrl)
         .isDeleted(isDeleted)
         .isAdmin(isAdmin)
+        .createdDate(createdDate)
         .build();
   }
 }
