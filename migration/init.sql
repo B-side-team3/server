@@ -31,7 +31,7 @@ ENGINE=INNODB
 
 CREATE TABLE `category` (
     `category_id` INT(11) NOT NULL AUTO_INCREMENT COMMENT 'category pk',
-    `title`	VARCHAR(20)	NOT NULL COMMENT '이메일 주소',
+    `title`	VARCHAR(20)	NOT NULL COMMENT '카테고리 이름',
     `created_date` TIMESTAMP NOT NULL DEFAULT current_timestamp() COMMENT '생성일자',
     PRIMARY KEY (`category_id`) USING BTREE
 )
@@ -98,6 +98,7 @@ CREATE TABLE `member_task` (
     `expected_time` INT(11)	NOT NULL COMMENT '예상 시간',
     `actual_time` INT(11) NOT NULL COMMENT '실제 시간',
     `status` VARCHAR(20) NOT NULL DEFAULT 'completed' COMMENT 'ongoing/completed/uncompleted',
+    `is_deleted` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '제외 여부',
     `created_date` TIMESTAMP NOT NULL DEFAULT current_timestamp() COMMENT '생성일자',
     PRIMARY KEY (`member_task_id`) USING BTREE,
     INDEX `member_id` (`member_id`) USING BTREE,
