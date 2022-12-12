@@ -1,2 +1,4 @@
-package com.bside.server.category.controller;public class CategoryController {
+package com.bside.server.category.controller;
+
+public class CategoryController {
 }

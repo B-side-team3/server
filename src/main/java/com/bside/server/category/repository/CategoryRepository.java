@@ -1,2 +1,4 @@
-package com.bside.server.category.repository;public class CategoryRepository {
+package com.bside.server.category.repository;
+
+public class CategoryRepository {
 }
