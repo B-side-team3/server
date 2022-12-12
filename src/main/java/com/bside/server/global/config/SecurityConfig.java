@@ -40,7 +40,8 @@ public class SecurityConfig {
                 // 인증 절차 설정
                 .authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .antMatchers("/auth/**").authenticated() // 임시 경로
+//                .antMatchers("/**").authenticated()
+                .antMatchers("/auth/**").permitAll()
                 .antMatchers("/admin/**").hasAnyRole("ADMIN")
                 .and()
                 .logout()
