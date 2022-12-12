@@ -29,8 +29,10 @@ public class SecurityConfig {
                 // corsFilter 활성화
                 .cors()
                 .and()
-                // csrf 비활성화
+                // REST API 사용하여 비활성화
                 .csrf().disable()
+                .formLogin().disable()
+                .httpBasic().disable()
                 // 세션 관리 안함
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -38,16 +40,9 @@ public class SecurityConfig {
                 // 인증 절차 설정
                 .authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .antMatchers("/**").authenticated()
+                .antMatchers("/auth/**").authenticated() // 임시 경로
                 .antMatchers("/admin/**").hasAnyRole("ADMIN")
                 .and()
-                .formLogin()
-                 .disable() // todo 로그인 구현 시 주석된 부분 설정
-//                .usernameParameter("") // 로그인 폼의 input 태그 name
-//                .passwordParameter("") // 로그인 폼의 password 태그의 name
-//                .loginProcessingUrl("/authenticate")
-//                .permitAll()
-//                .and()
                 .logout()
                 //.logoutUrl() todo 로그아웃 url 지정
                 //.logoutSuccessUrl() todo 로그아웃 성공 시 redirect 될 url 지정
