@@ -1,7 +1,7 @@
 package com.bside.server.global.util;
 
 import com.bside.server.global.auth.security.UserAdapter;
-import com.bside.server.member.domain.Member;
+import com.bside.server.module.member.domain.Member;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 /**

@@ -2,7 +2,7 @@ package com.bside.server.global.auth.security;
 
 import com.bside.server.global.error.ErrorCode;
 import com.bside.server.global.error.exception.AuthenticationException;
-import com.bside.server.member.dto.MemberDto;
+import com.bside.server.module.member.dto.MemberDto;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;

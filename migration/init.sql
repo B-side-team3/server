@@ -44,7 +44,7 @@ CREATE TABLE `routine` (
     `category_id` INT(11) NOT NULL COMMENT 'category pk',
     `title`	VARCHAR(50)	NOT NULL COMMENT '루틴 이름',
     `description` VARCHAR(200) NOT NULL COMMENT '루틴 설명',
-    `imageUrl` TEXT	NULL COMMENT '루틴 이미지',
+    `image_url` TEXT	NULL COMMENT '루틴 이미지',
     `period` INT(11) NOT NULL COMMENT '루틴 기간',
     `start_time` VARCHAR(50) NULL COMMENT '루틴 시작 시간',
     `anchor` VARCHAR(50) NULL COMMENT '루틴 앵커',
