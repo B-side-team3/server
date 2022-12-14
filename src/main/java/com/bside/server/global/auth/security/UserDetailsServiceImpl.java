@@ -2,8 +2,8 @@ package com.bside.server.global.auth.security;
 
 import com.bside.server.global.error.ErrorCode;
 import com.bside.server.global.error.exception.CustomException;
-import com.bside.server.member.repository.MemberRepository;
-import com.bside.server.member.domain.Member;
+import com.bside.server.module.member.repository.MemberRepository;
+import com.bside.server.module.member.domain.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
