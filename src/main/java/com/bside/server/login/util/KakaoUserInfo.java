@@ -30,7 +30,6 @@ public class KakaoUserInfo {
 
       ObjectMapper mapper = new ObjectMapper();
       returnNode = mapper.readTree(response.getEntity().getContent());
-
     } catch (ClientProtocolException e) {
       e.printStackTrace();
     } catch (IOException e) {
