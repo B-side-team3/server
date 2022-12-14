@@ -68,6 +68,11 @@ public class JwtValidator {
         return doCreateToken(memberDto, refreshTokenExpiry);
     }
 
+    public boolean isTokenExpired(String token) {
+        final Date expiration = getClaim(token).getExpiration();
+        return expiration.before(new Date());
+    }
+
     public String doCreateToken(MemberDto memberDto, long expireTime)  {
         Claims claims = Jwts.claims();
         claims.put("email", memberDto.getEmail());
