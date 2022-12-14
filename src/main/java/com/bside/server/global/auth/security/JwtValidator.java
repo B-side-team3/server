@@ -94,7 +94,7 @@ public class JwtValidator {
         return authorizationHeader.substring("Bearer ".length()).trim();
     }
 
-    private Claims getClaim(String token) throws ExpiredJwtException {
+    private Claims getClaim(String token) {
         try {
             return Jwts.parserBuilder()
                     .setSigningKey(secretKey)
@@ -102,7 +102,9 @@ public class JwtValidator {
                     .parseClaimsJws(token)
                     .getBody();
         } catch (ExpiredJwtException e) {
-                throw new AuthenticationException(ErrorCode.EXPIRED_TOKEN);
+            // throw new AuthenticationException(ErrorCode.EXPIRED_TOKEN); // todo 추후 주석 해제
+            return e.getClaims();   // 개발할 때는 만료된 토큰도 이용 가능하도록 처리
+
         }
     }
 
