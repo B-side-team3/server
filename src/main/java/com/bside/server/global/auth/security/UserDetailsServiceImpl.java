@@ -1,7 +1,7 @@
 package com.bside.server.global.auth.security;
 
 import com.bside.server.global.error.ErrorCode;
-import com.bside.server.global.error.exception.AuthenticationException;
+import com.bside.server.global.error.exception.CustomException;
 import com.bside.server.member.repository.MemberRepository;
 import com.bside.server.member.domain.Member;
 import lombok.RequiredArgsConstructor;
@@ -19,10 +19,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) {
         // username 은 "userId@email.com" 형태
-        Member member = memberRepository.findByEmail(username);
-        // 가입한 적 없는 이메일이거나 가입 이력 있으나 탈퇴한 회원인 경우
-        if (member == null || member.getIsDeleted() == 0)
-            throw new AuthenticationException(ErrorCode.UNKNOWN_USER);
+        Member member = memberRepository.findByEmail(username).orElseThrow(() -> new CustomException(ErrorCode.UNKNOWN_USER));
         return new UserAdapter(member);
 
     }

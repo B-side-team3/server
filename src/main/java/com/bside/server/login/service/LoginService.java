@@ -1,6 +1,8 @@
 package com.bside.server.login.service;
 
 import com.bside.server.global.auth.security.JwtValidator;
+import com.bside.server.global.error.ErrorCode;
+import com.bside.server.global.error.exception.CustomException;
 import com.bside.server.login.dto.AuthDto;
 import com.bside.server.login.dto.OauthDto;
 import com.bside.server.login.util.KakaoUserInfo;
@@ -24,23 +26,24 @@ public class LoginService {
   private final OauthRepository oauthRepository;
   private final JwtValidator jwtValidator;
 
-  public AuthDto login(HttpServletRequest request) throws Exception {
-    String email = new String();
+  public AuthDto login(HttpServletRequest request) {
     AuthDto authDto = new AuthDto();
 
     JsonNode userInfo = KakaoUserInfo.getKakaoUserInfo(request.getHeader("accessToken"));
     JsonNode kakao_account = userInfo.path("kakao_account");
-    email = kakao_account.get("email").toString();
+    String email = kakao_account.get("email").toString();
 
-    Member member = memberRepository.findByEmail(email);
+    Member member = memberRepository.findByEmail(email).orElseThrow(() -> new CustomException(ErrorCode.UNKNOWN_USER));
     MemberDto memberDto = new MemberDto(member);
 
-    if (member == null || member.getIsDeleted() == 0) {
+    if (member.getIsDeleted() == 0) {
       memberDto.setEmail(email);
       memberDto.setCreatedDate(LocalDateTime.now());
       memberDto.setIsDeleted(1);
       memberDto.setIsAdmin(0);
       memberRepository.save(memberDto.toEntity());
+    } else {
+      throw new CustomException(ErrorCode.DELETED_USER);
     }
 
     OauthDto oauthDto = new OauthDto();
@@ -56,8 +59,7 @@ public class LoginService {
     oauthRepository.save(oauthDto.toEntity());
     oauthRepository.flush();
 
-    Oauth oauth = new Oauth();
-    oauth = oauthRepository.findByAccessTokenAndIsDeleted(accessToken, 1);
+    Oauth oauth = oauthRepository.findByAccessTokenAndIsDeleted(accessToken, 1);
 
     authDto.setAccessToken(accessToken);
     authDto.setRefreshToken(refreshToken);

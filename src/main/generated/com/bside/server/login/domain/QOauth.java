@@ -1,8 +1,7 @@
-package com.bside.server.member.domain;
+package com.bside.server.login.domain;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
-import com.bside.server.login.domain.Oauth;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
@@ -17,7 +16,7 @@ import com.querydsl.core.types.dsl.PathInits;
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
 public class QOauth extends EntityPathBase<Oauth> {
 
-    private static final long serialVersionUID = 1161367960L;
+    private static final long serialVersionUID = 1562134107L;
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
@@ -29,7 +28,7 @@ public class QOauth extends EntityPathBase<Oauth> {
 
     public final NumberPath<Integer> isDeleted = createNumber("isDeleted", Integer.class);
 
-    public final QMember member;
+    public final com.bside.server.member.domain.QMember member;
 
     public final NumberPath<Integer> oauthId = createNumber("oauthId", Integer.class);
 
@@ -55,7 +54,7 @@ public class QOauth extends EntityPathBase<Oauth> {
 
     public QOauth(Class<? extends Oauth> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.member = inits.isInitialized("member") ? new QMember(forProperty("member")) : null;
+        this.member = inits.isInitialized("member") ? new com.bside.server.member.domain.QMember(forProperty("member")) : null;
     }
 
 }
