@@ -16,10 +16,12 @@ public enum ErrorCode {
     METHOD_NOT_ALLOWED(1002, "Method not allowed." ),
 
     // 인증
-    UNKNOWN_USER(2000, "Unknown user."),
-    INVALID_AUTHENTICATION_TYPE(2001, "Invalid authentication type."),
+    UNKNOWN_USER(2000, "알 수 없는 유저입니다."),
+    INVALID_AUTHENTICATION_TYPE(2001, "유효하지 않은 인증 타입입니다."),
     AUTHORIZATION_HEADER_NOT_FOUND(2003, "Authorization header not found."),
-    EXPIRED_TOKEN(2004, "Expired token.")
+    EXPIRED_TOKEN(2004, "만료된 토큰입니다."),
+
+    DELETED_USER(2005, "탈퇴한 회원입니다."),
     ;
 
     private final int code;

@@ -21,6 +21,7 @@ import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
+import java.util.Base64;
 import java.util.Date;
 
 @Slf4j
@@ -37,7 +38,12 @@ public class JwtValidator {
 
     private final UserDetailsServiceImpl userDetailsService;
 
-    private Key getSigninKey(String secretKey) {
+    @PostConstruct
+    protected void init() {
+        secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
+    }
+
+    private Key getSignInKey(String secretKey) {
         byte[] keyBytes = secretKey.getBytes(StandardCharsets.UTF_8);
         return Keys.hmacShaKeyFor(keyBytes);
     }
@@ -51,9 +57,7 @@ public class JwtValidator {
         Integer expiration = claims.get("exp", Integer.class);
 
         UserDetails userDetails = userDetailsService.loadUserByUsername(email);
-        Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, null, null);
-
-        return authentication;
+        return new UsernamePasswordAuthenticationToken(userDetails, null, null);
     }
 
     public String createToken(MemberDto memberDto) {
@@ -72,7 +76,7 @@ public class JwtValidator {
             .setClaims(claims)
             .setIssuedAt(new Date())
             .setExpiration(new Date(System.currentTimeMillis() + expireTime))
-            .signWith(getSigninKey(secretKey), SignatureAlgorithm.HS256)
+            .signWith(getSignInKey(secretKey), SignatureAlgorithm.HS256)
             .compact();
     }
 
