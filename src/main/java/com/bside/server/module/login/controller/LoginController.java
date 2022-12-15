@@ -22,8 +22,9 @@ public class LoginController {
     return loginService.login(request);
   }
 
-  @GetMapping("/logout")
+  @PostMapping("/logout")
   public String logout(HttpServletRequest request) throws Exception {
-    return loginService.logout(request);
+    loginService.logout(request);
+    return "redirect:/";
   }
 }

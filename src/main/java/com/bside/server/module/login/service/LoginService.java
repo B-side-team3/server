@@ -14,10 +14,7 @@ import com.bside.server.module.login.repository.OauthRepository;
 import com.fasterxml.jackson.databind.JsonNode;
 import lombok.RequiredArgsConstructor;
 import org.apache.http.HttpHeaders;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
@@ -76,18 +73,8 @@ public class LoginService {
     return authDto;
   }
 
-  public String logout(HttpServletRequest request) {
+  public void logout(HttpServletRequest request) {
     String accessToken = request.getHeader(HttpHeaders.AUTHORIZATION);
-
-    WebClient webClient = WebClient.builder()
-        .baseUrl("https://kapi.kakao.com")
-        .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-        .build();
-
-    JSONObject response = webClient.post()
-        .uri(uriBuilder -> uriBuilder.path("/v1/user/logout").build())
-        .header("Authorization", "Bearer " + accessToken)
-        .retrieve().bodyToMono(JSONObject.class).block();
 
     jwtValidator.isTokenExpired(accessToken);
 
@@ -95,7 +82,5 @@ public class LoginService {
     OauthDto oauthDto = new OauthDto(oauth);
     oauthDto.setIsDeleted(0);
     oauthRepository.save(oauthDto.toEntity());
-
-    return "redirect:/";
   }
 }
