@@ -24,7 +24,10 @@ public enum ErrorCode {
     DELETED_USER(2005, "탈퇴한 회원입니다."),
     // 카테고리
     CATEGORY_NOT_FOUND(3000, "존재하지 않는 카테고리입니다."),
-    CATEGORY_NAME_EMPTY(3001, "카테고리 이름이 없습니다.")
+    CATEGORY_NAME_EMPTY(3001, "카테고리 이름이 없습니다."),
+
+    // 루틴
+    ROUTINE_NOT_FOUND(4000, "존재하지 않는 루틴입니다.")
     ;
 
     private final int code;
