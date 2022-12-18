@@ -2,20 +2,19 @@ package com.bside.server.module.routine.dto;
 
 import com.bside.server.module.category.domain.Category;
 import com.bside.server.module.routine.domain.Routine;
-import lombok.*;
-
-import javax.validation.constraints.NotEmpty;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class RoutineRequest {
+public class RoutineUpdateRequest
+{
 
     private Integer categoryId;
 
-    @NotEmpty(message = "ROUTINE_TITLE_EMPTY")
     private String title;
 
-    @NotEmpty(message = "ROUTINE_DESCRIPTION_EMPTY")
     private String description;
 
     private String imageUrl;
@@ -28,7 +27,7 @@ public class RoutineRequest {
 
     private String anchor;
 
-    public Routine toEntity(RoutineRequest request, Category category) {
+    public Routine toEntity(RoutineUpdateRequest request, Category category) {
         return Routine.builder()
                 .category(category)
                 .title(request.getTitle())
