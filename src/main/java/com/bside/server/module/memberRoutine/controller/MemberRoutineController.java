@@ -1,15 +1,16 @@
 package com.bside.server.module.memberRoutine.controller;
 
-import com.bside.server.module.memberRoutine.domain.MemberRoutine;
 import com.bside.server.module.memberRoutine.service.MemberRoutineService;
 import com.bside.server.module.memberRoutine.dto.MemberRoutineRequest;
 import com.bside.server.module.memberRoutine.dto.MemberRoutineResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequiredArgsConstructor
 public class MemberRoutineController {
 
-  private MemberRoutineService routineService;
+  private final MemberRoutineService routineService;
 
   @PostMapping("/routines")
   public MemberRoutineResponse createRoutine(@RequestBody MemberRoutineRequest request) {

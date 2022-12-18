@@ -9,15 +9,15 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Data
-@Entity
+@Entity(name = "member_routine")
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class MemberRoutine {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "member routine id", nullable = false)
+  @Column(name = "member_routine_id", nullable = false)
   private Integer memberRoutineId;
 
   @ManyToOne
