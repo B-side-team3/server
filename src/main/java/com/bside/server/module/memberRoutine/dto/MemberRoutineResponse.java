@@ -2,9 +2,12 @@ package com.bside.server.module.memberRoutine.dto;
 
 import com.bside.server.module.memberRoutine.domain.MemberRoutine;
 import com.bside.server.module.routine.domain.Routine;
-
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
+@Getter
+@NoArgsConstructor
 public class MemberRoutineResponse {
 
   private Integer memberRoutineId;
