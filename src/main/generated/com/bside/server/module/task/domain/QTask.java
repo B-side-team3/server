@@ -26,9 +26,9 @@ public class QTask extends EntityPathBase<Task> {
 
     public final NumberPath<Integer> expectedTime = createNumber("expectedTime", Integer.class);
 
-    public final com.bside.server.module.routine.domain.QRoutine routine;
+    public final NumberPath<Integer> id = createNumber("id", Integer.class);
 
-    public final NumberPath<Integer> taskId = createNumber("taskId", Integer.class);
+    public final com.bside.server.module.routine.domain.QRoutine routine;
 
     public final StringPath title = createString("title");
 

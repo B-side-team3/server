@@ -16,7 +16,7 @@ public class Routine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "routine_id", nullable = false)
-    private Integer routineId;
+    private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
@@ -26,7 +26,7 @@ public class Routine {
     private String title;
 
     @Column(name = "description", nullable = false)
-    private String descriptioin;
+    private String description;
 
     @Column(name = "image_url")
     private String imageUrl;
@@ -47,4 +47,27 @@ public class Routine {
     @CreationTimestamp
     private LocalDateTime createdDateTime;
 
+    public void updateCategory(Category category){
+        this.category = category;
+    }
+
+    public void updateTitle(String title){
+        this.title = title;
+    }
+
+    public void updateDescription(String description) { this.description = description; }
+
+    public void updateImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
+
+    public void updatePeriod(Integer period){
+        this.period = period;
+    }
+
+    public void updateStartTime(String startTime) { this.startTime = startTime; }
+
+    public void updateAnchor(String anchor) { this.anchor = anchor; }
+
+    public void updateTotalTime(Integer totalTime){
+        this.totalTime = totalTime;
+    }
 }

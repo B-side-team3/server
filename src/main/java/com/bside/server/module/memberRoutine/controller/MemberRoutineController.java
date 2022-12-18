@@ -1,8 +1,8 @@
-package com.bside.server.module.memberRoutine.controller;
+package com.bside.server.module.memberroutine.controller;
 
-import com.bside.server.module.memberRoutine.service.MemberRoutineService;
 import com.bside.server.module.memberRoutine.dto.MemberRoutineRequest;
 import com.bside.server.module.memberRoutine.dto.MemberRoutineResponse;
+import com.bside.server.module.memberroutine.service.MemberRoutineService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

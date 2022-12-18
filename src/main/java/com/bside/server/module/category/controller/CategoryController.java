@@ -25,9 +25,9 @@ public class CategoryController {
         return categoryService.createCategory(categoryRequest);
     }
 
-    @PatchMapping("/admin/categories")
-    public CategoryResponse updateCategory(@RequestBody @Valid CategoryRequest categoryRequest) {
-        return categoryService.updateCategory(categoryRequest);
+    @PatchMapping("/admin/categories/{categoryId}")
+    public CategoryResponse updateCategory(@PathVariable("categoryId") Integer categoryId, @RequestBody @Valid CategoryRequest categoryRequest) {
+        return categoryService.updateCategory(categoryId, categoryRequest);
     }
 
     @DeleteMapping("/admin/categories/{categoryId}")
