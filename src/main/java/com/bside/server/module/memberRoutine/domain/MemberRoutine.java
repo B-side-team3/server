@@ -45,5 +45,5 @@ public class MemberRoutine {
 
   @Column(name = "created_date")
   @CreationTimestamp
-  private LocalDateTime createdDateTime;
+  private LocalDateTime createdDate;
 }
