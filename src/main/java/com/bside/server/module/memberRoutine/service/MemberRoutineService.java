@@ -1,4 +1,4 @@
-package com.bside.server.module.memberRoutine.service;
+package com.bside.server.module.memberroutine.service;
 
 import com.bside.server.global.error.ErrorCode;
 import com.bside.server.global.error.exception.CustomException;

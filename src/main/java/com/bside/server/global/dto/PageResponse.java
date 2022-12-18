@@ -1,31 +1,33 @@
 package com.bside.server.global.dto;
 
 import lombok.Builder;
+import lombok.Getter;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
 
+@Getter
 public class PageResponse<T> {
-    private List<T> value;
+    private List<T> contents;
     private long count;
-    private long offset;
-    private long limit;
+    private long page;
+    private long size;
     private long total;
 
     @Builder
-    public PageResponse(List<T> value, long count, long offset, long limit, long total) {
-        this.value = value;
+    public PageResponse(List<T> contents, long count, long page, long size, long total) {
+        this.contents = contents;
         this.count = count;
-        this.offset = offset;
-        this.limit = limit;
+        this.page = page;
+        this.size = size;
         this.total = total;
     }
 
     public PageResponse(Page<T> page) {
-        this.value = page.getContent();
+        this.contents = page.getContent();
         this.count = page.getNumberOfElements();
-        this.offset = page.getPageable().getPageNumber();
-        this.limit = page.getPageable().getPageSize();
+        this.page = page.getPageable().getPageNumber();
+        this.size = page.getPageable().getPageSize();
         this.total = page.getTotalElements();
     }
 }

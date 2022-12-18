@@ -14,7 +14,7 @@ public class CategoryResponse {
     private LocalDateTime createdDateTime;
 
     public CategoryResponse(Category category) {
-        this.categoryId = category.getCategoryId();
+        this.categoryId = category.getId();
         this.title = category.getTitle();
         this.createdDateTime = category.getCreatedDateTime();
     }

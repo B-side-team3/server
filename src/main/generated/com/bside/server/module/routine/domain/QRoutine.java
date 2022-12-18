@@ -28,13 +28,13 @@ public class QRoutine extends EntityPathBase<Routine> {
 
     public final DateTimePath<java.time.LocalDateTime> createdDateTime = createDateTime("createdDateTime", java.time.LocalDateTime.class);
 
-    public final StringPath descriptioin = createString("descriptioin");
+    public final StringPath description = createString("description");
+
+    public final NumberPath<Integer> id = createNumber("id", Integer.class);
 
     public final StringPath imageUrl = createString("imageUrl");
 
     public final NumberPath<Integer> period = createNumber("period", Integer.class);
-
-    public final NumberPath<Integer> routineId = createNumber("routineId", Integer.class);
 
     public final StringPath startTime = createString("startTime");
 
