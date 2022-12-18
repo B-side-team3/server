@@ -11,22 +11,24 @@ import java.time.LocalDateTime;
 public class MemberRoutineResponse {
 
   private Integer memberRoutineId;
-  private Routine routine;
+  private Integer routineId;
+  private Integer memberId;
   private LocalDateTime startDate;
   private LocalDateTime endDate;
   private String startTime;
   private String anchor;
   private Integer totalTime;
-  private LocalDateTime createdDateTime;
+  private LocalDateTime createdDate;
 
   public MemberRoutineResponse(MemberRoutine memberRoutine) {
     this.memberRoutineId = memberRoutine.getMemberRoutineId();
-    this.routine = memberRoutine.getRoutine();
+    this.routineId = memberRoutine.getRoutine().getId();
+    this.memberId = memberRoutine.getMember().getMemberId();
     this.startDate = memberRoutine.getStartDate();
     this.endDate = memberRoutine.getEndDate();
     this.startTime = memberRoutine.getStartTime();
     this.anchor = memberRoutine.getAnchor();
     this.totalTime = memberRoutine.getTotalTime();
-    this.createdDateTime = memberRoutine.getCreatedDateTime();
+    this.createdDate = memberRoutine.getCreatedDate();
   }
 }

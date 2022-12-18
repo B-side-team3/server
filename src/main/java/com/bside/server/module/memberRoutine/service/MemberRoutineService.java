@@ -35,7 +35,7 @@ public class MemberRoutineService {
   }
 
   @Transactional
-  public void deleteRoutine(Integer memberRoutineId, MemberRoutineRequest request) {
+  public void deleteRoutine(Integer memberRoutineId) {
     MemberRoutine memberRoutine = findRoutine(memberRoutineId);
     memberRoutineRepository.delete(memberRoutine);
   }

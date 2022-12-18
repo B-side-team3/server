@@ -8,27 +8,28 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/routines")
 public class MemberRoutineController {
 
   private final MemberRoutineService routineService;
 
-  @PostMapping("/routines")
+  @PostMapping
   public MemberRoutineResponse createRoutine(@RequestBody MemberRoutineRequest request) {
    return routineService.createRoutine(request);
   }
 
-  @GetMapping("/routines/{memberRoutineId}")
+  @GetMapping("/{memberRoutineId}")
   public MemberRoutineResponse getRoutineDetail(@PathVariable Integer memberRoutineId) {
     return routineService.getRoutineDetail(memberRoutineId);
   }
 
-  @PatchMapping("/routines/{memberRoutineId}")
+  @PatchMapping("/{memberRoutineId}")
   public MemberRoutineResponse updateRoutine(@PathVariable Integer memberRoutineId, @RequestBody MemberRoutineRequest request) {
     return routineService.updateRoutine(memberRoutineId, request);
   }
 
-  @DeleteMapping("/routines/{memberRoutineId}")
-  public void deleteRoutine(@PathVariable Integer memberRoutineId, @RequestBody MemberRoutineRequest request) {
-    routineService.deleteRoutine(memberRoutineId, request);
+  @DeleteMapping("/{memberRoutineId}")
+  public void deleteRoutine(@PathVariable Integer memberRoutineId) {
+    routineService.deleteRoutine(memberRoutineId);
   }
 }
