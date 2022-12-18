@@ -2,10 +2,10 @@ package com.bside.server.module.memberroutine.service;
 
 import com.bside.server.global.error.ErrorCode;
 import com.bside.server.global.error.exception.CustomException;
-import com.bside.server.module.memberRoutine.domain.MemberRoutine;
-import com.bside.server.module.memberRoutine.dto.MemberRoutineResponse;
-import com.bside.server.module.memberRoutine.repository.MemberRoutineRepository;
-import com.bside.server.module.memberRoutine.dto.MemberRoutineRequest;
+import com.bside.server.module.memberroutine.domain.MemberRoutine;
+import com.bside.server.module.memberroutine.dto.MemberRoutineResponse;
+import com.bside.server.module.memberroutine.repository.MemberRoutineRepository;
+import com.bside.server.module.memberroutine.dto.MemberRoutineRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

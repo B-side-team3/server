@@ -2,7 +2,6 @@ package com.bside.server.module.memberroutine.domain;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
-import com.bside.server.module.memberRoutine.domain.MemberRoutine;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
@@ -17,7 +16,7 @@ import com.querydsl.core.types.dsl.PathInits;
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
 public class QMemberRoutine extends EntityPathBase<MemberRoutine> {
 
-    private static final long serialVersionUID = -769125091L;
+    private static final long serialVersionUID = -330759939L;
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
