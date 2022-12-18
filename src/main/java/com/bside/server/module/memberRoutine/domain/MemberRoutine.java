@@ -1,4 +1,4 @@
-package com.bside.server.module.memberRoutine.domain;
+package com.bside.server.module.memberroutine.domain;
 
 import com.bside.server.module.member.domain.Member;
 import com.bside.server.module.routine.domain.Routine;

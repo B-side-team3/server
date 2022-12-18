@@ -1,6 +1,6 @@
-package com.bside.server.module.memberRoutine.dto;
+package com.bside.server.module.memberroutine.dto;
 
-import com.bside.server.module.memberRoutine.domain.MemberRoutine;
+import com.bside.server.module.memberroutine.domain.MemberRoutine;
 import com.bside.server.module.routine.domain.Routine;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
