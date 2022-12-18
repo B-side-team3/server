@@ -6,7 +6,8 @@ import com.bside.server.global.error.exception.CustomException;
 import com.bside.server.module.category.domain.Category;
 import com.bside.server.module.category.service.CategoryService;
 import com.bside.server.module.routine.domain.Routine;
-import com.bside.server.module.routine.dto.RoutineRequest;
+import com.bside.server.module.routine.dto.RoutineCreateRequest;
+import com.bside.server.module.routine.dto.RoutineUpdateRequest;
 import com.bside.server.module.routine.repository.RoutineRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -26,14 +27,14 @@ public class RoutineService {
     }
 
     @Transactional
-    public Routine createRoutine(RoutineRequest request) {
+    public Routine createRoutine(RoutineCreateRequest request) {
         Category category = categoryService.findCategory(request.getCategoryId());
         Routine routine = request.toEntity(request, category);
         return routineRepository.save(routine);
     }
 
     @Transactional
-    public Routine updateRoutine(Integer routineId, RoutineRequest request) {
+    public Routine updateRoutine(Integer routineId, RoutineUpdateRequest request) {
         Routine routine = findRoutine(routineId);
         return routineRepository.save(updateRoutine(request, routine));
     }
@@ -47,7 +48,7 @@ public class RoutineService {
         return routineRepository.findById(routineId).orElseThrow(() -> new CustomException(ErrorCode.ROUTINE_NOT_FOUND));
     }
 
-    private Routine updateRoutine(RoutineRequest request, Routine routine){
+    private Routine updateRoutine(RoutineUpdateRequest request, Routine routine){
         if(request.getCategoryId() != null) {
             routine.updateCategory(categoryService.findCategory(request.getCategoryId()));
         }

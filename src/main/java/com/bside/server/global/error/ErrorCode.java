@@ -6,9 +6,12 @@ import lombok.Getter;
 public enum ErrorCode {
     /**
      * ----- 에러 분류 ----
-     * common   : 1000
-     * 인증      : 2000
-     * 카테고리  : 3000
+     * common    : 1000
+     * 인증       : 2000
+     * Category  : 3000
+     * Routine   : 4000
+     * Task      : 5000
+     *
      */
 
     // common
@@ -27,7 +30,14 @@ public enum ErrorCode {
     CATEGORY_NAME_EMPTY(3001, "카테고리 이름이 없습니다."),
 
     // 루틴
-    ROUTINE_NOT_FOUND(4000, "존재하지 않는 루틴입니다.")
+    ROUTINE_NOT_FOUND(4000, "존재하지 않는 루틴입니다."),
+    ROUTINE_TITLE_EMPTY(4001, "루틴의 이름이 없습니다."),
+    ROUTINE_DESCRIPTION_EMPTY(4002, "루틴의 설명이 없습니다."),
+
+    // Task
+    TASK_NOT_FOUND(5000, "존재하지 않는 Task 입니다."),
+    TASK_TITLE_EMPTY(5001, "Task 의 이름이 없습니다."),
+    TASK_EXPECTED_TIME_EMPTY(5002, "Task 의 예상 시간이 없습니다.")
     ;
 
     private final int code;
