@@ -26,8 +26,6 @@ public class QMemberTask extends EntityPathBase<MemberTask> {
 
     public final DateTimePath<java.time.LocalDateTime> createdDate = createDateTime("createdDate", java.time.LocalDateTime.class);
 
-    public final NumberPath<Integer> expectedTime = createNumber("expectedTime", Integer.class);
-
     public final NumberPath<Integer> isDeleted = createNumber("isDeleted", Integer.class);
 
     public final com.bside.server.module.member.domain.QMember member;

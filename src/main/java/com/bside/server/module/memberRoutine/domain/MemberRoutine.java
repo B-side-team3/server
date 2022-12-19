@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Data
 @Entity(name = "member_routine")
 @Builder
-@AllArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor
 public class MemberRoutine {
 
@@ -28,19 +28,19 @@ public class MemberRoutine {
   @JoinColumn(name = "routine_id")
   private Routine routine;
 
-  @JoinColumn(name = "start_date")
+  @Column(name = "start_date")
   private LocalDateTime startDate;
 
-  @JoinColumn(name = "end_date")
+  @Column(name = "end_date")
   private LocalDateTime endDate;
 
-  @JoinColumn(name = "start_time")
+  @Column(name = "start_time")
   private String startTime;
 
-  @JoinColumn(name = "anchor")
+  @Column(name = "anchor")
   private String anchor;
 
-  @JoinColumn(name = "total_time")
+  @Column(name = "total_time")
   private Integer totalTime;
 
   @Column(name = "created_date")
