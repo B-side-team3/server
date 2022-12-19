@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Entity(name = "member_task")
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class MemberTask {
 
   @Id
@@ -27,9 +27,6 @@ public class MemberTask {
   @ManyToOne
   @JoinColumn(name = "member_id")
   private Member member;
-
-  @Column(name = "expected_time", nullable = false)
-  private Integer expectedTime;
 
   @Column(name = "actual_time", nullable = false)
   private Integer actualTime;
