@@ -1,6 +1,7 @@
 package com.bside.server.global.config;
 
 import com.bside.server.global.auth.security.AuthenticationFilter;
+import com.bside.server.global.auth.security.JwtValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -21,7 +22,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    private final AuthenticationFilter authenticationFilter;
+    private final JwtValidator jwtValidator;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -49,7 +50,7 @@ public class SecurityConfig {
                 //.logoutSuccessUrl() todo 로그아웃 성공 시 redirect 될 url 지정
             ;
 
-        http.addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(new AuthenticationFilter(jwtValidator), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 
@@ -57,6 +58,7 @@ public class SecurityConfig {
     public WebSecurityCustomizer webSecurityCustomizer(){
         return (web) -> web.ignoring()
                 .mvcMatchers(HttpMethod.GET, "/docs/index.html")
+                .mvcMatchers(HttpMethod.POST, "/auth/login")
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations());
     }
 
