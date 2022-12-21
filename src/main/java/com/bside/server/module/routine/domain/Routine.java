@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "routine")
 public class Routine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
