@@ -20,7 +20,7 @@ public class MemberRoutineRepositoryCustomImpl implements MemberRoutineRepositor
   public List<MemberRoutine> findEndRoutine(Integer memberId, LocalDateTime startDate, LocalDateTime endDate, String status) {
     return jpaQueryFactory
           .selectFrom(memberRoutine)
-          .where(memberRoutine.member.memberId.eq(memberId).and((memberRoutine.startDate.eq(startDate)).or(memberRoutine.endDate.goe(endDate)).and(memberRoutine.status.eq(status))))
+          .where(memberRoutine.member.memberId.eq(memberId).and((memberRoutine.startDate.eq(startDate)).or(memberRoutine.endDate.loe(endDate)).and(memberRoutine.status.eq(status))))
           .fetch();
   }
 }
