@@ -6,6 +6,8 @@ import com.bside.server.module.memberroutine.service.MemberRoutineService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/routines")
@@ -16,6 +18,11 @@ public class MemberRoutineController {
   @PostMapping
   public MemberRoutineResponse createRoutine(@RequestBody MemberRoutineRequest request) {
    return routineService.createRoutine(request);
+  }
+
+  @PostMapping("/find")
+  public List<MemberRoutineResponse> getRoutine(@RequestParam Integer memberId, @RequestParam String startDate, @RequestParam String endDate) {
+    return routineService.getRoutine(memberId, startDate, endDate);
   }
 
   @GetMapping("/{memberRoutineId}")
