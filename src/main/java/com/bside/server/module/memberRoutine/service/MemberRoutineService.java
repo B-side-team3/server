@@ -6,6 +6,7 @@ import com.bside.server.module.memberroutine.domain.MemberRoutine;
 import com.bside.server.module.memberroutine.dto.MemberRoutineResponse;
 import com.bside.server.module.memberroutine.repository.MemberRoutineRepository;
 import com.bside.server.module.memberroutine.dto.MemberRoutineRequest;
+import com.bside.server.module.memberroutine.repository.MemberRoutineRepositoryCustom;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
 public class MemberRoutineService {
 
   private final MemberRoutineRepository memberRoutineRepository;
+  private final MemberRoutineRepositoryCustom memberRoutineRepositoryCustom;
 
   @Transactional
   public MemberRoutineResponse createRoutine(MemberRoutineRequest request) {
@@ -40,7 +42,7 @@ public class MemberRoutineService {
     String startDateStr = LocalDateTime.now().format(DateTimeFormatter.ISO_DATE);
     LocalDateTime startDate = LocalDate.parse(startDateStr, DateTimeFormatter.ISO_DATE).atStartOfDay();
     LocalDateTime endDate = startDate.plusDays(7);
-    List<MemberRoutine> memberRoutineList = memberRoutineRepository.findByMemberMemberIdAndStartDateEqualsOrEndDateLessThanEqualAndStatus(memberId, startDate, endDate, "ongoing");
+    List<MemberRoutine> memberRoutineList = memberRoutineRepositoryCustom.findEndRoutine(memberId, startDate, endDate, "ongoing");
     return memberRoutineList.stream().map(MemberRoutineResponse::new).collect(Collectors.toList());
   }
 
