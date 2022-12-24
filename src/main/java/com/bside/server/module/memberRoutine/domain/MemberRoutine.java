@@ -4,6 +4,7 @@ import com.bside.server.module.member.domain.Member;
 import com.bside.server.module.routine.domain.Routine;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -29,9 +30,11 @@ public class MemberRoutine {
   private Routine routine;
 
   @Column(name = "start_date")
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
   private LocalDateTime startDate;
 
   @Column(name = "end_date")
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
   private LocalDateTime endDate;
 
   @Column(name = "start_time")
@@ -46,4 +49,7 @@ public class MemberRoutine {
   @Column(name = "created_date")
   @CreationTimestamp
   private LocalDateTime createdDate;
+
+  @Column(name = "status", nullable = false)
+  private String status;
 }

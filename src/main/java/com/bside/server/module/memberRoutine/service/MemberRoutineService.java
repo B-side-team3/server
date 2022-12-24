@@ -28,11 +28,19 @@ public class MemberRoutineService {
   }
 
   @Transactional
-  public List<MemberRoutineResponse> getRoutine(Integer memberId, String startDateStr, String endDateStr) {
+  public List<MemberRoutineResponse> getRoutine(Integer memberId, String dateStr) {
     DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
-    LocalDateTime startDate = LocalDate.parse(startDateStr, formatter).atStartOfDay();
-    LocalDateTime endDate = LocalDate.parse(endDateStr, formatter).atStartOfDay();
-    List<MemberRoutine> memberRoutineList = memberRoutineRepository.findByMemberMemberIdAndStartDateBetween(memberId, startDate, endDate);
+    LocalDateTime date = LocalDate.parse(dateStr, formatter).atStartOfDay();
+    List<MemberRoutine> memberRoutineList = memberRoutineRepository.findByMemberMemberIdAndStartDateLessThanEqualAndStatus(memberId, date, "ongoing");
+    return memberRoutineList.stream().map(MemberRoutineResponse::new).collect(Collectors.toList());
+  }
+
+  @Transactional
+  public List<MemberRoutineResponse> getEndRoutine(Integer memberId) {
+    String startDateStr = LocalDateTime.now().format(DateTimeFormatter.ISO_DATE);
+    LocalDateTime startDate = LocalDate.parse(startDateStr, DateTimeFormatter.ISO_DATE).atStartOfDay();
+    LocalDateTime endDate = startDate.plusDays(7);
+    List<MemberRoutine> memberRoutineList = memberRoutineRepository.findByMemberMemberIdAndStartDateEqualsOrEndDateLessThanEqualAndStatus(memberId, startDate, endDate, "ongoing");
     return memberRoutineList.stream().map(MemberRoutineResponse::new).collect(Collectors.toList());
   }
 
