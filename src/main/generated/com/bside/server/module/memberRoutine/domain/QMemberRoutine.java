@@ -38,6 +38,8 @@ public class QMemberRoutine extends EntityPathBase<MemberRoutine> {
 
     public final StringPath startTime = createString("startTime");
 
+    public final StringPath status = createString("status");
+
     public final NumberPath<Integer> totalTime = createNumber("totalTime", Integer.class);
 
     public QMemberRoutine(String variable) {
