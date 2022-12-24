@@ -21,8 +21,13 @@ public class MemberRoutineController {
   }
 
   @PostMapping("/find")
-  public List<MemberRoutineResponse> getRoutine(@RequestParam Integer memberId, @RequestParam String startDate, @RequestParam String endDate) {
-    return routineService.getRoutine(memberId, startDate, endDate);
+  public List<MemberRoutineResponse> getRoutine(@RequestParam Integer memberId, @RequestParam String date) {
+    return routineService.getRoutine(memberId, date);
+  }
+
+  @PostMapping("/end")
+  public List<MemberRoutineResponse> getEndRoutine(@RequestParam Integer memberId) {
+    return routineService.getEndRoutine(memberId);
   }
 
   @GetMapping("/{memberRoutineId}")
