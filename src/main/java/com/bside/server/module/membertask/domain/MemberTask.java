@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Data
 @Entity(name = "member_task")
 @Builder
-@AllArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor
 public class MemberTask {
 

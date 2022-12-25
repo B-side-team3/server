@@ -6,7 +6,6 @@ import com.bside.server.module.memberroutine.domain.MemberRoutine;
 import com.bside.server.module.memberroutine.dto.MemberRoutineResponse;
 import com.bside.server.module.memberroutine.repository.MemberRoutineRepository;
 import com.bside.server.module.memberroutine.dto.MemberRoutineRequest;
-import com.bside.server.module.memberroutine.repository.MemberRoutineRepositoryCustom;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +21,6 @@ import java.util.stream.Collectors;
 public class MemberRoutineService {
 
   private final MemberRoutineRepository memberRoutineRepository;
-  private final MemberRoutineRepositoryCustom memberRoutineRepositoryCustom;
 
   @Transactional
   public MemberRoutineResponse createRoutine(MemberRoutineRequest request) {
@@ -31,9 +29,10 @@ public class MemberRoutineService {
 
   @Transactional
   public List<MemberRoutineResponse> getRoutine(Integer memberId, String dateStr) {
+    updateStatus(memberId);
     DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
     LocalDateTime date = LocalDate.parse(dateStr, formatter).atStartOfDay();
-    List<MemberRoutine> memberRoutineList = memberRoutineRepository.findByMemberMemberIdAndStartDateLessThanEqualAndStatus(memberId, date, "ongoing");
+    List<MemberRoutine> memberRoutineList = memberRoutineRepository.findByMemberMemberIdAndStartDateLessThanEqualAndEndDateGreaterThanEqualAndStatus(memberId, date, date, "ongoing");
     return memberRoutineList.stream().map(MemberRoutineResponse::new).collect(Collectors.toList());
   }
 
@@ -42,7 +41,7 @@ public class MemberRoutineService {
     String startDateStr = LocalDateTime.now().format(DateTimeFormatter.ISO_DATE);
     LocalDateTime startDate = LocalDate.parse(startDateStr, DateTimeFormatter.ISO_DATE).atStartOfDay();
     LocalDateTime endDate = startDate.plusDays(7);
-    List<MemberRoutine> memberRoutineList = memberRoutineRepositoryCustom.findEndRoutine(memberId, startDate, endDate, "ongoing");
+    List<MemberRoutine> memberRoutineList = memberRoutineRepository.findByMemberMemberIdAndStartDateLessThanEqualAndEndDateLessThanEqualAndStatus(memberId, startDate, endDate, "ongoing");
     return memberRoutineList.stream().map(MemberRoutineResponse::new).collect(Collectors.toList());
   }
 
@@ -56,6 +55,7 @@ public class MemberRoutineService {
   public MemberRoutineResponse updateRoutine(Integer memberRoutineId, MemberRoutineRequest request) {
     MemberRoutine memberRoutine = findRoutine(memberRoutineId);
     memberRoutine.setAnchor(request.getAnchor());
+    memberRoutine.setStatus(request.getStatus());
     return new MemberRoutineResponse(memberRoutineRepository.save(memberRoutine));
   }
 
@@ -67,5 +67,16 @@ public class MemberRoutineService {
 
   private MemberRoutine findRoutine(Integer memberRoutineId) {
     return memberRoutineRepository.findByMemberRoutineId(memberRoutineId).orElseThrow(() -> new CustomException(ErrorCode.ROUTINE_NOT_FOUND));
+  }
+
+  private void updateStatus(Integer memberId) {
+    List<MemberRoutine> memberRoutineList = memberRoutineRepository.findByMemberMemberIdAndStatus(memberId, "ongoing");
+    LocalDateTime date = LocalDateTime.now();
+    for (MemberRoutine memberRoutine : memberRoutineList) {
+      if (memberRoutine.getEndDate().compareTo(date) == -1) {
+        memberRoutine.setStatus("uncompleted");
+        memberRoutineRepository.saveAndFlush(memberRoutine);
+      }
+    }
   }
 }

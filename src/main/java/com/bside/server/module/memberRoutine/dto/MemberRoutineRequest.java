@@ -27,7 +27,18 @@ public class MemberRoutineRequest {
 
   private String anchor;
 
+  private String status;
+
   public MemberRoutine toEntity(MemberRoutineRequest request){
-    return MemberRoutine.builder().member(request.getMember()).routine(request.getRoutine()).startDate(request.getStartDate()).endDate(request.getEndDate()).startTime(request.getStartTime()).anchor(request.getAnchor()).build();
+    return MemberRoutine
+        .builder()
+        .member(request.getMember())
+        .routine(request.getRoutine())
+        .startDate(request.getStartDate())
+        .endDate(request.getEndDate())
+        .startTime(request.getStartTime())
+        .anchor(request.getAnchor())
+        .status(request.getStatus())
+        .build();
   }
 }
