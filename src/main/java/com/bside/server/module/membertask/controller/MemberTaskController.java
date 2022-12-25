@@ -16,7 +16,7 @@ public class MemberTaskController {
   private final MemberTaskService memberTaskService;
 
   @PostMapping
-  public MemberTaskResponse createTask(@PathVariable Integer routineId, MemberTaskRequest request){
+  public MemberTaskResponse createTask(@PathVariable Integer routineId, @RequestBody MemberTaskRequest request){
     return memberTaskService.createTask(routineId, request);
   }
 
@@ -26,7 +26,7 @@ public class MemberTaskController {
   }
 
   @PatchMapping("/{memberTaskId}")
-  public MemberTaskResponse updateTask(@PathVariable Integer routineId, @PathVariable Integer memberTaskId, MemberTaskRequest request) {
+  public MemberTaskResponse updateTask(@PathVariable Integer routineId, @PathVariable Integer memberTaskId, @RequestBody MemberTaskRequest request) {
     return memberTaskService.updateTask(routineId, memberTaskId, request);
   }
 

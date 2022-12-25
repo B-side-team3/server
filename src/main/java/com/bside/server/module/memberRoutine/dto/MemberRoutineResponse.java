@@ -1,7 +1,6 @@
 package com.bside.server.module.memberroutine.dto;
 
 import com.bside.server.module.memberroutine.domain.MemberRoutine;
-import com.bside.server.module.routine.domain.Routine;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
@@ -19,6 +18,7 @@ public class MemberRoutineResponse {
   private String anchor;
   private Integer totalTime;
   private LocalDateTime createdDate;
+  private String status;
 
   public MemberRoutineResponse(MemberRoutine memberRoutine) {
     this.memberRoutineId = memberRoutine.getMemberRoutineId();
@@ -30,5 +30,6 @@ public class MemberRoutineResponse {
     this.anchor = memberRoutine.getAnchor();
     this.totalTime = memberRoutine.getTotalTime();
     this.createdDate = memberRoutine.getCreatedDate();
+    this.status = memberRoutine.getStatus();
   }
 }

@@ -20,7 +20,7 @@ public class MemberRoutineController {
    return routineService.createRoutine(request);
   }
 
-  @PostMapping("/find")
+  @PostMapping("/list")
   public List<MemberRoutineResponse> getRoutine(@RequestParam Integer memberId, @RequestParam String date) {
     return routineService.getRoutine(memberId, date);
   }
