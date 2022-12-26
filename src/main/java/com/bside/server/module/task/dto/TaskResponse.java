@@ -1,6 +1,7 @@
 package com.bside.server.module.task.dto;
 
 import com.bside.server.module.task.domain.Task;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,7 @@ public class TaskResponse {
     private Integer taskId;
     private String title;
     private Integer expectedTime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdDateTime;
 
     public TaskResponse(Task task) {

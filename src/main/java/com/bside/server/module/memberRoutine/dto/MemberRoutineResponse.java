@@ -1,6 +1,7 @@
 package com.bside.server.module.memberroutine.dto;
 
 import com.bside.server.module.memberroutine.domain.MemberRoutine;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
@@ -12,11 +13,14 @@ public class MemberRoutineResponse {
   private Integer memberRoutineId;
   private Integer routineId;
   private Integer memberId;
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
   private LocalDateTime startDate;
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
   private LocalDateTime endDate;
   private String startTime;
   private String anchor;
   private Integer totalTime;
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
   private LocalDateTime createdDate;
   private String status;
 
