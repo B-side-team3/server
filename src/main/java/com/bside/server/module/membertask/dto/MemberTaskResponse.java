@@ -1,7 +1,7 @@
 package com.bside.server.module.membertask.dto;
 
-import com.bside.server.module.member.domain.Member;
 import com.bside.server.module.membertask.domain.MemberTask;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,6 +18,7 @@ public class MemberTaskResponse {
   private Integer actualTime;
   private String status;
   private Integer isDeleted;
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
   private LocalDateTime createdDate;
 
   public MemberTaskResponse(MemberTask memberTask) {

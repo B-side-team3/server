@@ -1,7 +1,7 @@
 package com.bside.server.module.routine.dto;
 
-import com.bside.server.module.category.domain.Category;
 import com.bside.server.module.routine.domain.Routine;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,6 +18,7 @@ public class RoutineResponse {
     private String startTime;
     private String anchor;
     private Integer totalTime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdDateTime;
 
     public RoutineResponse(Routine routine) {
