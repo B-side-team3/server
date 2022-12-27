@@ -1,6 +1,7 @@
 package com.bside.server.module.membertask.domain;
 
 import com.bside.server.module.member.domain.Member;
+import com.bside.server.module.memberroutine.domain.MemberRoutine;
 import com.bside.server.module.task.domain.Task;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -27,6 +28,10 @@ public class MemberTask {
   @ManyToOne
   @JoinColumn(name = "member_id")
   private Member member;
+
+  @ManyToOne
+  @JoinColumn(name = "member_routine_id")
+  private MemberRoutine memberRoutine;
 
   @Column(name = "actual_time", nullable = false)
   private Integer actualTime;

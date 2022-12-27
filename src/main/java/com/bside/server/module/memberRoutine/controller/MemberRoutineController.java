@@ -3,6 +3,7 @@ package com.bside.server.module.memberroutine.controller;
 import com.bside.server.module.memberroutine.dto.MemberRoutineRequest;
 import com.bside.server.module.memberroutine.dto.MemberRoutineResponse;
 import com.bside.server.module.memberroutine.service.MemberRoutineService;
+import com.bside.server.module.membertask.dto.MemberTaskResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +24,11 @@ public class MemberRoutineController {
   @PostMapping("/list")
   public List<MemberRoutineResponse> getRoutine(@RequestParam Integer memberId, @RequestParam String date) {
     return routineService.getRoutine(memberId, date);
+  }
+
+  @PostMapping("/list/tasks")
+  public List<MemberTaskResponse> getTask(@RequestParam Integer memberId, @RequestParam String date) {
+    return routineService.getTask(memberId, date);
   }
 
   @PostMapping("/end")
