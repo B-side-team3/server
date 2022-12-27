@@ -30,6 +30,8 @@ public class QMemberTask extends EntityPathBase<MemberTask> {
 
     public final com.bside.server.module.member.domain.QMember member;
 
+    public final com.bside.server.module.memberroutine.domain.QMemberRoutine memberRoutine;
+
     public final NumberPath<Integer> memberTaskId = createNumber("memberTaskId", Integer.class);
 
     public final StringPath status = createString("status");
@@ -55,6 +57,7 @@ public class QMemberTask extends EntityPathBase<MemberTask> {
     public QMemberTask(Class<? extends MemberTask> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.member = inits.isInitialized("member") ? new com.bside.server.module.member.domain.QMember(forProperty("member")) : null;
+        this.memberRoutine = inits.isInitialized("memberRoutine") ? new com.bside.server.module.memberroutine.domain.QMemberRoutine(forProperty("memberRoutine"), inits.get("memberRoutine")) : null;
         this.task = inits.isInitialized("task") ? new com.bside.server.module.task.domain.QTask(forProperty("task"), inits.get("task")) : null;
     }
 

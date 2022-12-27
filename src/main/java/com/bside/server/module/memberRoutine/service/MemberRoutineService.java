@@ -6,6 +6,9 @@ import com.bside.server.module.memberroutine.domain.MemberRoutine;
 import com.bside.server.module.memberroutine.dto.MemberRoutineResponse;
 import com.bside.server.module.memberroutine.repository.MemberRoutineRepository;
 import com.bside.server.module.memberroutine.dto.MemberRoutineRequest;
+import com.bside.server.module.membertask.domain.MemberTask;
+import com.bside.server.module.membertask.dto.MemberTaskResponse;
+import com.bside.server.module.membertask.repository.MemberTaskRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +24,7 @@ import java.util.stream.Collectors;
 public class MemberRoutineService {
 
   private final MemberRoutineRepository memberRoutineRepository;
+  private final MemberTaskRepository memberTaskRepository;
 
   @Transactional
   public MemberRoutineResponse createRoutine(MemberRoutineRequest request) {
@@ -34,6 +38,14 @@ public class MemberRoutineService {
     LocalDateTime date = LocalDate.parse(dateStr, formatter).atStartOfDay();
     List<MemberRoutine> memberRoutineList = memberRoutineRepository.findByMemberMemberIdAndStartDateLessThanEqualAndEndDateGreaterThanEqualAndStatus(memberId, date, date, "ongoing");
     return memberRoutineList.stream().map(MemberRoutineResponse::new).collect(Collectors.toList());
+  }
+
+  @Transactional
+  public List<MemberTaskResponse> getTask(Integer memberId, String dateStr) {
+    DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
+    LocalDateTime date = LocalDate.parse(dateStr, formatter).atStartOfDay();
+    List<MemberTask> taskList = memberTaskRepository.findByMemberMemberIdAndMemberRoutineStartDateLessThanEqualAndMemberRoutineEndDateGreaterThanEqualAndMemberRoutineStatus(memberId, date, date, "ongoing");
+    return taskList.stream().map(MemberTaskResponse::new).collect(Collectors.toList());
   }
 
   @Transactional
