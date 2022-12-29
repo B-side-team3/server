@@ -54,10 +54,7 @@ public class JwtValidator {
         String token = getToken(request);
         Claims claims = getClaim(token);
 
-        // todo token payload 에 따라 변경 예정
         String email = claims.get("email", String.class);
-        Integer expiration = claims.get("exp", Integer.class);
-
         UserDetails userDetails = userDetailsService.loadUserByUsername(email);
         return new UsernamePasswordAuthenticationToken(userDetails, null, null);
     }

@@ -23,7 +23,7 @@ public enum ErrorCode {
     INVALID_AUTHENTICATION_TYPE(2001, "유효하지 않은 인증 타입입니다."),
     AUTHORIZATION_HEADER_NOT_FOUND(2003, "Authorization 헤더가 없습니다."),
     TOKEN_NOT_FOUND(2004, "토큰이 존재하지 않습니다."),
-    UNKNOWN_TOKEN(2005, "유효하지 않은 토큰입니다."),
+    INVALID_TOKEN(2005, "유효하지 않은 토큰입니다."),
     EXPIRED_TOKEN(2006, "만료된 토큰입니다."),
     DELETED_USER(2007, "탈퇴한 회원입니다."),
     INVALID_REFRESH_REQUEST(2008, "유효하지 않은 재발급 요청입니다."),
@@ -44,7 +44,7 @@ public enum ErrorCode {
 
     // request
     INVALID_REQUEST_URI(6000, "유효하지 않은 url 입니다."),
-    FAIL_TO_GET_KAKAO_INFO(6001, "카카오 서버에서 사용자 정보를 얻지 못했습니다."),
+    REQUEST_REJECTED(6001, "카카오 서버에서 사용자 정보를 얻지 못했습니다."),
     ;
 
     private final int code;

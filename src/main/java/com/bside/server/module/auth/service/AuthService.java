@@ -61,7 +61,7 @@ public class AuthService {
 
         // db 와 값이 다른 경우
         if (!oauth.get().getRefreshToken().equals(refreshToken)) {
-            throw new AuthenticationException(ErrorCode.UNKNOWN_TOKEN);
+            throw new AuthenticationException(ErrorCode.INVALID_TOKEN);
         }
 
         // accessToken 이 만료되지 않았는데 refresh 요청 보낸 경우

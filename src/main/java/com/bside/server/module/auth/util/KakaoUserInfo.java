@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.log4j.Log4j2;
 import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -28,11 +27,11 @@ public class KakaoUserInfo {
       final int statusCode = response.getStatusLine().getStatusCode();
       if(statusCode != 200) {
         log.error("failed to httpRequest: {}, statusCode = {}", response, statusCode);
-        throw new CustomException(ErrorCode.FAIL_TO_GET_KAKAO_INFO);
+        throw new CustomException(ErrorCode.REQUEST_REJECTED);
       }
       return new ObjectMapper().readTree(response.getEntity().getContent());
     } catch (IOException e) {
-      throw new CustomException(ErrorCode.FAIL_TO_GET_KAKAO_INFO);
+      throw new CustomException(ErrorCode.REQUEST_REJECTED);
     }
   }
 }
