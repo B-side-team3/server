@@ -2,6 +2,7 @@ package com.bside.server.global.auth.security;
 
 import com.bside.server.global.error.ErrorCode;
 import com.bside.server.global.error.exception.AuthenticationException;
+import com.bside.server.module.auth.dto.TokenResponse;
 import com.bside.server.module.member.dto.MemberDto;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -60,12 +61,26 @@ public class JwtValidator {
         return new UsernamePasswordAuthenticationToken(userDetails, null, null);
     }
 
-    public String createToken(MemberDto memberDto) {
-        return doCreateToken(memberDto, tokenExpiry);
-    }
+    public TokenResponse createToken(String email) {
 
-    public String createRefreshToken(MemberDto memberDto) {
-        return doCreateToken(memberDto, refreshTokenExpiry);
+        Claims claims = Jwts.claims();
+        claims.put("email", email);
+
+        String accessToken = Jwts.builder()
+                .setClaims(claims)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + tokenExpiry))
+                .signWith(getSignInKey(secretKey), SignatureAlgorithm.HS256)
+                .compact();
+
+        String refreshToken = Jwts.builder()
+                .setClaims(claims)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + refreshTokenExpiry))
+                .signWith(getSignInKey(secretKey), SignatureAlgorithm.HS256)
+                .compact();
+
+        return TokenResponse.builder().accessToken(accessToken).refreshToken(refreshToken).build();
     }
 
     public boolean isTokenExpired(String token) {
@@ -73,19 +88,9 @@ public class JwtValidator {
         return expiration.before(new Date());
     }
 
-    public String doCreateToken(MemberDto memberDto, long expireTime)  {
-        Claims claims = Jwts.claims();
-        claims.put("email", memberDto.getEmail());
 
-        return Jwts.builder()
-            .setClaims(claims)
-            .setIssuedAt(new Date())
-            .setExpiration(new Date(System.currentTimeMillis() + expireTime))
-            .signWith(getSignInKey(secretKey), SignatureAlgorithm.HS256)
-            .compact();
-    }
 
-    private String getToken(HttpServletRequest request) {
+    public String getToken(HttpServletRequest request) {
         String authorizationHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
 
         if (authorizationHeader == null) {

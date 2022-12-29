@@ -58,7 +58,8 @@ public class SecurityConfig {
     public WebSecurityCustomizer webSecurityCustomizer(){
         return (web) -> web.ignoring()
                 .mvcMatchers(HttpMethod.GET, "/docs/index.html")
-                .mvcMatchers(HttpMethod.POST, "/auth/login")
+                .mvcMatchers(HttpMethod.POST, "/auth/token")
+                .mvcMatchers(HttpMethod.POST, "/auth/refresh")
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations());
     }
 

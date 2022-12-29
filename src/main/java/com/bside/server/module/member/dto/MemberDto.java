@@ -28,25 +28,25 @@ public class MemberDto {
 
   private LocalDateTime createdDate;
 
-  public MemberDto(Member entity) {
-    this.memberId = entity.getMemberId();
-    this.email = entity.getEmail();
-    this.nickname = entity.getNickname();
-    this.imageUrl = entity.getImageUrl();
-    this.isDeleted = entity.getIsDeleted();
-    this.isAdmin = entity.getIsAdmin();
-    this.createdDate = entity.getCreatedDate();
-  }
+//  public MemberDto(Member entity) {
+//    this.memberId = entity.getMemberId();
+//    this.email = entity.getEmail();
+//    this.nickname = entity.getNickname();
+//    this.imageUrl = entity.getImageUrl();
+//    this.isDeleted = entity.isDeleted();
+//    this.isAdmin = entity.isAdmin();
+//    this.createdDate = entity.getCreatedDate();
+//  }
 
-  public Member toEntity() {
-    return Member.builder()
-        .memberId(memberId)
-        .email(email)
-        .nickname(nickname)
-        .imageUrl(imageUrl)
-        .isDeleted(isDeleted)
-        .isAdmin(isAdmin)
-        .createdDate(createdDate)
-        .build();
-  }
+//  public Member toEntity() {
+//    return Member.builder()
+//        .memberId(memberId)
+//        .email(email)
+//        .nickname(nickname)
+//        .imageUrl(imageUrl)
+//        .isDeleted(isDeleted)
+//        .isAdmin(isAdmin)
+//        .createdDate(createdDate)
+//        .build();
+//  }
 }
