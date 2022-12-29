@@ -92,4 +92,9 @@ public class AuthService {
         return response;
     }
 
+    @Transactional
+    public void revoke() {
+        Optional<Oauth> oauth = oauthRepository.findByMember(UserContext.getMember());
+        oauth.ifPresent(oauthRepository::delete);
+    }
 }

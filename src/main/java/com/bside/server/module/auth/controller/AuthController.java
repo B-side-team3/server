@@ -5,6 +5,7 @@ import com.bside.server.module.auth.dto.TokenResponse;
 import com.bside.server.module.auth.service.AuthService;
 import com.bside.server.module.member.domain.Member;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,5 +29,10 @@ public class AuthController
     public TokenResponse refresh(HttpServletRequest request) {
         authService.validateRefresh(request);
         return authService.upsertOauth(UserContext.getMember());
+    }
+
+    @DeleteMapping("/revoke")
+    public void revoke() {
+        authService.revoke();
     }
 }
