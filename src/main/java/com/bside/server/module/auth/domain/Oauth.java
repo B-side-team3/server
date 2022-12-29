@@ -1,4 +1,4 @@
-package com.bside.server.module.login.domain;
+package com.bside.server.module.auth.domain;
 
 import com.bside.server.module.member.domain.Member;
 import lombok.AllArgsConstructor;
@@ -23,7 +23,7 @@ public class Oauth {
   @Column(name = "oauth_id", nullable = false)
   private Integer oauthId;
 
-  @OneToOne
+  @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "member_id")
   private Member member;
 
@@ -35,9 +35,6 @@ public class Oauth {
 
   @Column(name = "type")
   private String type;
-
-  @Column(name = "is_deleted", columnDefinition = "jwt token 삭제 여부")
-  private Integer isDeleted;
 
   @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
   @CreationTimestamp

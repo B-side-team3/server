@@ -19,7 +19,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) {
         // username 은 "userId@email.com" 형태
-        Member member = memberRepository.findByEmail(username).orElseThrow(() -> new CustomException(ErrorCode.UNKNOWN_USER));
+        Member member = memberRepository.findByEmailAndIsDeletedIs(username, false).orElseThrow(() -> new CustomException(ErrorCode.UNKNOWN_USER));
         return new UserAdapter(member);
 
     }

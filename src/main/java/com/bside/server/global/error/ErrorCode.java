@@ -15,9 +15,9 @@ public enum ErrorCode {
      */
 
     // common
-    INVALID_INPUT_VALUE(1000, "Invalid input value."),
-    INVALID_BINDING_VALUE(1001, "Invalid binding value."),
-    METHOD_NOT_ALLOWED(1002, "Method not allowed." ),
+    INVALID_INPUT_VALUE(1000, "유효하지 않은 입력값입니다."),
+    METHOD_NOT_ALLOWED(1001, "허용되지 않은 method 입니다." ),
+    CONTENT_TYPE_NOT_ALLOWED(1002, "허용되지 않은 콘텐츠 타입입니다."),
 
     // 인증
     UNKNOWN_USER(2000, "알 수 없는 유저입니다."),
@@ -25,6 +25,7 @@ public enum ErrorCode {
     AUTHORIZATION_HEADER_NOT_FOUND(2003, "Authorization 헤더가 없습니다."),
     EXPIRED_TOKEN(2004, "만료된 토큰입니다."),
     DELETED_USER(2005, "탈퇴한 회원입니다."),
+
     // 카테고리
     CATEGORY_NOT_FOUND(3000, "존재하지 않는 카테고리입니다."),
     CATEGORY_NAME_EMPTY(3001, "카테고리 이름이 없습니다."),
@@ -37,7 +38,11 @@ public enum ErrorCode {
     // Task
     TASK_NOT_FOUND(5000, "존재하지 않는 Task 입니다."),
     TASK_TITLE_EMPTY(5001, "Task 의 이름이 없습니다."),
-    TASK_EXPECTED_TIME_EMPTY(5002, "Task 의 예상 시간이 없습니다.")
+    TASK_EXPECTED_TIME_EMPTY(5002, "Task 의 예상 시간이 없습니다."),
+
+    // request
+    INVALID_REQUEST_URI(6000, "유효하지 않은 url 입니다."),
+    FAIL_TO_GET_KAKAO_INFO(6001, "카카오 서버에서 사용자 정보를 얻지 못했습니다."),
     ;
 
     private final int code;

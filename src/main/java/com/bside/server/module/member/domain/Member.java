@@ -1,6 +1,7 @@
 package com.bside.server.module.member.domain;
 
 import com.bside.server.global.auth.permission.Role;
+import com.bside.server.module.auth.domain.Oauth;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -31,11 +32,11 @@ public class Member {
     @Column(name = "image_url", nullable = false)
     private String imageUrl;
 
-    @Column(name = "is_admin", nullable = false)
-    private Integer isAdmin;
+    @Column(name = "is_admin", columnDefinition = "TINYINT", nullable = false)
+    private boolean isAdmin;
 
-    @Column(name = "is_deleted", nullable = false)
-    private Integer isDeleted;
+    @Column(name = "is_deleted", columnDefinition = "TINYINT", nullable = false)
+    private boolean isDeleted;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @CreationTimestamp
@@ -43,9 +44,9 @@ public class Member {
     private LocalDateTime createdDate;
 
     public String getRole() {
-        if(this.getIsAdmin() == 0) {
-            return Role.USER.getValue();
+        if(this.isAdmin()) {
+            return Role.ADMIN.getValue();
         }
-        return Role.ADMIN.getValue();
+        return Role.USER.getValue();
     }
 }

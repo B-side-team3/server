@@ -1,7 +1,7 @@
 CREATE TABLE `member` (
     `member_id`	INT(11)	NOT NULL AUTO_INCREMENT COMMENT 'member pk',
     `email`	VARCHAR(20)	NOT NULL COMMENT '이메일 주소',
-    `nickname`	VARCHAR(20)	NOT NULL COMMENT '닉네임',
+    `nickname`	VARCHAR(20) COMMENT '닉네임',
     `image_url`	TEXT NULL COMMENT '프로필 이미지',
     `is_deleted` TINYINT  NOT NULL DEFAULT '0'  COMMENT '삭제 여부',
     `is_admin` TINYINT NOT NULL DEFAULT '0' COMMENT '관리자 여부',
@@ -19,7 +19,6 @@ CREATE TABLE `oauth` (
     `type`	VARCHAR(20)	NOT NULL COMMENT '로그인 타입',
     `access_token` TEXT NOT NULL COMMENT 'access token',
     `refresh_token`	TEXT NOT NULL COMMENT 'refresh token',
-    `is_deleted` TINYINT  NOT NULL DEFAULT '0'  COMMENT '삭제 여부',
     `created_date` TIMESTAMP NOT NULL DEFAULT current_timestamp() COMMENT '생성일자',
     PRIMARY KEY (`oauth_id`) USING BTREE,
     INDEX `member_id` (`member_id`) USING BTREE,
