@@ -1,8 +1,5 @@
-package com.bside.server.global.error.handler;
+package com.bside.server.global.error;
 
-
-import com.bside.server.global.error.ErrorCode;
-import com.bside.server.global.error.ErrorResponse;
 import com.bside.server.global.error.exception.CustomException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
