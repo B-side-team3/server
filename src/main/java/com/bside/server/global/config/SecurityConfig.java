@@ -57,11 +57,11 @@ public class SecurityConfig {
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer(){
         return (web) -> web.ignoring()
-                .mvcMatchers(HttpMethod.GET, "/docs/index.html")
-                .mvcMatchers(HttpMethod.POST, "/auth/token")
-                .requestMatchers(PathRequest.toStaticResources().atCommonLocations());
+            .requestMatchers(PathRequest.toStaticResources().atCommonLocations())
+            .mvcMatchers(HttpMethod.GET, "/docs/index.html")
+            .mvcMatchers(HttpMethod.POST, "/auth/token")
+            .mvcMatchers("/v3/api-docs", "/swagger-ui/**", "/swagger-resources/**", "/swagger-ui.html");
     }
-
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
