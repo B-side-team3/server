@@ -32,6 +32,7 @@ public class JwtValidator {
 
     @Value("${spring.jwt.secret}")
     private String secretKey;
+    private String encodeKey;
     @Value("${spring.jwt.tokenExpiry}")
     private Long tokenExpiry;
     @Value("${spring.jwt.refreshTokenExpiry}")
@@ -41,7 +42,7 @@ public class JwtValidator {
 
     @PostConstruct
     protected void init() {
-        secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
+        encodeKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
     }
 
     private Key getSignInKey(String secretKey) {
@@ -88,8 +89,6 @@ public class JwtValidator {
         return expiration.before(new Date());
     }
 
-
-
     public String getToken(HttpServletRequest request) {
         String authorizationHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
 
@@ -107,7 +106,7 @@ public class JwtValidator {
     private Claims getClaim(String token) {
         try {
             return Jwts.parserBuilder()
-                    .setSigningKey(secretKey)
+                    .setSigningKey(encodeKey)
                     .build()
                     .parseClaimsJws(token)
                     .getBody();
@@ -117,9 +116,4 @@ public class JwtValidator {
 
         }
     }
-
-// todo 만료된 access 토큰 refresh 처리
-//    private boolean needRefresh(String key, int createTime) {
-//    }
-
 }
