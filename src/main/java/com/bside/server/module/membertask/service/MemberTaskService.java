@@ -21,19 +21,19 @@ public class MemberTaskService {
 
   @Transactional
   public MemberTaskResponse createTask(Integer routineId, MemberTaskRequest request) {
-    memberTaskRepository.findByTaskRoutineId(routineId);
+    memberTaskRepository.findByTaskRoutineIdAndIsDeleted(routineId, 0);
     return new MemberTaskResponse(memberTaskRepository.save(request.toEntity(request)));
   }
 
   @Transactional
   public List<MemberTaskResponse> getTask(Integer routineId) {
-    List<MemberTask> taskList = memberTaskRepository.findByTaskRoutineId(routineId);
+    List<MemberTask> taskList = memberTaskRepository.findByTaskRoutineIdAndIsDeleted(routineId, 0);
     return taskList.stream().map(MemberTaskResponse::new).collect(Collectors.toList());
   }
 
   @Transactional
   public MemberTaskResponse updateTask(Integer routineId, Integer memberTaskId, MemberTaskRequest request) {
-    memberTaskRepository.findByTaskRoutineId(routineId);
+    memberTaskRepository.findByTaskRoutineIdAndIsDeleted(routineId, 0);
     MemberTask memberTask = findTask(memberTaskId);
     memberTask.setActualTime(request.getActualTime());
     memberTask.setStatus(request.getStatus());
@@ -42,9 +42,10 @@ public class MemberTaskService {
 
   @Transactional
   public void deleteTask(Integer routineId, Integer memberTaskId) {
-    memberTaskRepository.findByTaskRoutineId(routineId);
+    memberTaskRepository.findByTaskRoutineIdAndIsDeleted(routineId, 0);
     MemberTask memberTask = findTask(memberTaskId);
-    memberTaskRepository.delete(memberTask);
+    memberTask.setIsDeleted(1);
+    memberTaskRepository.save(memberTask);
   }
 
   private MemberTask findTask(Integer memberTaskId) {

@@ -38,7 +38,7 @@ public class MemberRoutineService {
     updateStatus(memberId);
     DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
     LocalDateTime date = LocalDate.parse(dateStr, formatter).atStartOfDay();
-    List<MemberRoutine> memberRoutineList = memberRoutineRepository.findByMemberMemberIdAndStartDateLessThanEqualAndEndDateGreaterThanEqualAndStatus(memberId, date, date, "ongoing");
+    List<MemberRoutine> memberRoutineList = memberRoutineRepository.findByMemberMemberIdAndStartDateLessThanEqualAndEndDateGreaterThanEqualAndStatusAndIsDeleted(memberId, date, date, "ongoing", 0);
     return memberRoutineList.stream().map(MemberRoutineResponse::new).collect(Collectors.toList());
   }
 
@@ -46,7 +46,7 @@ public class MemberRoutineService {
   public List<MemberTaskResponse> getTask(Integer memberId, String dateStr) {
     DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
     LocalDateTime date = LocalDate.parse(dateStr, formatter).atStartOfDay();
-    List<MemberTask> taskList = memberTaskRepository.findByMemberMemberIdAndMemberRoutineStartDateLessThanEqualAndMemberRoutineEndDateGreaterThanEqualAndMemberRoutineStatus(memberId, date, date, "ongoing");
+    List<MemberTask> taskList = memberTaskRepository.findByMemberMemberIdAndMemberRoutineStartDateLessThanEqualAndMemberRoutineEndDateGreaterThanEqualAndMemberRoutineStatusAndIsDeleted(memberId, date, date, "ongoing", 0);
     return taskList.stream().map(MemberTaskResponse::new).collect(Collectors.toList());
   }
 
@@ -55,7 +55,7 @@ public class MemberRoutineService {
     String startDateStr = LocalDateTime.now().format(DateTimeFormatter.ISO_DATE);
     LocalDateTime startDate = LocalDate.parse(startDateStr, DateTimeFormatter.ISO_DATE).atStartOfDay();
     LocalDateTime endDate = startDate.plusDays(7);
-    List<MemberRoutine> memberRoutineList = memberRoutineRepository.findByMemberMemberIdAndStartDateLessThanEqualAndEndDateLessThanEqualAndStatus(memberId, startDate, endDate, "ongoing");
+    List<MemberRoutine> memberRoutineList = memberRoutineRepository.findByMemberMemberIdAndStartDateLessThanEqualAndEndDateLessThanEqualAndStatusAndIsDeleted(memberId, startDate, endDate, "ongoing", 0);
     return memberRoutineList.stream().map(MemberRoutineResponse::new).collect(Collectors.toList());
   }
 
@@ -76,7 +76,13 @@ public class MemberRoutineService {
   @Transactional
   public void deleteRoutine(Integer memberRoutineId) {
     MemberRoutine memberRoutine = findRoutine(memberRoutineId);
-    memberRoutineRepository.delete(memberRoutine);
+    List<MemberTask> memberTaskList = memberTaskRepository.findByMemberRoutineMemberRoutineId(memberRoutineId);
+    memberRoutine.setIsDeleted(1);
+    for (MemberTask memberTask : memberTaskList) {
+      memberTask.setIsDeleted(1);
+      memberTaskRepository.save(memberTask);
+    }
+    memberRoutineRepository.save(memberRoutine);
   }
 
   private MemberRoutine findRoutine(Integer memberRoutineId) {
@@ -84,7 +90,7 @@ public class MemberRoutineService {
   }
 
   private void updateStatus(Integer memberId) {
-    List<MemberRoutine> memberRoutineList = memberRoutineRepository.findByMemberMemberIdAndStatus(memberId, "ongoing");
+    List<MemberRoutine> memberRoutineList = memberRoutineRepository.findByMemberMemberIdAndStatusAndIsDeleted(memberId, "ongoing", 0);
     LocalDateTime date = LocalDateTime.now();
     for (MemberRoutine memberRoutine : memberRoutineList) {
       if (memberRoutine.getEndDate().compareTo(date) == -1) {

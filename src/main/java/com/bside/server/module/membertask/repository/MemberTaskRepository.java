@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface MemberTaskRepository extends JpaRepository<MemberTask, Integer> {
-  List<MemberTask> findByTaskRoutineId(Integer routineId);
-  List<MemberTask> findByMemberMemberIdAndMemberRoutineStartDateLessThanEqualAndMemberRoutineEndDateGreaterThanEqualAndMemberRoutineStatus(Integer memberId, LocalDateTime startdDate, LocalDateTime endDate, String status);
+  List<MemberTask> findByTaskRoutineIdAndIsDeleted(Integer routineId, Integer isDeleted);
+  List<MemberTask> findByMemberMemberIdAndMemberRoutineStartDateLessThanEqualAndMemberRoutineEndDateGreaterThanEqualAndMemberRoutineStatusAndIsDeleted(Integer memberId, LocalDateTime startdDate, LocalDateTime endDate, String status, Integer isDeleted);
+  List<MemberTask> findByMemberRoutineMemberRoutineId(Integer memberRoutineId);
 }

@@ -28,6 +28,8 @@ public class QMemberRoutine extends EntityPathBase<MemberRoutine> {
 
     public final DateTimePath<java.time.LocalDateTime> endDate = createDateTime("endDate", java.time.LocalDateTime.class);
 
+    public final NumberPath<Integer> isDeleted = createNumber("isDeleted", Integer.class);
+
     public final com.bside.server.module.member.domain.QMember member;
 
     public final NumberPath<Integer> memberRoutineId = createNumber("memberRoutineId", Integer.class);
