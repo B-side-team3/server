@@ -52,4 +52,7 @@ public class MemberRoutine {
 
   @Column(name = "status", nullable = false)
   private String status;
+
+  @Column(name = "is_deleted", nullable = false)
+  private Integer isDeleted;
 }
