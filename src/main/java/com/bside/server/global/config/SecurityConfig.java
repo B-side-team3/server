@@ -59,7 +59,6 @@ public class SecurityConfig {
         return (web) -> web.ignoring()
                 .mvcMatchers(HttpMethod.GET, "/docs/index.html")
                 .mvcMatchers(HttpMethod.POST, "/auth/token")
-                .mvcMatchers(HttpMethod.POST, "/auth/refresh")
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations());
     }
 

@@ -11,20 +11,22 @@ public enum ErrorCode {
      * Category  : 3000
      * Routine   : 4000
      * Task      : 5000
-     *
      */
 
     // common
     INVALID_INPUT_VALUE(1000, "유효하지 않은 입력값입니다."),
-    METHOD_NOT_ALLOWED(1001, "허용되지 않은 method 입니다." ),
+    METHOD_NOT_ALLOWED(1001, "허용되지 않은 method 입니다."),
     CONTENT_TYPE_NOT_ALLOWED(1002, "허용되지 않은 콘텐츠 타입입니다."),
 
     // 인증
     UNKNOWN_USER(2000, "알 수 없는 유저입니다."),
     INVALID_AUTHENTICATION_TYPE(2001, "유효하지 않은 인증 타입입니다."),
     AUTHORIZATION_HEADER_NOT_FOUND(2003, "Authorization 헤더가 없습니다."),
-    EXPIRED_TOKEN(2004, "만료된 토큰입니다."),
-    DELETED_USER(2005, "탈퇴한 회원입니다."),
+    TOKEN_NOT_FOUND(2004, "토큰이 존재하지 않습니다."),
+    UNKNOWN_TOKEN(2005, "유효하지 않은 토큰입니다."),
+    EXPIRED_TOKEN(2006, "만료된 토큰입니다."),
+    DELETED_USER(2007, "탈퇴한 회원입니다."),
+    INVALID_REFRESH_REQUEST(2008, "유효하지 않은 재발급 요청입니다."),
 
     // 카테고리
     CATEGORY_NOT_FOUND(3000, "존재하지 않는 카테고리입니다."),
