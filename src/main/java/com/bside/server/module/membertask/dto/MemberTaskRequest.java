@@ -1,33 +1,36 @@
 package com.bside.server.module.membertask.dto;
 
 import com.bside.server.module.member.domain.Member;
+import com.bside.server.module.memberroutine.domain.MemberRoutine;
 import com.bside.server.module.membertask.domain.MemberTask;
 import com.bside.server.module.task.domain.Task;
-import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class MemberTaskRequest {
 
-  private Integer memberTaskId;
+  private Integer taskId;
 
-  private Task task;
+  private Integer memberId;
 
-  private Member member;
+  private Integer memberRoutineId;
 
-  private int actualTime;
+  private Integer actualTime;
 
-  private String status;
+  @Builder.Default
+  private String status = "ongoing";
 
-  private int isDeleted;
+  @Builder.Default
+  private Integer isDeleted = 0;
 
   public MemberTask toEntity(MemberTaskRequest request) {
     return MemberTask
         .builder()
-        .task(request.getTask())
-        .member(request.getMember())
+        .task(Task.builder().id(getTaskId()).build())
+//        .member(UserContext.getMember())
+        .member(Member.builder().memberId(request.getMemberId()).build())
+        .memberRoutine(MemberRoutine.builder().memberRoutineId(getMemberRoutineId()).build())
         .actualTime(request.getActualTime())
         .status(request.getStatus())
         .isDeleted(request.getIsDeleted())

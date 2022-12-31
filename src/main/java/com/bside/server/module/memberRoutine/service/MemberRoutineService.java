@@ -9,8 +9,6 @@ import com.bside.server.module.memberroutine.dto.MemberRoutineRequest;
 import com.bside.server.module.membertask.domain.MemberTask;
 import com.bside.server.module.membertask.dto.MemberTaskResponse;
 import com.bside.server.module.membertask.repository.MemberTaskRepository;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
