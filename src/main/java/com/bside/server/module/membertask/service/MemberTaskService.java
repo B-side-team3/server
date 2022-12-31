@@ -35,18 +35,18 @@ public class MemberTaskService {
   public MemberTaskResponse updateTask(Integer routineId, Integer memberTaskId, MemberTaskRequest request) {
     memberTaskRepository.findByTaskRoutineIdAndIsDeleted(routineId, 0);
     MemberTask memberTask = findTask(memberTaskId);
-    memberTask.setActualTime(request.getActualTime());
-    memberTask.setStatus(request.getStatus());
+    memberTask.setIsDeleted(request.getIsDeleted()); // 테스크편집 - 진행중인/쉬어가는
+    memberTask.setStatus(request.getStatus()); // 진행상태
     return new MemberTaskResponse(memberTaskRepository.save(memberTask));
   }
 
-  @Transactional
-  public void deleteTask(Integer routineId, Integer memberTaskId) {
-    memberTaskRepository.findByTaskRoutineIdAndIsDeleted(routineId, 0);
-    MemberTask memberTask = findTask(memberTaskId);
-    memberTask.setIsDeleted(1);
-    memberTaskRepository.save(memberTask);
-  }
+//  @Transactional
+//  public void deleteTask(Integer routineId, Integer memberTaskId) {
+//    memberTaskRepository.findByTaskRoutineIdAndIsDeleted(routineId, 0);
+//    MemberTask memberTask = findTask(memberTaskId);
+//    memberTask.setIsDeleted(1);
+//    memberTaskRepository.save(memberTask);
+//  }
 
   private MemberTask findTask(Integer memberTaskId) {
     return memberTaskRepository.findById(memberTaskId).orElseThrow(() -> new CustomException(ErrorCode.TASK_NOT_FOUND));

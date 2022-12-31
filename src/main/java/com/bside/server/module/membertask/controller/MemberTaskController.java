@@ -30,8 +30,8 @@ public class MemberTaskController {
     return memberTaskService.updateTask(routineId, memberTaskId, request);
   }
 
-  @DeleteMapping("/{memberTaskId}")
-  public void deleteTask(@PathVariable Integer routineId, @PathVariable Integer memberTaskId) {
-    memberTaskService.deleteTask(routineId, memberTaskId);
-  }
+//  @DeleteMapping("/{memberTaskId}")
+//  public void deleteTask(@PathVariable Integer routineId, @PathVariable Integer memberTaskId) {
+//    memberTaskService.deleteTask(routineId, memberTaskId);
+//  }
 }

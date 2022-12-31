@@ -15,6 +15,7 @@ public class MemberTaskResponse {
   private Integer memberTaskId;
   private Integer taskId;
   private Integer memberId;
+  private Integer routineId;
   private Integer actualTime;
   private String status;
   private Integer isDeleted;
@@ -25,6 +26,7 @@ public class MemberTaskResponse {
     this.memberTaskId = memberTask.getMemberTaskId();
     this.taskId = memberTask.getTask().getId();
     this.memberId = memberTask.getMember().getMemberId();
+    this.routineId = memberTask.getMemberRoutine().getMemberRoutineId();
     this.actualTime = memberTask.getActualTime();
     this.status = memberTask.getStatus();
     this.isDeleted = memberTask.getIsDeleted();

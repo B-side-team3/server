@@ -1,23 +1,20 @@
 package com.bside.server.module.memberroutine.dto;
 
+import com.bside.server.global.util.UserContext;
 import com.bside.server.module.member.domain.Member;
 import com.bside.server.module.memberroutine.domain.MemberRoutine;
 import com.bside.server.module.routine.domain.Routine;
-import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class MemberRoutineRequest {
 
-  private Integer memberRoutineId;
+  private Integer memberId;
 
-  private Member member;
-
-  private Routine routine;
+  private Integer routineId;
 
   private LocalDateTime startDate;
 
@@ -27,18 +24,24 @@ public class MemberRoutineRequest {
 
   private String anchor;
 
-  private String status;
+  @Builder.Default
+  private String status = "ongoing";
 
-  public MemberRoutine toEntity(MemberRoutineRequest request){
+  @Builder.Default
+  private Integer isDeleted = 0;
+
+  public MemberRoutine toEntity(MemberRoutineRequest request) {
     return MemberRoutine
         .builder()
-        .member(request.getMember())
-        .routine(request.getRoutine())
+//        .member(UserContext.getMember())
+        .member(Member.builder().memberId(request.getMemberId()).build())
+        .routine(Routine.builder().id(request.getRoutineId()).build())
         .startDate(request.getStartDate())
         .endDate(request.getEndDate())
         .startTime(request.getStartTime())
         .anchor(request.getAnchor())
         .status(request.getStatus())
+        .isDeleted(request.getIsDeleted())
         .build();
   }
 }
