@@ -22,3 +22,5 @@ spring:
     secret: BSIDE_ROLEBIT_AUTHENTICATE_ENCRYPT_KEY
     tokenExpiry: 1800000 # milliseconds, 30min
     refreshTokenExpiry: 1209600000 # milliseconds, 14days
+fcm:
+  certification: RolebitNotificationKey.json
