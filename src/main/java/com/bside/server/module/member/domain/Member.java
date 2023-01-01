@@ -1,7 +1,6 @@
 package com.bside.server.module.member.domain;
 
 import com.bside.server.global.auth.permission.Role;
-import com.bside.server.module.auth.domain.Oauth;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -38,6 +37,12 @@ public class Member {
     @Column(name = "is_deleted", columnDefinition = "TINYINT", nullable = false)
     private boolean isDeleted;
 
+    @Column(name = "is_notification", columnDefinition = "TINYINT", nullable = false)
+    private boolean isNotification;
+
+    @Column(name = "notification_token")
+    private String notificationToken;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @CreationTimestamp
     @Column(name = "created_date")
@@ -49,4 +54,13 @@ public class Member {
         }
         return Role.USER.getValue();
     }
+
+    public void updateIsNotification(boolean isNotification) {
+        this.isNotification = isNotification;
+    }
+
+    public void updateNotificationToken(String notificationToken) {
+        this.notificationToken = notificationToken;
+    }
+
 }

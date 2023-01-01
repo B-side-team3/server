@@ -21,7 +21,7 @@ public enum ErrorCode {
     // 인증
     UNKNOWN_USER(2000, "알 수 없는 유저입니다."),
     INVALID_AUTHENTICATION_TYPE(2001, "유효하지 않은 인증 타입입니다."),
-    AUTHORIZATION_HEADER_NOT_FOUND(2003, "Authorization 헤더가 없습니다."),
+    AUTHORIZATION_HEADER_NOT_FOUND(2003, "Authorization 헤더가 존재하지 않습니다."),
     TOKEN_NOT_FOUND(2004, "토큰이 존재하지 않습니다."),
     INVALID_TOKEN(2005, "유효하지 않은 토큰입니다."),
     EXPIRED_TOKEN(2006, "만료된 토큰입니다."),
@@ -45,6 +45,10 @@ public enum ErrorCode {
     // request
     INVALID_REQUEST_URI(6000, "유효하지 않은 url 입니다."),
     REQUEST_REJECTED(6001, "카카오 서버에서 사용자 정보를 얻지 못했습니다."),
+
+    // firebase
+    FAIL_TO_INIT_FIREBASE(7000, "firebase 초기화에 실패했습니다."),
+    EMPTY_NOTIFICATION_TOKEN(7001, "notification token 값이 없습니다.")
     ;
 
     private final int code;

@@ -5,6 +5,8 @@ CREATE TABLE `member` (
     `image_url`	TEXT NULL COMMENT '프로필 이미지',
     `is_deleted` TINYINT  NOT NULL DEFAULT '0'  COMMENT '삭제 여부',
     `is_admin` TINYINT NOT NULL DEFAULT '0' COMMENT '관리자 여부',
+    `is_notification` TINYINT(4) NOT NULL DEFAULT '0' COMMENT '알림 수신 여부',
+    `notification_token` TEXT NULL DEFAULT NULL COMMENT '푸쉬알림 토큰',
     `created_date` TIMESTAMP NOT NULL DEFAULT current_timestamp() COMMENT '생성일자',
     PRIMARY KEY (`member_id`) USING BTREE,
     INDEX `email` (`email`) USING BTREE

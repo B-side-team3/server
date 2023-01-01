@@ -29,9 +29,13 @@ public class QMember extends EntityPathBase<Member> {
 
     public final BooleanPath isDeleted = createBoolean("isDeleted");
 
+    public final BooleanPath isNotification = createBoolean("isNotification");
+
     public final NumberPath<Integer> memberId = createNumber("memberId", Integer.class);
 
     public final StringPath nickname = createString("nickname");
+
+    public final StringPath notificationToken = createString("notificationToken");
 
     public QMember(String variable) {
         super(Member.class, forVariable(variable));
