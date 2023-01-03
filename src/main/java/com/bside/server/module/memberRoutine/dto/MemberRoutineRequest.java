@@ -1,7 +1,6 @@
 package com.bside.server.module.memberroutine.dto;
 
 import com.bside.server.global.util.UserContext;
-import com.bside.server.module.member.domain.Member;
 import com.bside.server.module.memberroutine.domain.MemberRoutine;
 import com.bside.server.module.routine.domain.Routine;
 import lombok.Builder;
@@ -11,9 +10,6 @@ import java.time.LocalDateTime;
 
 @Getter
 public class MemberRoutineRequest {
-
-  @Builder.Default
-  private Integer memberId = UserContext.getMember().getMemberId();
 
   private Integer routineId;
 
@@ -34,7 +30,7 @@ public class MemberRoutineRequest {
   public MemberRoutine toEntity(MemberRoutineRequest request) {
     return MemberRoutine
         .builder()
-        .member(Member.builder().memberId(request.getMemberId()).build())
+        .member(UserContext.getMember())
         .routine(Routine.builder().id(request.getRoutineId()).build())
         .startDate(request.getStartDate())
         .endDate(request.getEndDate())
