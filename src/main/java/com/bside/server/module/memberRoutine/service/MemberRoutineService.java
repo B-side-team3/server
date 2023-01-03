@@ -2,6 +2,7 @@ package com.bside.server.module.memberroutine.service;
 
 import com.bside.server.global.error.ErrorCode;
 import com.bside.server.global.error.exception.CustomException;
+import com.bside.server.global.util.UserContext;
 import com.bside.server.module.memberroutine.domain.MemberRoutine;
 import com.bside.server.module.memberroutine.dto.MemberRoutineResponse;
 import com.bside.server.module.memberroutine.repository.MemberRoutineRepository;
@@ -32,28 +33,28 @@ public class MemberRoutineService {
   }
 
   @Transactional
-  public List<MemberRoutineResponse> getRoutine(Integer memberId, String dateStr) {
-    updateStatus(memberId);
+  public List<MemberRoutineResponse> getRoutine(String dateStr) {
+    updateStatus();
     DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
     LocalDateTime date = LocalDate.parse(dateStr, formatter).atStartOfDay();
-    List<MemberRoutine> memberRoutineList = memberRoutineRepository.findByMemberMemberIdAndStartDateLessThanEqualAndEndDateGreaterThanEqualAndStatusAndIsDeleted(memberId, date, date, "ongoing", 0);
+    List<MemberRoutine> memberRoutineList = memberRoutineRepository.findByMemberMemberIdAndStartDateLessThanEqualAndEndDateGreaterThanEqualAndStatusAndIsDeleted(UserContext.getMember().getMemberId(), date, date, "ongoing", 0);
     return memberRoutineList.stream().map(MemberRoutineResponse::new).collect(Collectors.toList());
   }
 
   @Transactional
-  public List<MemberTaskResponse> getTask(Integer memberId, String dateStr) {
+  public List<MemberTaskResponse> getTask(String dateStr) {
     DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
     LocalDateTime date = LocalDate.parse(dateStr, formatter).atStartOfDay();
-    List<MemberTask> taskList = memberTaskRepository.findByMemberMemberIdAndMemberRoutineStartDateLessThanEqualAndMemberRoutineEndDateGreaterThanEqualAndMemberRoutineStatusAndIsDeleted(memberId, date, date, "ongoing", 0);
+    List<MemberTask> taskList = memberTaskRepository.findByMemberMemberIdAndMemberRoutineStartDateLessThanEqualAndMemberRoutineEndDateGreaterThanEqualAndMemberRoutineStatusAndIsDeleted(UserContext.getMember().getMemberId(), date, date, "ongoing", 0);
     return taskList.stream().map(MemberTaskResponse::new).collect(Collectors.toList());
   }
 
   @Transactional
-  public List<MemberRoutineResponse> getEndRoutine(Integer memberId) {
+  public List<MemberRoutineResponse> getEndRoutine() {
     String startDateStr = LocalDateTime.now().format(DateTimeFormatter.ISO_DATE);
     LocalDateTime startDate = LocalDate.parse(startDateStr, DateTimeFormatter.ISO_DATE).atStartOfDay();
     LocalDateTime endDate = startDate.plusDays(7);
-    List<MemberRoutine> memberRoutineList = memberRoutineRepository.findByMemberMemberIdAndStartDateLessThanEqualAndEndDateLessThanEqualAndStatusAndIsDeleted(memberId, startDate, endDate, "ongoing", 0);
+    List<MemberRoutine> memberRoutineList = memberRoutineRepository.findByMemberMemberIdAndStartDateLessThanEqualAndEndDateLessThanEqualAndStatusAndIsDeleted(UserContext.getMember().getMemberId(), startDate, endDate, "ongoing", 0);
     return memberRoutineList.stream().map(MemberRoutineResponse::new).collect(Collectors.toList());
   }
 
@@ -87,8 +88,8 @@ public class MemberRoutineService {
     return memberRoutineRepository.findByMemberRoutineId(memberRoutineId).orElseThrow(() -> new CustomException(ErrorCode.ROUTINE_NOT_FOUND));
   }
 
-  private void updateStatus(Integer memberId) {
-    List<MemberRoutine> memberRoutineList = memberRoutineRepository.findByMemberMemberIdAndStatusAndIsDeleted(memberId, "ongoing", 0);
+  private void updateStatus() {
+    List<MemberRoutine> memberRoutineList = memberRoutineRepository.findByMemberMemberIdAndStatusAndIsDeleted(UserContext.getMember().getMemberId(), "ongoing", 0);
     LocalDateTime date = LocalDateTime.now();
     for (MemberRoutine memberRoutine : memberRoutineList) {
       if (memberRoutine.getEndDate().compareTo(date) == -1) {

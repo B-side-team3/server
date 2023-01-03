@@ -21,19 +21,19 @@ public class MemberRoutineController {
    return routineService.createRoutine(request);
   }
 
-  @PostMapping("/list")
-  public List<MemberRoutineResponse> getRoutine(@RequestParam Integer memberId, @RequestParam String date) {
-    return routineService.getRoutine(memberId, date);
+  @GetMapping("/list")
+  public List<MemberRoutineResponse> getRoutine(@RequestParam String date) {
+    return routineService.getRoutine(date);
   }
 
-  @PostMapping("/list/tasks")
-  public List<MemberTaskResponse> getTask(@RequestParam Integer memberId, @RequestParam String date) {
-    return routineService.getTask(memberId, date);
+  @GetMapping("/list/tasks")
+  public List<MemberTaskResponse> getTask(@RequestParam String date) {
+    return routineService.getTask(date);
   }
 
-  @PostMapping("/end")
-  public List<MemberRoutineResponse> getEndRoutine(@RequestParam Integer memberId) {
-    return routineService.getEndRoutine(memberId);
+  @GetMapping("/end")
+  public List<MemberRoutineResponse> getEndRoutine() {
+    return routineService.getEndRoutine();
   }
 
   @GetMapping("/{memberRoutineId}")
