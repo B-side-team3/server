@@ -37,11 +37,26 @@ public class MemberRoutine {
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   private LocalDateTime endDate;
 
+  @Column(name = "color", nullable = false)
+  private String color;
+
   @Column(name = "start_time")
   private String startTime;
 
+  @Column(name = "is_start_time")
+  private Integer isStartTime;
+
   @Column(name = "anchor")
   private String anchor;
+
+  @Column(name = "status", nullable = false)
+  private String status;
+
+  @Column(name = "is_deleted", nullable = false)
+  private Integer isDeleted;
+
+  @Column(name = "is_push", nullable = false)
+  private Integer isPush;
 
   @Column(name = "total_time")
   private Integer totalTime;
@@ -49,10 +64,4 @@ public class MemberRoutine {
   @Column(name = "created_date")
   @CreationTimestamp
   private LocalDateTime createdDate;
-
-  @Column(name = "status", nullable = false)
-  private String status;
-
-  @Column(name = "is_deleted", nullable = false)
-  private Integer isDeleted;
 }
