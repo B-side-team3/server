@@ -1,6 +1,6 @@
 CREATE TABLE `member` (
     `member_id`	INT(11)	NOT NULL AUTO_INCREMENT COMMENT 'member pk',
-    `email`	VARCHAR(20)	NOT NULL COMMENT '이메일 주소',
+    `email`	VARCHAR(100)	NOT NULL COMMENT '이메일 주소',
     `nickname`	VARCHAR(20) COMMENT '닉네임',
     `image_url`	TEXT NULL COMMENT '프로필 이미지',
     `is_deleted` TINYINT  NOT NULL DEFAULT '0'  COMMENT '삭제 여부',

@@ -15,23 +15,23 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/admin/routines/{routineId}/tasks")
+@RequestMapping
 public class TaskController {
 
     private final TaskService taskService;
 
-    @GetMapping
+    @GetMapping("/routines/{routineId}/tasks")
     public List<TaskResponse> getTaskList(@PathVariable("routineId")Integer routineId) {
         List<Task> taskList= taskService.getTaskList(routineId);
         return taskList.stream().map(TaskResponse::new).collect(Collectors.toList());
     }
 
-    @PostMapping
+    @PostMapping("/admin/routines/{routineId}/tasks")
     public TaskResponse createTask(@PathVariable("routineId") @Positive Integer routineId, @RequestBody TaskCreateRequest taskCreateRequest) {
         return new TaskResponse(taskService.createTask(routineId, taskCreateRequest));
     }
 
-    @PatchMapping("/{taskId}")
+    @PatchMapping("/admin/routines/{routineId}/tasks/{taskId}")
     public TaskResponse updateTask(@PathVariable("routineId") @Positive Integer routineId,
                                    @PathVariable("taskId") @Positive Integer taskId,
                                    @RequestBody @Valid TaskUpdateRequest taskUpdateRequest

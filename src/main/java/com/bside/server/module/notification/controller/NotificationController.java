@@ -6,14 +6,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/notification")
+@RequestMapping
 @RequiredArgsConstructor
 public class NotificationController {
 
     private final NotificationService notificationService;
 
-    @PatchMapping
+    @PostMapping("/notification/token")
     public void updateNotification(@RequestBody NotificationRequest notificationRequest) {
-        notificationService.updateNotification(notificationRequest);
+        notificationService.upsertNotification(notificationRequest);
     }
 }

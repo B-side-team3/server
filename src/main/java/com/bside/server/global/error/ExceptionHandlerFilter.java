@@ -35,7 +35,7 @@ public class ExceptionHandlerFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
         } catch (RequestRejectedException e) {
             String message = e.getMessage();
-            ErrorResponse errorResponse = new ErrorResponse(ErrorCode.REQUEST_REJECTED.getCode(), message);
+            ErrorResponse errorResponse = new ErrorResponse(ErrorCode.FAIL_TO_GET_KAKAO_USER_INFO.getCode(), message);
             sendErrorResponse(response, errorResponse, HttpStatus.BAD_REQUEST);
         } catch (AuthenticationException e) {
             ErrorResponse errorResponse = new ErrorResponse(e.getErrorCode());
