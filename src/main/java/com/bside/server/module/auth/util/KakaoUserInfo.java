@@ -27,11 +27,11 @@ public class KakaoUserInfo {
       final int statusCode = response.getStatusLine().getStatusCode();
       if(statusCode != 200) {
         log.error("failed to httpRequest: {}, statusCode = {}", response, statusCode);
-        throw new CustomException(ErrorCode.REQUEST_REJECTED);
+        throw new CustomException(ErrorCode.FAIL_TO_GET_KAKAO_USER_INFO);
       }
       return new ObjectMapper().readTree(response.getEntity().getContent());
     } catch (IOException e) {
-      throw new CustomException(ErrorCode.REQUEST_REJECTED);
+      throw new CustomException(ErrorCode.FAIL_TO_GET_KAKAO_USER_INFO);
     }
   }
 }

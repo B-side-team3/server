@@ -17,17 +17,19 @@ public class NotificationService {
 
     private final MemberRepository memberRepository;
 
+    /**
+     * fcm 서버 토큰 저장
+     */
     @Transactional
-    public void updateNotification(NotificationRequest notificationRequest) {
+    public void upsertNotification(NotificationRequest notificationRequest) {
+        if( notificationRequest.getToken() == null) {
+            throw new CustomException(ErrorCode.EMPTY_NOTIFICATION_TOKEN);
+        }
+
         Member member = memberRepository.findByEmailAndIsDeletedIs(UserContext.getMember().getEmail(), false).orElseThrow(
                 () -> new CustomException(ErrorCode.UNKNOWN_USER)
         );
 
-        boolean isNotification = member.isNotification();
-        if(!isNotification && notificationRequest.getToken() == null) {
-            throw new CustomException(ErrorCode.EMPTY_NOTIFICATION_TOKEN);
-        }
-        member.updateIsNotification(!isNotification);
         member.updateNotificationToken(notificationRequest.getToken());
     }
 }
