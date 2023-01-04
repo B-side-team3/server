@@ -33,6 +33,9 @@ public class AuthService {
         String oauthToken = jwtValidator.getToken(request);
         JsonNode userInfo = KakaoUserInfo.getKakaoUserInfo(oauthToken);
         String email = String.valueOf(userInfo.path("kakao_account").get("email")).replace("\"", "");
+        if(!email.contains("@")) {
+            throw new CustomException(ErrorCode.INVALID_EMAIL);
+        }
 
         Optional<Member> member = memberRepository.findByEmailAndIsDeletedIs(email, false);
 
