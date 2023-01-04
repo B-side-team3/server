@@ -42,9 +42,9 @@ public enum ErrorCode {
     TASK_TITLE_EMPTY(5001, "Task 의 이름이 없습니다."),
     TASK_EXPECTED_TIME_EMPTY(5002, "Task 의 예상 시간이 없습니다."),
 
-    // request
-    INVALID_REQUEST_URI(6000, "유효하지 않은 url 입니다."),
-    REQUEST_REJECTED(6001, "카카오 서버에서 사용자 정보를 얻지 못했습니다."),
+    // sign in
+    FAIL_TO_GET_KAKAO_USER_INFO(6000, "카카오 서버에서 사용자 정보를 얻지 못했습니다."),
+    INVALID_EMAIL(6001, "이메일이 유효하지 않습니다."),
 
     // firebase
     FAIL_TO_INIT_FIREBASE(7000, "firebase 초기화에 실패했습니다."),
