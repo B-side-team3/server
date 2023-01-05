@@ -1,15 +1,11 @@
 package com.bside.server.module.task.controller;
 
 import com.bside.server.module.task.domain.Task;
-import com.bside.server.module.task.dto.TaskCreateRequest;
 import com.bside.server.module.task.dto.TaskResponse;
-import com.bside.server.module.task.dto.TaskUpdateRequest;
 import com.bside.server.module.task.service.TaskService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import javax.validation.constraints.Positive;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,23 +16,28 @@ public class TaskController {
 
     private final TaskService taskService;
 
-    @GetMapping("/routines/{routineId}/tasks")
+    /**
+     * 루틴 찾기 - 루틴 내 task 목록 조회
+     * @param routineId 루틴 아이디
+     * @return Task 목록
+     */
+    @GetMapping("/browse/routines/{routineId}/tasks")
     public List<TaskResponse> getTaskList(@PathVariable("routineId")Integer routineId) {
         List<Task> taskList= taskService.getTaskList(routineId);
         return taskList.stream().map(TaskResponse::new).collect(Collectors.toList());
     }
 
-    @PostMapping("/admin/routines/{routineId}/tasks")
-    public TaskResponse createTask(@PathVariable("routineId") @Positive Integer routineId, @RequestBody TaskCreateRequest taskCreateRequest) {
-        return new TaskResponse(taskService.createTask(routineId, taskCreateRequest));
-    }
-
-    @PatchMapping("/admin/routines/{routineId}/tasks/{taskId}")
-    public TaskResponse updateTask(@PathVariable("routineId") @Positive Integer routineId,
-                                   @PathVariable("taskId") @Positive Integer taskId,
-                                   @RequestBody @Valid TaskUpdateRequest taskUpdateRequest
-    ) {
-        return new TaskResponse(taskService.updateTask(routineId, taskId, taskUpdateRequest));
-    }
+//    @PostMapping("/admin/routines/{routineId}/tasks")
+//    public TaskResponse createTask(@PathVariable("routineId") @Positive Integer routineId, @RequestBody TaskCreateRequest taskCreateRequest) {
+//        return new TaskResponse(taskService.createTask(routineId, taskCreateRequest));
+//    }
+//
+//    @PatchMapping("/admin/routines/{routineId}/tasks/{taskId}")
+//    public TaskResponse updateTask(@PathVariable("routineId") @Positive Integer routineId,
+//                                   @PathVariable("taskId") @Positive Integer taskId,
+//                                   @RequestBody @Valid TaskUpdateRequest taskUpdateRequest
+//    ) {
+//        return new TaskResponse(taskService.updateTask(routineId, taskId, taskUpdateRequest));
+//    }
 
 }
