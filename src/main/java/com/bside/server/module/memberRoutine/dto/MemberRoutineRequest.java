@@ -2,6 +2,7 @@ package com.bside.server.module.memberroutine.dto;
 
 import com.bside.server.global.util.UserContext;
 import com.bside.server.module.memberroutine.domain.MemberRoutine;
+import com.bside.server.module.memberroutine.enums.Color;
 import com.bside.server.module.routine.domain.Routine;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,9 +18,13 @@ public class MemberRoutineRequest {
 
   private LocalDateTime endDate;
 
+  private Color color;
+
   private String startTime;
 
   private String anchor;
+
+  private Integer isPush;
 
   @Builder.Default
   private String status = "ongoing";
@@ -34,10 +39,12 @@ public class MemberRoutineRequest {
         .routine(Routine.builder().id(request.getRoutineId()).build())
         .startDate(request.getStartDate())
         .endDate(request.getEndDate())
+        .color(request.getColor().name())
         .startTime(request.getStartTime())
         .anchor(request.getAnchor())
         .status(request.getStatus())
         .isDeleted(request.getIsDeleted())
+        .isPush(request.getIsPush())
         .build();
   }
 }

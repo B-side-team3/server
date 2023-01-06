@@ -43,9 +43,6 @@ public class MemberRoutine {
   @Column(name = "start_time")
   private String startTime;
 
-  @Column(name = "is_start_time")
-  private Integer isStartTime;
-
   @Column(name = "anchor")
   private String anchor;
 
