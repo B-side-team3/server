@@ -23,6 +23,9 @@ public class MemberRoutineResponse {
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
   private LocalDateTime createdDate;
   private String status;
+  private String color;
+  private Integer isDeleted;
+  private Integer isPush;
 
   public MemberRoutineResponse(MemberRoutine memberRoutine) {
     this.memberRoutineId = memberRoutine.getMemberRoutineId();
@@ -35,5 +38,8 @@ public class MemberRoutineResponse {
     this.totalTime = memberRoutine.getTotalTime();
     this.createdDate = memberRoutine.getCreatedDate();
     this.status = memberRoutine.getStatus();
+    this.color = memberRoutine.getColor();
+    this.isDeleted = memberRoutine.getIsDeleted();
+    this.isPush = memberRoutine.getIsPush();
   }
 }

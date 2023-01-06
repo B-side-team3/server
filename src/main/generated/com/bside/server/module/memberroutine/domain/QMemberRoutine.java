@@ -34,8 +34,6 @@ public class QMemberRoutine extends EntityPathBase<MemberRoutine> {
 
     public final NumberPath<Integer> isPush = createNumber("isPush", Integer.class);
 
-    public final NumberPath<Integer> isStartTime = createNumber("isStartTime", Integer.class);
-
     public final com.bside.server.module.member.domain.QMember member;
 
     public final NumberPath<Integer> memberRoutineId = createNumber("memberRoutineId", Integer.class);
