@@ -4,6 +4,8 @@ import com.bside.server.module.memberroutine.dto.MemberRoutineRequest;
 import com.bside.server.module.memberroutine.dto.MemberRoutineResponse;
 import com.bside.server.module.memberroutine.service.MemberRoutineService;
 import com.bside.server.module.membertask.dto.MemberTaskResponse;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,6 +46,13 @@ public class MemberRoutineController {
   @PatchMapping("/{memberRoutineId}")
   public MemberRoutineResponse updateRoutine(@PathVariable Integer memberRoutineId, @RequestBody MemberRoutineRequest request) {
     return routineService.updateRoutine(memberRoutineId, request);
+  }
+
+  @ApiOperation(value = "사용자의 루틴 초기화", notes = "사용자의 루틴을 초기화한다.(할 일 목록의 소요시간 및 상태 초기화)")
+  @ApiImplicitParam(name = "memberRoutineId", value = "사용자의 루틴 아이디", required = true)
+  @PatchMapping("/{memberRoutineId}/reset")
+  public void resetRoutine(@PathVariable Integer memberRoutineId) {
+    routineService.resetRoutine(memberRoutineId);
   }
 
   @DeleteMapping("/{memberRoutineId}")

@@ -9,6 +9,7 @@ import com.bside.server.module.memberroutine.repository.MemberRoutineRepository;
 import com.bside.server.module.memberroutine.dto.MemberRoutineRequest;
 import com.bside.server.module.membertask.domain.MemberTask;
 import com.bside.server.module.membertask.dto.MemberTaskResponse;
+import com.bside.server.module.membertask.repository.MemberTaskCondition;
 import com.bside.server.module.membertask.repository.MemberTaskRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -82,6 +83,12 @@ public class MemberRoutineService {
       memberTaskRepository.save(memberTask);
     }
     memberRoutineRepository.save(memberRoutine);
+  }
+
+  @Transactional
+  public void resetRoutine(Integer memberRoutineId) {
+    MemberTaskCondition condition = MemberTaskCondition.builder().memberRoutineId(memberRoutineId).build();
+    memberTaskRepository.resetMemberTask(condition);
   }
 
   private MemberRoutine findRoutine(Integer memberRoutineId) {

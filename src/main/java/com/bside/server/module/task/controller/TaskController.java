@@ -23,7 +23,7 @@ public class TaskController {
      * @param routineId 루틴 아이디
      * @return Task 목록
      */
-    @ApiOperation(value = "루틴의 Task 목록 조회", notes = "특정 루틴의 Task 목록을 조회한다.")
+    @ApiOperation(value = "루틴의 할 일 목록 조회", notes = "특정 루틴의 할 일 목록을 조회한다.")
     @ApiImplicitParam(name = "routineId", value = "루틴 아이디", required = true)
     @GetMapping("/browse/routines/{routineId}/tasks")
     public List<TaskResponse> getTaskList(@PathVariable("routineId")Integer routineId) {

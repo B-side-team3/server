@@ -5,6 +5,7 @@ import com.bside.server.global.error.exception.CustomException;
 import com.bside.server.module.membertask.domain.MemberTask;
 import com.bside.server.module.membertask.dto.MemberTaskRequest;
 import com.bside.server.module.membertask.dto.MemberTaskResponse;
+import com.bside.server.module.membertask.repository.MemberTaskCondition;
 import com.bside.server.module.membertask.repository.MemberTaskRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,12 @@ public class MemberTaskService {
     memberTask.setIsDeleted(request.getIsDeleted()); // 테스크편집 - 진행중인/쉬어가는
     memberTask.setStatus(request.getStatus()); // 진행상태
     return new MemberTaskResponse(memberTaskRepository.save(memberTask));
+  }
+
+  @Transactional
+  public void resetTask(Integer memberTaskId) {
+    MemberTaskCondition condition = MemberTaskCondition.builder().memberTaskId(memberTaskId).build();
+    memberTaskRepository.resetMemberTask(condition);
   }
 
 //  @Transactional
