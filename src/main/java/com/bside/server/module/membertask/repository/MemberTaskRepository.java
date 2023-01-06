@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public interface MemberTaskRepository extends JpaRepository<MemberTask, Integer> {
+public interface MemberTaskRepository extends JpaRepository<MemberTask, Integer>, MemberTaskRepositoryCustom {
   List<MemberTask> findByTaskRoutineIdAndIsDeleted(Integer routineId, Integer isDeleted);
   List<MemberTask> findByMemberMemberIdAndMemberRoutineStartDateLessThanEqualAndMemberRoutineEndDateGreaterThanEqualAndMemberRoutineStatusAndIsDeleted(Integer memberId, LocalDateTime startdDate, LocalDateTime endDate, String status, Integer isDeleted);
   List<MemberTask> findByMemberRoutineMemberRoutineId(Integer memberRoutineId);
