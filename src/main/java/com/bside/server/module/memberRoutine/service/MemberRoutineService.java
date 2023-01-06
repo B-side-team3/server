@@ -69,6 +69,8 @@ public class MemberRoutineService {
     MemberRoutine memberRoutine = findRoutine(memberRoutineId);
     memberRoutine.setAnchor(request.getAnchor());
     memberRoutine.setStatus(request.getStatus());
+    memberRoutine.setColor(request.getColor().name());
+    memberRoutine.setIsPush(request.getIsPush());
     return new MemberRoutineResponse(memberRoutineRepository.save(memberRoutine));
   }
 
