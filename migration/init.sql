@@ -80,7 +80,6 @@ CREATE TABLE `member_routine` (
     `start_date` DATE NOT NULL COMMENT '시작일자',
     `end_date` DATE NOT NULL COMMENT '종료일자',
     `color` VARCHAR(20) NOT NULL COMMENT '색상',
-    `is_start_time` TINYINT(4) NOT NULL COMMENT '시작 시간 사용 여부',
     `start_time` VARCHAR(50) NULL COMMENT '루틴 시간 설정',
     `anchor` VARCHAR(50) NULL COMMENT '루틴 앵커',
     `status` VARCHAR(20) NOT NULL DEFAULT 'uncompleted' COMMENT 'ongoing/completed/uncompleted',
