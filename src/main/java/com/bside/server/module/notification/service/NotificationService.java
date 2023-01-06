@@ -18,11 +18,11 @@ public class NotificationService {
     private final MemberRepository memberRepository;
 
     /**
-     * fcm 서버 토큰 저장
+     * fcm 서버 accessToken 저장
      */
     @Transactional
-    public void upsertNotification(NotificationRequest notificationRequest) {
-        if( notificationRequest.getToken() == null) {
+    public void upsertNotification(NotificationRequest notificationTokenRequest) {
+        if( notificationTokenRequest.getToken() == null) {
             throw new CustomException(ErrorCode.EMPTY_NOTIFICATION_TOKEN);
         }
 
@@ -30,7 +30,7 @@ public class NotificationService {
                 () -> new CustomException(ErrorCode.UNKNOWN_USER)
         );
 
-        member.updateNotificationToken(notificationRequest.getToken());
+        member.updateNotificationToken(notificationTokenRequest.getToken());
     }
 
     /**
@@ -42,6 +42,6 @@ public class NotificationService {
                 () -> new CustomException(ErrorCode.UNKNOWN_USER)
         );
 
-        member.updateIsNotification(notificationRequest.isNotification());
+        member.updateIsNotification(notificationRequest.getIsNotification());
     }
 }

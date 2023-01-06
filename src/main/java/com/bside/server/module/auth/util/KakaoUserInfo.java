@@ -5,6 +5,7 @@ import com.bside.server.global.error.exception.CustomException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.log4j.Log4j2;
+import org.apache.http.HttpHeaders;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -19,7 +20,7 @@ public class KakaoUserInfo {
     final String REQUEST_URL = "https://kapi.kakao.com/v2/user/me";
     final HttpClient CLIENT = HttpClientBuilder.create().build();
     final HttpPost POST = new HttpPost(REQUEST_URL);
-    POST.addHeader("Authorization", "Bearer " + accessToken);
+    POST.addHeader(HttpHeaders.AUTHORIZATION, "Bearer " + accessToken);
 
     try
     {
