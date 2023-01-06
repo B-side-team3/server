@@ -24,11 +24,17 @@ public class QMemberRoutine extends EntityPathBase<MemberRoutine> {
 
     public final StringPath anchor = createString("anchor");
 
+    public final StringPath color = createString("color");
+
     public final DateTimePath<java.time.LocalDateTime> createdDate = createDateTime("createdDate", java.time.LocalDateTime.class);
 
     public final DateTimePath<java.time.LocalDateTime> endDate = createDateTime("endDate", java.time.LocalDateTime.class);
 
     public final NumberPath<Integer> isDeleted = createNumber("isDeleted", Integer.class);
+
+    public final NumberPath<Integer> isPush = createNumber("isPush", Integer.class);
+
+    public final NumberPath<Integer> isStartTime = createNumber("isStartTime", Integer.class);
 
     public final com.bside.server.module.member.domain.QMember member;
 
