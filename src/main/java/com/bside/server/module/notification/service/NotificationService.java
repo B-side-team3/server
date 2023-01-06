@@ -32,4 +32,16 @@ public class NotificationService {
 
         member.updateNotificationToken(notificationRequest.getToken());
     }
+
+    /**
+     * 사용자의 알림 수신 여부 변경
+     */
+    @Transactional
+    public void updateNotificationSetting(NotificationRequest notificationRequest) {
+        Member member = memberRepository.findByEmailAndIsDeletedIs(UserContext.getMember().getEmail(), false).orElseThrow(
+                () -> new CustomException(ErrorCode.UNKNOWN_USER)
+        );
+
+        member.updateIsNotification(notificationRequest.isNotification());
+    }
 }
