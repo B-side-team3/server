@@ -18,16 +18,19 @@ public class MemberTaskController {
 
   private final MemberTaskService memberTaskService;
 
+  @ApiOperation(value = "할 일 (data) 추가")
   @PostMapping
   public MemberTaskResponse createTask(@PathVariable Integer routineId, @RequestBody MemberTaskRequest request){
     return memberTaskService.createTask(routineId, request);
   }
 
-  @GetMapping
-  public List<MemberTaskResponse> getTask(@PathVariable Integer routineId) {
-    return memberTaskService.getTask(routineId);
-  }
+//  @ApiOperation(value = "할 일 보기")
+//  @GetMapping
+//  public List<MemberTaskResponse> getTask(@PathVariable Integer routineId) {
+//    return memberTaskService.getTask(routineId);
+//  }
 
+  @ApiOperation(value = "할 일 편집")
   @PatchMapping("/{memberTaskId}")
   public MemberTaskResponse updateTask(@PathVariable Integer routineId, @PathVariable Integer memberTaskId, @RequestBody MemberTaskRequest request) {
     return memberTaskService.updateTask(routineId, memberTaskId, request);
