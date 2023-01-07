@@ -26,11 +26,11 @@ public class MemberTaskService {
     return new MemberTaskResponse(memberTaskRepository.save(request.toEntity(request)));
   }
 
-  @Transactional
-  public List<MemberTaskResponse> getTask(Integer routineId) {
-    List<MemberTask> taskList = memberTaskRepository.findByTaskRoutineIdAndIsDeleted(routineId, 0);
-    return taskList.stream().map(MemberTaskResponse::new).collect(Collectors.toList());
-  }
+//  @Transactional
+//  public List<MemberTaskResponse> getTask(Integer routineId) {
+//    List<MemberTask> taskList = memberTaskRepository.findByTaskRoutineIdAndIsDeleted(routineId, 0);
+//    return taskList.stream().map(MemberTaskResponse::new).collect(Collectors.toList());
+//  }
 
   @Transactional
   public MemberTaskResponse updateTask(Integer routineId, Integer memberTaskId, MemberTaskRequest request) {

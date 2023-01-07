@@ -14,10 +14,12 @@ import com.bside.server.module.membertask.repository.MemberTaskRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -62,7 +64,15 @@ public class MemberRoutineService {
   @Transactional
   public MemberRoutineResponse getRoutineDetail(Integer memberRoutineId) {
     MemberRoutine memberRoutine = findRoutine(memberRoutineId);
-    return new MemberRoutineResponse(memberRoutine);
+    List<MemberTask> memberTaskList = memberTaskRepository.findByMemberRoutineMemberRoutineId(memberRoutineId);
+    List<String> taskList = new ArrayList<>();
+    if (!ObjectUtils.isEmpty(memberTaskList)) {
+      for (int i = 0; i < memberTaskList.size(); i++) {
+        taskList.add(memberTaskList.get(i).getTask().getTitle());
+        taskList.add(memberTaskList.get(i).getTask().getExpectedTime().toString());
+      }
+    }
+    return new MemberRoutineResponse(memberRoutine, taskList);
   }
 
   @Transactional

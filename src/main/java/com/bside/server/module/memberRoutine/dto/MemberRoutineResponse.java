@@ -2,12 +2,15 @@ package com.bside.server.module.memberroutine.dto;
 
 import com.bside.server.module.memberroutine.domain.MemberRoutine;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class MemberRoutineResponse {
 
   private Integer memberRoutineId;
@@ -26,6 +29,7 @@ public class MemberRoutineResponse {
   private String color;
   private Integer isDeleted;
   private Integer isPush;
+  private List<String> taskList;
 
   public MemberRoutineResponse(MemberRoutine memberRoutine) {
     this.memberRoutineId = memberRoutine.getMemberRoutineId();
@@ -41,5 +45,22 @@ public class MemberRoutineResponse {
     this.color = memberRoutine.getColor();
     this.isDeleted = memberRoutine.getIsDeleted();
     this.isPush = memberRoutine.getIsPush();
+  }
+
+  public MemberRoutineResponse(MemberRoutine memberRoutine, List<String> taskList) {
+    this.memberRoutineId = memberRoutine.getMemberRoutineId();
+    this.routineId = memberRoutine.getRoutine().getId();
+    this.memberId = memberRoutine.getMember().getMemberId();
+    this.startDate = memberRoutine.getStartDate();
+    this.endDate = memberRoutine.getEndDate();
+    this.startTime = memberRoutine.getStartTime();
+    this.anchor = memberRoutine.getAnchor();
+    this.totalTime = memberRoutine.getTotalTime();
+    this.createdDate = memberRoutine.getCreatedDate();
+    this.status = memberRoutine.getStatus();
+    this.color = memberRoutine.getColor();
+    this.isDeleted = memberRoutine.getIsDeleted();
+    this.isPush = memberRoutine.getIsPush();
+    this.taskList = taskList.stream().collect(Collectors.toList());
   }
 }
