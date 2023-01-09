@@ -14,7 +14,7 @@ public class MemberController {
 
   private final MemberService memberService;
 
-  @ApiOperation(value = "프로필 요청")
+  @ApiOperation(value = "프로필 조회")
   @GetMapping("/profile")
   public MemberResponse getProfile() {
     return memberService.getProfile();
@@ -32,11 +32,9 @@ public class MemberController {
     return memberService.withdrawal();
   }
 
-  /* 구현 예정
   @ApiOperation(value = "루틴 진행 조회")
   @GetMapping("/routines")
   public MemberResponse getRoutineProgress() {
     return memberService.getRoutineProgress();
   }
-   */
 }
