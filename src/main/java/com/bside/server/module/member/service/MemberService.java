@@ -7,15 +7,23 @@ import com.bside.server.module.member.domain.Member;
 import com.bside.server.module.member.dto.MemberRequest;
 import com.bside.server.module.member.dto.MemberResponse;
 import com.bside.server.module.member.repository.MemberRepository;
+import com.bside.server.module.memberroutine.domain.MemberRoutine;
+import com.bside.server.module.memberroutine.repository.MemberRoutineRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
+
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class MemberService {
 
   private final MemberRepository memberRepository;
+  private final MemberRoutineRepository memberRoutineRepository;
 
   public MemberResponse getProfile() {
     Member member = memberRepository.findByMemberIdAndIsDeleted(UserContext.getMember().getMemberId(), false).orElseThrow(() -> new AuthenticationException(ErrorCode.UNKNOWN_USER));
@@ -38,9 +46,16 @@ public class MemberService {
     return new MemberResponse(memberRepository.save(member));
   }
 
-  /* todo 구현 예정 가입일, 루틴등록날짜, 루틴 횟수 카운트
   public MemberResponse getRoutineProgress() {
-    return new MemberResponse();
+    List<MemberRoutine> memberRoutineList = memberRoutineRepository.findByMemberMemberIdAndIsDeleted(UserContext.getMember().getMemberId(), 0);
+    List<Integer> myPageRoutineCount = new ArrayList<>();
+    List<String> myPageRoutineDate = new ArrayList<>();
+    if (!ObjectUtils.isEmpty(memberRoutineList)) {
+      for (int i = 0; i < memberRoutineList.size(); i++) {
+        myPageRoutineCount.add(i);
+        myPageRoutineDate.add(memberRoutineList.get(i).getCreatedDate().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일")));
+      }
+    }
+    return new MemberResponse(myPageRoutineCount, myPageRoutineDate);
   }
-   */
 }

@@ -9,6 +9,7 @@ import java.util.Optional;
 
 public interface MemberRoutineRepository extends JpaRepository<MemberRoutine, Integer> {
   Optional<MemberRoutine> findByMemberRoutineId(Integer memberRoutineId);
+  List<MemberRoutine> findByMemberMemberIdAndIsDeleted(Integer memberId, Integer isDeleted);
   List<MemberRoutine> findByMemberMemberIdAndStatusAndIsDeleted(Integer memberId, String status, Integer isDeleted);
   List<MemberRoutine> findByMemberMemberIdAndStartDateLessThanEqualAndEndDateGreaterThanEqualAndStatusAndIsDeleted(Integer memberId, LocalDateTime startDate, LocalDateTime endDate, String status, Integer isDeleted);
   List<MemberRoutine> findByMemberMemberIdAndStartDateLessThanEqualAndEndDateLessThanEqualAndStatusAndIsDeleted(Integer memberId, LocalDateTime startDate, LocalDateTime endDate, String status, Integer isDeleted);
