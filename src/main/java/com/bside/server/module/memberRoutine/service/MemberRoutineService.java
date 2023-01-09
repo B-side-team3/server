@@ -65,14 +65,15 @@ public class MemberRoutineService {
   public MemberRoutineResponse getRoutineDetail(Integer memberRoutineId) {
     MemberRoutine memberRoutine = findRoutine(memberRoutineId);
     List<MemberTask> memberTaskList = memberTaskRepository.findByMemberRoutineMemberRoutineId(memberRoutineId);
-    List<String> taskList = new ArrayList<>();
+    List<String> taskTitleList = new ArrayList<>();
+    List<String> taskExpectedTimeList = new ArrayList<>();
     if (!ObjectUtils.isEmpty(memberTaskList)) {
       for (int i = 0; i < memberTaskList.size(); i++) {
-        taskList.add(memberTaskList.get(i).getTask().getTitle());
-        taskList.add(memberTaskList.get(i).getTask().getExpectedTime().toString());
+        taskTitleList.add(memberTaskList.get(i).getTask().getTitle());
+        taskExpectedTimeList.add(memberTaskList.get(i).getTask().getExpectedTime().toString());
       }
     }
-    return new MemberRoutineResponse(memberRoutine, taskList);
+    return new MemberRoutineResponse(memberRoutine, taskTitleList, taskExpectedTimeList);
   }
 
   @Transactional

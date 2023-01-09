@@ -29,7 +29,8 @@ public class MemberRoutineResponse {
   private String color;
   private Integer isDeleted;
   private Integer isPush;
-  private List<String> taskList;
+  private List<String> taskTitleList;
+  private List<String> taskExpectedTimeList;
 
   public MemberRoutineResponse(MemberRoutine memberRoutine) {
     this.memberRoutineId = memberRoutine.getMemberRoutineId();
@@ -47,7 +48,7 @@ public class MemberRoutineResponse {
     this.isPush = memberRoutine.getIsPush();
   }
 
-  public MemberRoutineResponse(MemberRoutine memberRoutine, List<String> taskList) {
+  public MemberRoutineResponse(MemberRoutine memberRoutine, List<String> taskTitleList, List<String> taskExpectedTimeList) {
     this.memberRoutineId = memberRoutine.getMemberRoutineId();
     this.routineId = memberRoutine.getRoutine().getId();
     this.memberId = memberRoutine.getMember().getMemberId();
@@ -61,6 +62,7 @@ public class MemberRoutineResponse {
     this.color = memberRoutine.getColor();
     this.isDeleted = memberRoutine.getIsDeleted();
     this.isPush = memberRoutine.getIsPush();
-    this.taskList = taskList.stream().collect(Collectors.toList());
+    this.taskTitleList = taskTitleList.stream().collect(Collectors.toList());
+    this.taskExpectedTimeList = taskExpectedTimeList.stream().collect(Collectors.toList());
   }
 }

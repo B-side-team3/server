@@ -52,7 +52,7 @@ public class MemberService {
     List<String> myPageRoutineDate = new ArrayList<>();
     if (!ObjectUtils.isEmpty(memberRoutineList)) {
       for (int i = 0; i < memberRoutineList.size(); i++) {
-        myPageRoutineCount.add(i);
+        myPageRoutineCount.add(i+1);
         myPageRoutineDate.add(memberRoutineList.get(i).getCreatedDate().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일")));
       }
     }
