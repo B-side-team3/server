@@ -19,7 +19,7 @@ public class MemberRoutineController {
   private final MemberRoutineService routineService;
 
   @ApiOperation(value = "루틴 설정")
-  @PostMapping
+  @PostMapping("/{memberRoutineId}")
   public MemberRoutineResponse createRoutine(@RequestBody MemberRoutineRequest request) {
    return routineService.createRoutine(request);
   }
@@ -30,7 +30,7 @@ public class MemberRoutineController {
     return routineService.getRoutine(date);
   }
 
-  @ApiOperation(value = "할 일 별로 설정")
+  @ApiOperation(value = "할 일 별로 보기")
   @GetMapping("/list/tasks")
   public List<MemberTaskResponse> getTask(@RequestParam String date) {
     return routineService.getTask(date);
@@ -49,7 +49,7 @@ public class MemberRoutineController {
   }
 
   @ApiOperation(value = "루틴 편집")
-  @PatchMapping("/{memberRoutineId}")
+  @PatchMapping("/{memberRoutineId}/update")
   public MemberRoutineResponse updateRoutine(@PathVariable Integer memberRoutineId, @RequestBody MemberRoutineRequest request) {
     return routineService.updateRoutine(memberRoutineId, request);
   }
@@ -62,7 +62,7 @@ public class MemberRoutineController {
   }
 
   @ApiOperation(value = "루틴 삭제")
-  @DeleteMapping("/{memberRoutineId}")
+  @PatchMapping("/{memberRoutineId}/update/delete")
   public void deleteRoutine(@PathVariable Integer memberRoutineId) {
     routineService.deleteRoutine(memberRoutineId);
   }
