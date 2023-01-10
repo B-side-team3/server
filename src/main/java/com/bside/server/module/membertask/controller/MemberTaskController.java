@@ -13,6 +13,13 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+/*
+todo
+ 엔드포인트 변경 예정
+ 1. @RequestMapping("/routines/{memberRoutineId}") 로 변경한다.
+ 2. @PostMapping -> @PostMapping("/{memberRoutineId}")(나의루틴상세_루틴저장(추가))할 때 할일추가 되도록 변경한다.
+ 3. @PatchMapping("/{memberTaskId}") -> 나의루틴상세_할일편집에서 하도록 변경한다.
+ */
 @RequestMapping("/routines/{routineId}/tasks")
 public class MemberTaskController {
 
