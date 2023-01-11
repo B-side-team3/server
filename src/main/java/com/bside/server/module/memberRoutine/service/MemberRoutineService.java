@@ -32,6 +32,11 @@ public class MemberRoutineService {
 
   @Transactional
   public MemberRoutineResponse createRoutine(MemberRoutineRequest request) {
+    if (!ObjectUtils.isEmpty(request.getMemberTaskList())) {
+      for (int i = 0; i < request.getMemberTaskList().size(); i++) {
+        memberTaskRepository.save(request.getMemberTaskList().get(i).toEntity(request.getMemberTaskList().get(i)));
+      } throw new CustomException(ErrorCode.TASK_NOT_FOUND);
+    }
     return new MemberRoutineResponse(memberRoutineRepository.save(request.toEntity(request)));
   }
 

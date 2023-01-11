@@ -11,8 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -20,11 +18,10 @@ public class MemberTaskService {
 
   private final MemberTaskRepository memberTaskRepository;
 
-  @Transactional
-  public MemberTaskResponse createTask(Integer routineId, MemberTaskRequest request) {
-    memberTaskRepository.findByTaskRoutineIdAndIsDeleted(routineId, 0);
-    return new MemberTaskResponse(memberTaskRepository.save(request.toEntity(request)));
-  }
+//  @Transactional
+//  public void createTask(MemberTaskRequest request) {
+//    memberTaskRepository.save(request.toEntity(request));
+//  }
 
 //  @Transactional
 //  public List<MemberTaskResponse> getTask(Integer routineId) {
