@@ -9,27 +9,18 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequiredArgsConstructor
-/*
-todo
- 엔드포인트 변경 예정
- 1. @RequestMapping("/routines/{memberRoutineId}") 로 변경한다.
- 2. @PostMapping -> @PostMapping("/{memberRoutineId}")(나의루틴상세_루틴저장(추가))할 때 할일추가 되도록 변경한다.
- 3. @PatchMapping("/{memberTaskId}") -> 나의루틴상세_할일편집에서 하도록 변경한다.
- */
-@RequestMapping("/routines/{routineId}/tasks")
+@RequestMapping("/routines/{memberRoutineId}")
 public class MemberTaskController {
 
   private final MemberTaskService memberTaskService;
 
-  @ApiOperation(value = "할 일 (data) 추가")
-  @PostMapping
-  public MemberTaskResponse createTask(@PathVariable Integer routineId, @RequestBody MemberTaskRequest request){
-    return memberTaskService.createTask(routineId, request);
-  }
+//  @ApiOperation(value = "할 일 (data) 추가")
+//  @PostMapping
+//  public MemberTaskResponse createTask(@PathVariable Integer routineId, @RequestBody MemberTaskRequest request){
+//    return memberTaskService.createTask(routineId, request);
+//  }
 
 //  @ApiOperation(value = "할 일 보기")
 //  @GetMapping

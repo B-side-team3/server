@@ -3,11 +3,13 @@ package com.bside.server.module.memberroutine.dto;
 import com.bside.server.global.util.UserContext;
 import com.bside.server.module.memberroutine.domain.MemberRoutine;
 import com.bside.server.module.memberroutine.enums.Color;
+import com.bside.server.module.membertask.dto.MemberTaskRequest;
 import com.bside.server.module.routine.domain.Routine;
 import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 public class MemberRoutineRequest {
@@ -25,6 +27,8 @@ public class MemberRoutineRequest {
   private String anchor;
 
   private Integer isPush;
+
+  private List<MemberTaskRequest> memberTaskList;
 
   @Builder.Default
   private String status = "ongoing";
