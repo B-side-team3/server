@@ -35,13 +35,13 @@ public class MemberRoutineService {
     if (!ObjectUtils.isEmpty(request.getMemberTaskList())) {
       for (int i = 0; i < request.getMemberTaskList().size(); i++) {
         memberTaskRepository.save(request.getMemberTaskList().get(i).toEntity(request.getMemberTaskList().get(i)));
-      } throw new CustomException(ErrorCode.TASK_NOT_FOUND);
-    }
+      }
+    } else throw new CustomException(ErrorCode.TASK_NOT_FOUND);
     return new MemberRoutineResponse(memberRoutineRepository.save(request.toEntity(request)));
   }
 
   @Transactional
-  public List<MemberRoutineResponse> getRoutine(String dateStr) {
+  public List<MemberRoutineResponse> getRoutineList(String dateStr) {
     updateStatus();
     DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
     LocalDateTime date = LocalDate.parse(dateStr, formatter).atStartOfDay();
@@ -50,7 +50,7 @@ public class MemberRoutineService {
   }
 
   @Transactional
-  public List<MemberTaskResponse> getTask(String dateStr) {
+  public List<MemberTaskResponse> getTaskList(String dateStr) {
     DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
     LocalDateTime date = LocalDate.parse(dateStr, formatter).atStartOfDay();
     List<MemberTask> taskList = memberTaskRepository.findByMemberMemberIdAndMemberRoutineStartDateLessThanEqualAndMemberRoutineEndDateGreaterThanEqualAndMemberRoutineStatusAndIsDeleted(UserContext.getMember().getMemberId(), date, date, "ongoing", 0);
@@ -84,9 +84,12 @@ public class MemberRoutineService {
   @Transactional
   public MemberRoutineResponse updateRoutine(Integer memberRoutineId, MemberRoutineRequest request) {
     MemberRoutine memberRoutine = findRoutine(memberRoutineId);
+    memberRoutine.setStartDate(request.getStartDate());
+    memberRoutine.setEndDate(request.getEndDate());
     memberRoutine.setAnchor(request.getAnchor());
     memberRoutine.setStatus(request.getStatus());
     memberRoutine.setColor(request.getColor().name());
+    memberRoutine.setStartTime(request.getStartTime());
     memberRoutine.setIsPush(request.getIsPush());
     return new MemberRoutineResponse(memberRoutineRepository.save(memberRoutine));
   }

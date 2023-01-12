@@ -1,7 +1,6 @@
 package com.bside.server.module.membertask.controller;
 
 import com.bside.server.module.membertask.dto.MemberTaskRequest;
-import com.bside.server.module.membertask.dto.MemberTaskResponse;
 import com.bside.server.module.membertask.service.MemberTaskService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -11,16 +10,17 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/routines/{memberRoutineId}")
+@RequestMapping("/myRoutines/{memberRoutineId}")
+
 public class MemberTaskController {
 
   private final MemberTaskService memberTaskService;
 
-//  @ApiOperation(value = "할 일 (data) 추가")
-//  @PostMapping
-//  public MemberTaskResponse createTask(@PathVariable Integer routineId, @RequestBody MemberTaskRequest request){
-//    return memberTaskService.createTask(routineId, request);
-//  }
+  @ApiOperation(value = "루틴 시작(할일(data)추가)")
+  @PostMapping
+  public void createTask(@PathVariable Integer memberRoutineId, @RequestBody MemberTaskRequest request){
+    memberTaskService.createTask(memberRoutineId, request);
+  }
 
 //  @ApiOperation(value = "할 일 보기")
 //  @GetMapping
@@ -29,9 +29,9 @@ public class MemberTaskController {
 //  }
 
   @ApiOperation(value = "할 일 편집")
-  @PatchMapping("/{memberTaskId}")
-  public MemberTaskResponse updateTask(@PathVariable Integer routineId, @PathVariable Integer memberTaskId, @RequestBody MemberTaskRequest request) {
-    return memberTaskService.updateTask(routineId, memberTaskId, request);
+  @PatchMapping
+  public void updateTask(@PathVariable Integer memberRoutineId, @RequestBody MemberTaskRequest request) {
+    memberTaskService.updateTask(memberRoutineId, request);
   }
 
   @ApiOperation(value = "사용자 할 일 초기화", notes = "사용자 할 일을 초기화한다.(소요시간 및 상태 초기화)")
@@ -40,7 +40,7 @@ public class MemberTaskController {
           @ApiImplicitParam(name = "memberTaskId", value = "사용자 할 일 아이디", required = true)
   })
   @PatchMapping("/{memberTaskId}/reset")
-  public void resetTask(@PathVariable Integer routineId, @PathVariable Integer memberTaskId) {
+  public void resetTask(@PathVariable Integer memberRoutineId, @PathVariable Integer memberTaskId) {
     memberTaskService.resetTask(memberTaskId);
   }
 
