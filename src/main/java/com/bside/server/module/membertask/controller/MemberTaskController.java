@@ -29,7 +29,7 @@ public class MemberTaskController {
 //  }
 
   @ApiOperation(value = "할 일 편집")
-  @PatchMapping
+  @PatchMapping("/updateTask")
   public void updateTask(@PathVariable Integer memberRoutineId, @RequestBody MemberTaskRequest request) {
     memberTaskService.updateTask(memberRoutineId, request);
   }
