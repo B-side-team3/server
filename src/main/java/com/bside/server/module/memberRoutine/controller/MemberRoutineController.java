@@ -18,7 +18,7 @@ public class MemberRoutineController {
   private final MemberRoutineService routineService;
 
   @ApiOperation(value = "루틴 설정")
-  @PostMapping("/routines/{memberRoutineId}")
+  @PostMapping("/routines")
   public MemberRoutineResponse createRoutine(@RequestBody MemberRoutineRequest request) {
    return routineService.createRoutine(request);
   }
@@ -48,7 +48,7 @@ public class MemberRoutineController {
   }
 
   @ApiOperation(value = "루틴 편집")
-  @PatchMapping("/myRoutines/{memberRoutineId}/update")
+  @PatchMapping("/myRoutines/{memberRoutineId}/updateRoutine")
   public MemberRoutineResponse updateRoutine(@PathVariable Integer memberRoutineId, @RequestBody MemberRoutineRequest request) {
     return routineService.updateRoutine(memberRoutineId, request);
   }
