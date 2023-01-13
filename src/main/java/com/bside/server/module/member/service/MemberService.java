@@ -29,7 +29,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class MemberService {
 
-  @Value("${file-path.profileImage}")
+  @Value("${file-path.profileImage:0}")
   private String filePath;
 
   private final MemberRepository memberRepository;
