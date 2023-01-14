@@ -51,8 +51,8 @@ public class RoutineController {
 
     @ApiOperation(value = "루틴 엑셀 파일 업로드(admin)", httpMethod = "POST", produces = "multipart/form-data")
     @PostMapping("/routines/upload")
-    public void routineDataUpdate(@RequestPart MultipartFile file) {
-      routineService.routineDataUpdate(file);
+    public void routineFileUpload(@RequestPart MultipartFile file) {
+      routineService.routineFileUpload(file);
     }
 
 //    @ApiOperation(value = "루틴 상세 조회 (루틴 찾기)")

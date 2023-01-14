@@ -95,13 +95,13 @@ public class RoutineService {
     }
 
     @Transactional
-    public void routineDataUpdate(MultipartFile file) {
+    public void routineFileUpload(MultipartFile file) {
       if (UserContext.getMember().isAdmin() == true) {
         Path excelFilePath = Paths.get(filePath + "/" + file.getOriginalFilename());
         try {
           Files.write(excelFilePath, file.getBytes());
         } catch (Exception e) {
-          e.printStackTrace();
+            e.printStackTrace();
         }
       } else throw new CustomException(ErrorCode.NOT_ADMIN);
     }

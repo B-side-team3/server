@@ -11,6 +11,9 @@ public enum ErrorCode {
      * Category  : 3000
      * Routine   : 4000
      * Task      : 5000
+     * Sign in   : 6000
+     * firebase  : 7000
+     * 마이페이지  : 8000
      */
 
     // common
@@ -37,6 +40,7 @@ public enum ErrorCode {
     ROUTINE_NOT_FOUND(4000, "존재하지 않는 루틴입니다."),
     ROUTINE_TITLE_EMPTY(4001, "루틴의 이름이 없습니다."),
     ROUTINE_DESCRIPTION_EMPTY(4002, "루틴의 설명이 없습니다."),
+    NOT_FOUND_FILE(4003, "파일을 찾을 수 없습니다."),
 
     // Task
     TASK_NOT_FOUND(5000, "존재하지 않는 Task 입니다."),
@@ -52,7 +56,7 @@ public enum ErrorCode {
     EMPTY_NOTIFICATION_TOKEN(7001, "저장할 notification token 값이 없습니다."),
     NOTIFICATION_MEMBER_NOT_FOUND(7002, "사용자를 찾을 수 없습니다."),
 
-    // mypage
+    // 마이페이지
     NOT_FOUND(8000, "정보를 찾을 수 없습니다.")
     ;
 
