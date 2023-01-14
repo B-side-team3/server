@@ -27,6 +27,7 @@ public enum ErrorCode {
     EXPIRED_TOKEN(2006, "만료된 토큰입니다."),
     DELETED_USER(2007, "탈퇴한 회원입니다."),
     INVALID_REFRESH_REQUEST(2008, "유효하지 않은 재발급 요청입니다."),
+    NOT_ADMIN(2009, "관리자만 접근이 가능합니다."),
 
     // 카테고리
     CATEGORY_NOT_FOUND(3000, "존재하지 않는 카테고리입니다."),
