@@ -2,6 +2,7 @@ package com.bside.server.module.member.service;
 
 import com.bside.server.global.error.ErrorCode;
 import com.bside.server.global.error.exception.AuthenticationException;
+import com.bside.server.global.error.exception.CustomException;
 import com.bside.server.global.util.UserContext;
 import com.bside.server.module.auth.service.AuthService;
 import com.bside.server.module.member.domain.Member;
@@ -17,6 +18,7 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -46,9 +48,8 @@ public class MemberService {
     Member member = memberRepository.findByMemberIdAndIsDeleted(UserContext.getMember().getMemberId(), false).orElseThrow(() -> new AuthenticationException(ErrorCode.UNKNOWN_USER));
     member.setNickname(nickname);
 
-    File file = new File(UserContext.getMember().getImageUrl() != null ? UserContext.getMember().getImageUrl() : "");
-
     if (!ObjectUtils.isEmpty(imageFile)) {
+      File file = new File(UserContext.getMember().getImageUrl() != null ? UserContext.getMember().getImageUrl() : "");
       if (file.exists()) {
         file.delete();
       }
@@ -65,14 +66,20 @@ public class MemberService {
       }
 
       member.setImageUrl(imageFilePath.toString());
-    } else {
-      if (file.exists()) {
-        file.delete();
-      }
-      member.setImageUrl(null);
     }
 
     return new MemberResponse(memberRepository.save(member));
+  }
+
+  @Transactional
+  public void deleteProfileImage() {
+    Member member = memberRepository.findByMemberIdAndIsDeleted(UserContext.getMember().getMemberId(), false).orElseThrow(() -> new AuthenticationException(ErrorCode.UNKNOWN_USER));
+    if (!ObjectUtils.isEmpty(UserContext.getMember().getImageUrl())) {
+      File file = new File(UserContext.getMember().getImageUrl());
+      file.delete();
+      member.setImageUrl(null);
+    } else throw new CustomException(ErrorCode.NOT_FOUND);
+    memberRepository.save(member);
   }
 
   @Transactional

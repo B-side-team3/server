@@ -5,7 +5,6 @@ import com.bside.server.module.member.service.MemberService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,9 +22,15 @@ public class MemberController {
   }
 
   @ApiOperation(value = "프로필 수정", httpMethod = "PATCH", produces = "multipart/form-data")
-  @PatchMapping(value = "/profile/update", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+  @PatchMapping(value = "/profile/update")
   public MemberResponse updateProfile(String nickname, @ApiParam(value = "이미지 파일(/jpg, /png)") @RequestPart(required = false) MultipartFile imageFile) {
     return memberService.updateProfile(nickname, imageFile);
+  }
+
+  @ApiOperation(value = "프로필 이미지 삭제")
+  @PutMapping(value = "/profile/update")
+  public void deleteImage() {
+    memberService.deleteProfileImage();
   }
 
   @ApiOperation(value = "회원 탈퇴")
