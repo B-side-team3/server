@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequiredArgsConstructor
@@ -48,4 +49,15 @@ public class RoutineController {
         return new PageResponse<>(routineResponsePage);
     }
 
+    @ApiOperation(value = "루틴 엑셀 파일 업로드(admin)", httpMethod = "POST", produces = "multipart/form-data")
+    @PostMapping("/routines/upload")
+    public void routineDataUpdate(@RequestPart MultipartFile file) {
+      routineService.routineDataUpdate(file);
+    }
+
+//    @ApiOperation(value = "루틴 상세 조회 (루틴 찾기)")
+//    @GetMapping("/routines/{routineId}")
+//    public RoutineResponse getRoutineDetail(@PathVariable("routineId") Integer routineId) {
+//        return routineService.getRoutineDetail(routineId);
+//    }
 }

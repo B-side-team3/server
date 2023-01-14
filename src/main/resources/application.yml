@@ -23,7 +23,8 @@ spring:
     tokenExpiry: 1800000 # milliseconds, 30min
     refreshTokenExpiry: 1209600000 # milliseconds, 14days
 file-path:
-  routineImage: /svc/routine
+  routineFile: /svc/routine
+  routineImage: /svc/routine/image
   profileImage: /svc/profile_image
 fcm:
   certification: RolebitNotificationKey.json
