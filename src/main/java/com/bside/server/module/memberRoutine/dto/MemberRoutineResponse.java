@@ -6,8 +6,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -29,8 +28,7 @@ public class MemberRoutineResponse {
   private String color;
   private Integer isDeleted;
   private Integer isPush;
-  private List<String> taskTitleList;
-  private List<String> taskExpectedTimeList;
+  private Map<String, Integer> memberTaskList;
 
   public MemberRoutineResponse(MemberRoutine memberRoutine) {
     this.memberRoutineId = memberRoutine.getMemberRoutineId();
@@ -48,7 +46,7 @@ public class MemberRoutineResponse {
     this.isPush = memberRoutine.getIsPush();
   }
 
-  public MemberRoutineResponse(MemberRoutine memberRoutine, List<String> taskTitleList, List<String> taskExpectedTimeList) {
+  public MemberRoutineResponse(MemberRoutine memberRoutine, Map<String, Integer> memberTaskListMap) {
     this.memberRoutineId = memberRoutine.getMemberRoutineId();
     this.routineId = memberRoutine.getRoutine().getId();
     this.memberId = memberRoutine.getMember().getMemberId();
@@ -62,7 +60,6 @@ public class MemberRoutineResponse {
     this.color = memberRoutine.getColor();
     this.isDeleted = memberRoutine.getIsDeleted();
     this.isPush = memberRoutine.getIsPush();
-    this.taskTitleList = taskTitleList.stream().collect(Collectors.toList());
-    this.taskExpectedTimeList = taskExpectedTimeList.stream().collect(Collectors.toList());
+    this.memberTaskList = memberTaskListMap;
   }
 }

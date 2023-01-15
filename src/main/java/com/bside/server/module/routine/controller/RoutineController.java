@@ -55,9 +55,9 @@ public class RoutineController {
       routineService.routineFileUpload(file);
     }
 
-//    @ApiOperation(value = "루틴 상세 조회 (루틴 찾기)")
-//    @GetMapping("/routines/{routineId}")
-//    public RoutineResponse getRoutineDetail(@PathVariable("routineId") Integer routineId) {
-//        return routineService.getRoutineDetail(routineId);
-//    }
+    @ApiOperation(value = "루틴 상세 조회 (루틴 찾기)")
+    @GetMapping("/routines/{routineId}")
+    public RoutineResponse getRoutineDetail(@PathVariable("routineId") Integer routineId) {
+      return routineService.getRoutineDetail(routineId);
+    }
 }
