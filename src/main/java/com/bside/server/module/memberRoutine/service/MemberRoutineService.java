@@ -19,8 +19,9 @@ import org.springframework.util.ObjectUtils;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -70,15 +71,13 @@ public class MemberRoutineService {
   public MemberRoutineResponse getRoutineDetail(Integer memberRoutineId) {
     MemberRoutine memberRoutine = findRoutine(memberRoutineId);
     List<MemberTask> memberTaskList = memberTaskRepository.findByMemberRoutineMemberRoutineId(memberRoutineId);
-    List<String> taskTitleList = new ArrayList<>();
-    List<String> taskExpectedTimeList = new ArrayList<>();
+    Map<String, Integer> memberTaskListMap = new HashMap<>();
     if (!ObjectUtils.isEmpty(memberTaskList)) {
       for (int i = 0; i < memberTaskList.size(); i++) {
-        taskTitleList.add(memberTaskList.get(i).getTask().getTitle());
-        taskExpectedTimeList.add(memberTaskList.get(i).getTask().getExpectedTime().toString());
+        memberTaskListMap.put(memberTaskList.get(i).getTask().getTitle(), memberTaskList.get(i).getTask().getExpectedTime());
       }
-    }
-    return new MemberRoutineResponse(memberRoutine, taskTitleList, taskExpectedTimeList);
+    } else throw new CustomException(ErrorCode.ROUTINE_NOT_FOUND);
+    return new MemberRoutineResponse(memberRoutine, memberTaskListMap);
   }
 
   @Transactional

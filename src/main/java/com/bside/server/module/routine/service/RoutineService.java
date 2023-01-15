@@ -8,18 +8,25 @@ import com.bside.server.module.category.domain.Category;
 import com.bside.server.module.category.service.CategoryService;
 import com.bside.server.module.routine.domain.Routine;
 import com.bside.server.module.routine.dto.RoutineCreateRequest;
+import com.bside.server.module.routine.dto.RoutineResponse;
 import com.bside.server.module.routine.dto.RoutineUpdateRequest;
 import com.bside.server.module.routine.repository.RoutineRepository;
+import com.bside.server.module.task.domain.Task;
+import com.bside.server.module.task.repository.TaskRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -31,6 +38,7 @@ public class RoutineService {
 
     private final CategoryService categoryService;
     private final RoutineRepository routineRepository;
+    private final TaskRepository taskRepository;
 
     public Page<Routine> getRoutinePage(Integer categoryId, RequestParam requestParam) {
         return routineRepository.getRoutinePageByCategoryId(categoryId, requestParam.getPageRequest());
@@ -106,8 +114,16 @@ public class RoutineService {
       } else throw new CustomException(ErrorCode.NOT_ADMIN);
     }
 
-//    @Transactional
-//    public RoutineResponse getRoutineDetail(Integer routineId) {
-//      return new RoutineResponse();
-//    }
+    @Transactional
+    public RoutineResponse getRoutineDetail(Integer routineId) {
+      Routine routine = routineRepository.findById(routineId).orElseThrow(() -> new CustomException(ErrorCode.ROUTINE_NOT_FOUND));
+      List<Task> taskList = taskRepository.findByRoutineId(routineId);
+      Map<String, Integer> taskListMap = new HashMap<>();
+      if (!ObjectUtils.isEmpty(taskList)) {
+        for (int i = 0; i < taskList.size(); i++) {
+          taskListMap.put(taskList.get(i).getTitle(), taskList.get(i).getExpectedTime());
+        }
+      } else throw new CustomException(ErrorCode.ROUTINE_NOT_FOUND);
+      return new RoutineResponse(routine, taskListMap);
+    }
 }
