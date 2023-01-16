@@ -18,14 +18,10 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -90,16 +86,14 @@ public class MemberService {
     memberRepository.save(member);
   }
 
-  public MemberResponse getRoutineProgress() {
-    List<MemberRoutine> memberRoutineList = memberRoutineRepository.findByMemberMemberIdAndIsDeleted(UserContext.getMember().getMemberId(), 0);
-    List<Integer> myPageRoutineCount = new ArrayList<>();
-    List<String> myPageRoutineDate = new ArrayList<>();
-    if (!ObjectUtils.isEmpty(memberRoutineList)) {
-      for (int i = 0; i < memberRoutineList.size(); i++) {
-        myPageRoutineCount.add(i+1);
-        myPageRoutineDate.add(memberRoutineList.get(i).getCreatedDate().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일")));
-      }
-    }
-    return new MemberResponse(myPageRoutineCount, myPageRoutineDate);
-  }
+//  public MemberResponse getRoutineProgress() {
+//    List<MemberRoutine> memberRoutineList = memberRoutineRepository.findByMemberMemberIdAndIsDeleted(UserContext.getMember().getMemberId(), 0);
+//    Map<Integer, String> myPageRoutine = new HashMap<>();
+//    if (!ObjectUtils.isEmpty(memberRoutineList)) {
+//      for (int i = 0; i < memberRoutineList.size(); i++) {
+//        myPageRoutine.put(i+1, memberRoutineList.get(i).getCreatedDate().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일")));
+//      }
+//    }
+//    return new MemberResponse(myPageRoutine);
+//  }
 }

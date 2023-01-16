@@ -7,8 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -23,9 +22,7 @@ public class MemberResponse {
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
   private LocalDateTime createdDate;
 
-  private List<Integer> routineCount;
-
-  private List<String> routineDate;
+//  private Map<Integer, String> myPageRoutine;
 
   public MemberResponse(Member member) {
     this.memberId = member.getMemberId();
@@ -34,8 +31,7 @@ public class MemberResponse {
     this.createdDate = member.getCreatedDate();
   }
 
-  public MemberResponse(List<Integer> myPageRoutine, List<String> myPageRoutineDate) {
-    this.routineCount = myPageRoutine.stream().collect(Collectors.toList());
-    this.routineDate = myPageRoutineDate.stream().collect(Collectors.toList());
-  }
+//  public MemberResponse(Map<Integer, String> myPageRoutine) {
+//    this.myPageRoutine = myPageRoutine;
+//  }
 }
