@@ -19,21 +19,6 @@ public class RoutineController {
 
     private final RoutineService routineService;
 
-//    @PostMapping("/admin/routines")
-//    public RoutineResponse createRoutine(@RequestBody @Valid RoutineCreateRequest request) {
-//        return new RoutineResponse(routineService.createRoutine(request));
-//    }
-//
-//    @PatchMapping("/admin/routines/{routineId}")
-//    public RoutineResponse updateRoutine(@PathVariable("routineId") Integer routineId, @RequestBody RoutineUpdateRequest request) {
-//        return new RoutineResponse(routineService.updateRoutine(routineId, request));
-//    }
-//
-//    @DeleteMapping("/admin/routines/{routineId}")
-//    public void deleteRoutine(@PathVariable("routineId") Integer routineId) {
-//        routineService.deleteRoutine(routineId);
-//    }
-
     /**
      * 루틴 찾기 - 루틴 목록 조회
      * @param categoryId 카테고리 아이디

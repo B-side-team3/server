@@ -8,7 +8,6 @@ import com.bside.server.module.auth.service.AuthService;
 import com.bside.server.module.member.domain.Member;
 import com.bside.server.module.member.dto.MemberResponse;
 import com.bside.server.module.member.repository.MemberRepository;
-import com.bside.server.module.memberroutine.domain.MemberRoutine;
 import com.bside.server.module.memberroutine.repository.MemberRoutineRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -53,7 +52,7 @@ public class MemberService {
       UUID uuid = UUID.randomUUID();
       String imageFileName = uuid + "_" + imageFile.getOriginalFilename();
 
-      Path imageFilePath = Paths.get(filePath + '/' + imageFileName);
+      Path imageFilePath = Paths.get(filePath + imageFileName);
 
       try {
         Files.write(imageFilePath, imageFile.getBytes());
