@@ -41,7 +41,7 @@ public class MemberTaskService {
     List<MemberTask> memberTaskList = memberTaskRepository.findByMemberRoutineMemberRoutineId(memberRoutineId);
     if (!ObjectUtils.isEmpty(memberTaskList)) {
       for (MemberTask memberTask : memberTaskList) {
-        memberTask.setIsDeleted(request.getIsDeleted()); // 테스크편집 - 진행중인/쉬어가는
+        memberTask.setIsDeleted(1); // 테스크편집 - 진행중인/쉬어가는
         memberTask.setStatus(request.getStatus()); // 진행상태
         memberTaskRepository.save(memberTask);
       }
@@ -53,16 +53,4 @@ public class MemberTaskService {
     MemberTaskCondition condition = MemberTaskCondition.builder().memberTaskId(memberTaskId).build();
     memberTaskRepository.resetMemberTask(condition);
   }
-
-//  @Transactional
-//  public void deleteTask(Integer routineId, Integer memberTaskId) {
-//    memberTaskRepository.findByTaskRoutineIdAndIsDeleted(routineId, 0);
-//    MemberTask memberTask = findTask(memberTaskId);
-//    memberTask.setIsDeleted(1);
-//    memberTaskRepository.save(memberTask);
-//  }
-
-//  private MemberTask findTask(Integer memberTaskId) {
-//    return memberTaskRepository.findById(memberTaskId).orElseThrow(() -> new CustomException(ErrorCode.TASK_NOT_FOUND));
-//  }
 }

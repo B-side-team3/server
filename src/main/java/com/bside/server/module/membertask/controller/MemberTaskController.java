@@ -43,9 +43,4 @@ public class MemberTaskController {
   public void resetTask(@PathVariable Integer memberRoutineId, @PathVariable Integer memberTaskId) {
     memberTaskService.resetTask(memberTaskId);
   }
-
-//  @DeleteMapping("/{memberTaskId}")
-//  public void deleteTask(@PathVariable Integer routineId, @PathVariable Integer memberTaskId) {
-//    memberTaskService.deleteTask(routineId, memberTaskId);
-//  }
 }
