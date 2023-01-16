@@ -39,9 +39,9 @@ public class MemberController {
     memberService.withdrawal();
   }
 
-  @ApiOperation(value = "루틴 진행 조회")
-  @GetMapping("/routines")
-  public MemberResponse getRoutineProgress() {
-    return memberService.getRoutineProgress();
-  }
+//  @ApiOperation(value = "루틴 진행 조회")
+//  @GetMapping("/routines")
+//  public MemberResponse getRoutineProgress() {
+//    return memberService.getRoutineProgress();
+//  }
 }
