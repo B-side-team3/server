@@ -25,6 +25,6 @@ spring:
 file-path:
   routineFile: /svc/routine/
   routineImage: /svc/routine/image/
-  profileImage: /svc/mypage/
+  profileImage: ../svc/mypage/
 fcm:
   certification: RolebitNotificationKey.json
