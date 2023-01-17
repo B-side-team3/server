@@ -21,6 +21,7 @@ public class MemberController {
     return memberService.getProfile();
   }
 
+  @CrossOrigin
   @ApiOperation(value = "프로필 수정", httpMethod = "PATCH", produces = "multipart/form-data")
   @PatchMapping(value = "/profile/update")
   public MemberResponse updateProfile(String nickname, @ApiParam(value = "이미지 파일(/jpg, /png)") @RequestPart(required = false) MultipartFile imageFile) {
