@@ -52,7 +52,7 @@ public class MemberService {
       UUID uuid = UUID.randomUUID();
       String imageFileName = uuid + "_" + imageFile.getOriginalFilename();
 
-      Path imageFilePath = Paths.get(filePath + imageFileName);
+      Path imageFilePath = Paths.get(filePath + "\\" + imageFileName);
 
       try {
         Files.write(imageFilePath, imageFile.getBytes());
