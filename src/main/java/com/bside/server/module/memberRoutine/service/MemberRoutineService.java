@@ -87,7 +87,6 @@ public class MemberRoutineService {
     memberRoutine.setEndDate(request.getEndDate());
     memberRoutine.setAnchor(request.getAnchor());
     memberRoutine.setStatus(request.getStatus());
-    memberRoutine.setColor(request.getColor().name());
     memberRoutine.setStartTime(request.getStartTime());
     memberRoutine.setIsPush(request.getIsPush());
     return new MemberRoutineResponse(memberRoutineRepository.save(memberRoutine));

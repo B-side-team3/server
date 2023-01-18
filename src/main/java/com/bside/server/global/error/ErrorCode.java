@@ -57,7 +57,8 @@ public enum ErrorCode {
     NOTIFICATION_MEMBER_NOT_FOUND(7002, "사용자를 찾을 수 없습니다."),
 
     // 마이페이지
-    NOT_FOUND(8000, "정보를 찾을 수 없습니다.");
+    NOT_FOUND(8000, "정보를 찾을 수 없습니다."),
+    DATA_TOO_LONG(8001, "닉네임은 18자 이하로 설정해 주세요.");
 
     private final int code;
     private final String message;

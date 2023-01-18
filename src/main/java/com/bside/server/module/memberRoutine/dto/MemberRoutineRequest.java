@@ -2,7 +2,6 @@ package com.bside.server.module.memberroutine.dto;
 
 import com.bside.server.global.util.UserContext;
 import com.bside.server.module.memberroutine.domain.MemberRoutine;
-import com.bside.server.module.memberroutine.enums.Color;
 import com.bside.server.module.membertask.dto.MemberTaskRequest;
 import com.bside.server.module.routine.domain.Routine;
 import lombok.Builder;
@@ -19,8 +18,6 @@ public class MemberRoutineRequest {
   private LocalDateTime startDate;
 
   private LocalDateTime endDate;
-
-  private Color color;
 
   private String startTime;
 
@@ -43,7 +40,6 @@ public class MemberRoutineRequest {
         .routine(Routine.builder().id(request.getRoutineId()).build())
         .startDate(request.getStartDate())
         .endDate(request.getEndDate())
-        .color(request.getColor().name())
         .startTime(request.getStartTime())
         .anchor(request.getAnchor())
         .status(request.getStatus())
