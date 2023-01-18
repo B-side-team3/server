@@ -37,9 +37,6 @@ public class MemberRoutine {
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   private LocalDateTime endDate;
 
-  @Column(name = "color", nullable = false)
-  private String color;
-
   @Column(name = "start_time")
   private String startTime;
 

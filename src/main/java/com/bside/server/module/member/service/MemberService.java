@@ -42,7 +42,14 @@ public class MemberService {
   @Transactional
   public MemberResponse updateProfile(String nickname, MultipartFile imageFile) {
     Member member = memberRepository.findByMemberIdAndIsDeleted(UserContext.getMember().getMemberId(), false).orElseThrow(() -> new AuthenticationException(ErrorCode.UNKNOWN_USER));
-    member.setNickname(nickname);
+    if (!ObjectUtils.isEmpty(nickname)) {
+      member.setNickname(nickname);
+      if (nickname.length() > 18) {
+        throw new CustomException(ErrorCode.DATA_TOO_LONG);
+      }
+    } else {
+      member.setNickname(nickname);
+    }
 
     if (!ObjectUtils.isEmpty(imageFile)) {
       File file = new File(UserContext.getMember().getImageUrl() != null ? UserContext.getMember().getImageUrl() : "");

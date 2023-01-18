@@ -1,7 +1,7 @@
 CREATE TABLE `member` (
     `member_id`	INT(11)	NOT NULL AUTO_INCREMENT COMMENT 'member pk',
     `email`	VARCHAR(100)	NOT NULL COMMENT '이메일 주소',
-    `nickname`	VARCHAR(20) COMMENT '닉네임',
+    `nickname`	VARCHAR(18) COMMENT '닉네임',
     `image_url`	TEXT NULL COMMENT '프로필 이미지',
     `is_deleted` TINYINT  NOT NULL DEFAULT '0'  COMMENT '삭제 여부',
     `is_admin` TINYINT NOT NULL DEFAULT '0' COMMENT '관리자 여부',
@@ -79,7 +79,6 @@ CREATE TABLE `member_routine` (
     `routine_id` INT(11) NOT NULL COMMENT 'routine pk',
     `start_date` DATE NOT NULL COMMENT '시작일자',
     `end_date` DATE NOT NULL COMMENT '종료일자',
-    `color` VARCHAR(20) NOT NULL COMMENT '색상',
     `start_time` VARCHAR(50) NULL COMMENT '루틴 시간 설정',
     `anchor` VARCHAR(50) NULL COMMENT '루틴 앵커',
     `status` VARCHAR(20) NOT NULL DEFAULT 'uncompleted' COMMENT 'ongoing/completed/uncompleted',
