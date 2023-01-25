@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class MemberTaskResponse {
 
+  private String taskTitle;
   private Integer memberTaskId;
   private Integer taskId;
   private Integer memberId;
@@ -23,6 +24,7 @@ public class MemberTaskResponse {
   private LocalDateTime createdDate;
 
   public MemberTaskResponse(MemberTask memberTask) {
+    this.taskTitle = memberTask.getTask().getTitle();
     this.memberTaskId = memberTask.getMemberTaskId();
     this.taskId = memberTask.getTask().getId();
     this.memberId = memberTask.getMember().getMemberId();
