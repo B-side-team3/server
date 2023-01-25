@@ -12,6 +12,7 @@ import java.util.Map;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class MemberRoutineResponse {
 
+  private String routineTitle;
   private Integer memberRoutineId;
   private Integer routineId;
   private Integer memberId;
@@ -30,6 +31,7 @@ public class MemberRoutineResponse {
   private Map<String, Integer> memberTaskList;
 
   public MemberRoutineResponse(MemberRoutine memberRoutine) {
+    this.routineTitle = memberRoutine.getRoutine().getTitle();
     this.memberRoutineId = memberRoutine.getMemberRoutineId();
     this.routineId = memberRoutine.getRoutine().getId();
     this.memberId = memberRoutine.getMember().getMemberId();
