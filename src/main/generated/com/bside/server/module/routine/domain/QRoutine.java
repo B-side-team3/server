@@ -26,13 +26,13 @@ public class QRoutine extends EntityPathBase<Routine> {
 
     public final com.bside.server.module.category.domain.QCategory category;
 
-    public final DateTimePath<java.time.LocalDateTime> createdDateTime = createDateTime("createdDateTime", java.time.LocalDateTime.class);
-
     public final StringPath description = createString("description");
 
     public final NumberPath<Integer> id = createNumber("id", Integer.class);
 
     public final StringPath imageUrl = createString("imageUrl");
+
+    public final StringPath model = createString("model");
 
     public final NumberPath<Integer> period = createNumber("period", Integer.class);
 

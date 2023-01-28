@@ -13,6 +13,7 @@ import java.util.Map;
 public class MemberRoutineResponse {
 
   private String routineTitle;
+  private String roleModel;
   private Integer memberRoutineId;
   private Integer routineId;
   private Integer memberId;
@@ -32,6 +33,7 @@ public class MemberRoutineResponse {
 
   public MemberRoutineResponse(MemberRoutine memberRoutine) {
     this.routineTitle = memberRoutine.getRoutine().getTitle();
+    this.roleModel = memberRoutine.getRoutine().getModel();
     this.memberRoutineId = memberRoutine.getMemberRoutineId();
     this.routineId = memberRoutine.getRoutine().getId();
     this.memberId = memberRoutine.getMember().getMemberId();

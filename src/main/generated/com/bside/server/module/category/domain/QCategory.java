@@ -19,8 +19,6 @@ public class QCategory extends EntityPathBase<Category> {
 
     public static final QCategory category = new QCategory("category");
 
-    public final DateTimePath<java.time.LocalDateTime> createdDateTime = createDateTime("createdDateTime", java.time.LocalDateTime.class);
-
     public final NumberPath<Integer> id = createNumber("id", Integer.class);
 
     public final StringPath title = createString("title");

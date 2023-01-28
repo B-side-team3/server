@@ -22,8 +22,6 @@ public class QTask extends EntityPathBase<Task> {
 
     public static final QTask task = new QTask("task");
 
-    public final DateTimePath<java.time.LocalDateTime> createdDateTime = createDateTime("createdDateTime", java.time.LocalDateTime.class);
-
     public final NumberPath<Integer> expectedTime = createNumber("expectedTime", Integer.class);
 
     public final NumberPath<Integer> id = createNumber("id", Integer.class);
