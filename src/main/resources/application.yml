@@ -3,7 +3,7 @@ server:
 spring:
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://101.101.209.179:3306/db
+    url: jdbc:mariadb://118.67.134.52:3306/db
     username: root
     password: "#!@bside1303"
   jpa:

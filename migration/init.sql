@@ -99,6 +99,7 @@ CREATE TABLE `member_task` (
     `member_task_id` INT(11) NOT NULL AUTO_INCREMENT COMMENT 'member_task pk',
     `task_id` INT(11) NOT NULL COMMENT 'task_id',
     `member_id` INT(11) NOT NULL COMMENT 'member_id',
+    `member_routine_id` INT(11) NOT NULL COMMENT 'member_routine_id',
     `expected_time` INT(11)	NOT NULL COMMENT '예상 시간',
     `actual_time` INT(11) NOT NULL COMMENT '실제 시간',
     `status` VARCHAR(20) NOT NULL DEFAULT 'ongoing' COMMENT 'ongoing/completed/uncompleted',
@@ -107,7 +108,7 @@ CREATE TABLE `member_task` (
     PRIMARY KEY (`member_task_id`) USING BTREE,
     INDEX `member_id` (`member_id`) USING BTREE,
     CONSTRAINT `FK_member_task_member` FOREIGN KEY (`member_id`) REFERENCES `db`.`member` (`member_id`) ON UPDATE NO ACTION ON DELETE NO ACTION,
-    CONSTRAINT `FK_member_task_task` FOREIGN KEY (`task_id`) REFERENCES `db`.`task` (`task_id`) ON UPDATE NO ACTION ON DELETE NO ACTION
+    CONSTRAINT `FK_member_task_task` FOREIGN KEY (`task_id`) REFERENCES `db`.`task` (`task_id`) ON UPDATE NO ACTION ON DELETE NO ACTION,
     CONSTRAINT `FK_member_task_member_routine` FOREIGN KEY (`member_routine_id`) REFERENCES `db`.`member_routine` (`member_routine_id`) ON UPDATE RESTRICT ON DELETE RESTRICT
 )
 COLLATE='utf8_general_ci'
