@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 public class MemberTaskResponse {
 
   private String taskTitle;
+  private String roleModel;
   private Integer memberTaskId;
   private Integer taskId;
   private Integer memberId;
@@ -25,6 +26,7 @@ public class MemberTaskResponse {
 
   public MemberTaskResponse(MemberTask memberTask) {
     this.taskTitle = memberTask.getTask().getTitle();
+    this.roleModel = memberTask.getTask().getRoutine().getModel();
     this.memberTaskId = memberTask.getMemberTaskId();
     this.taskId = memberTask.getTask().getId();
     this.memberId = memberTask.getMember().getMemberId();

@@ -29,6 +29,9 @@ public class Routine {
     @Column(name = "description", nullable = false)
     private String description;
 
+    @Column(name = "model", nullable = false)
+    private String model;
+
     @Column(name = "image_url")
     private String imageUrl;
 
@@ -43,8 +46,4 @@ public class Routine {
 
     @Column(name = "total_time")
     private Integer totalTime;
-
-    @Column(name = "created_date")
-    @CreationTimestamp
-    private LocalDateTime createdDateTime;
 }
