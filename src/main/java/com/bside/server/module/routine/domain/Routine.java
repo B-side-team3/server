@@ -47,28 +47,4 @@ public class Routine {
     @Column(name = "created_date")
     @CreationTimestamp
     private LocalDateTime createdDateTime;
-
-    public void updateCategory(Category category){
-        this.category = category;
-    }
-
-    public void updateTitle(String title){
-        this.title = title;
-    }
-
-    public void updateDescription(String description) { this.description = description; }
-
-    public void updateImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
-
-    public void updatePeriod(Integer period){
-        this.period = period;
-    }
-
-    public void updateStartTime(String startTime) { this.startTime = startTime; }
-
-    public void updateAnchor(String anchor) { this.anchor = anchor; }
-
-    public void updateTotalTime(Integer totalTime){
-        this.totalTime = totalTime;
-    }
 }
