@@ -90,6 +90,7 @@ public class AuthService {
                 .member(member)
                 .build();
 
+        member.setNotificationToken(response.getAccessToken());
         oauthRepository.findByMember(member).ifPresent(oauthRepository::delete);
         oauthRepository.save(oauth);
         return response;
@@ -99,5 +100,8 @@ public class AuthService {
     public void revoke() {
         Optional<Oauth> oauth = oauthRepository.findByMember(UserContext.getMember());
         oauth.ifPresent(oauthRepository::delete);
+        if (oauth.isPresent())
+            UserContext.getMember().setNotificationToken(null);
+        memberRepository.save(UserContext.getMember());
     }
 }
