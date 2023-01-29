@@ -23,9 +23,6 @@ public class RoutineCreateRequest
     private String imageUrl;
 
     @Positive
-    private Integer period;
-
-    @Positive
     private Integer totalTime;
 
     private String startTime;
@@ -39,7 +36,6 @@ public class RoutineCreateRequest
                 .description(request.getDescription())
                 .startTime(request.getStartTime())
                 .anchor(request.getAnchor())
-                .period(request.getPeriod())
                 .totalTime(request.getTotalTime() == null ? 0 : request.getTotalTime())
                 .imageUrl(request.getImageUrl())
                 .build();

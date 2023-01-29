@@ -35,9 +35,6 @@ public class Routine {
     @Column(name = "image_url")
     private String imageUrl;
 
-    @Column(name = "period", nullable = false)
-    private Integer period;
-
     @Column(name = "start_time")
     private String startTime;
 

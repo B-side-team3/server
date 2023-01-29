@@ -34,8 +34,6 @@ public class QRoutine extends EntityPathBase<Routine> {
 
     public final StringPath model = createString("model");
 
-    public final NumberPath<Integer> period = createNumber("period", Integer.class);
-
     public final StringPath startTime = createString("startTime");
 
     public final StringPath title = createString("title");
