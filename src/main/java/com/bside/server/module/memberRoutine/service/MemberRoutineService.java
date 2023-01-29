@@ -88,7 +88,7 @@ public class MemberRoutineService {
     memberRoutine.setAnchor(request.getAnchor());
     memberRoutine.setStatus(request.getStatus());
     memberRoutine.setStartTime(request.getStartTime());
-    memberRoutine.setIsPush(request.getIsPush());
+//    memberRoutine.setIsPush(request.getIsPush());
     return new MemberRoutineResponse(memberRoutineRepository.save(memberRoutine));
   }
 

@@ -28,7 +28,7 @@ public class MemberRoutineResponse {
   private LocalDateTime createdDate;
   private String status;
   private Integer isDeleted;
-  private Integer isPush;
+//  private Integer isPush;
   private Map<String, Integer> memberTaskList;
 
   public MemberRoutineResponse(MemberRoutine memberRoutine) {
@@ -45,7 +45,7 @@ public class MemberRoutineResponse {
     this.createdDate = memberRoutine.getCreatedDate();
     this.status = memberRoutine.getStatus();
     this.isDeleted = memberRoutine.getIsDeleted();
-    this.isPush = memberRoutine.getIsPush();
+//    this.isPush = memberRoutine.getIsPush();
   }
 
   public MemberRoutineResponse(MemberRoutine memberRoutine, Map<String, Integer> memberTaskListMap) {
@@ -60,7 +60,7 @@ public class MemberRoutineResponse {
     this.createdDate = memberRoutine.getCreatedDate();
     this.status = memberRoutine.getStatus();
     this.isDeleted = memberRoutine.getIsDeleted();
-    this.isPush = memberRoutine.getIsPush();
+//    this.isPush = memberRoutine.getIsPush();
     this.memberTaskList = memberTaskListMap;
   }
 }

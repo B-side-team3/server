@@ -19,8 +19,6 @@ public class RoutineUpdateRequest
 
     private String imageUrl;
 
-    private Integer period;
-
     private Integer totalTime;
 
     private String startTime;
@@ -34,7 +32,6 @@ public class RoutineUpdateRequest
                 .description(request.getDescription())
                 .startTime(request.getStartTime())
                 .anchor(request.getAnchor())
-                .period(request.getPeriod())
                 .totalTime(request.getTotalTime() == null ? 0 : request.getTotalTime())
                 .imageUrl(request.getImageUrl())
                 .build();

@@ -23,7 +23,7 @@ public class MemberRoutineRequest {
 
   private String anchor;
 
-  private Integer isPush;
+//  private Integer isPush;
 
   private List<MemberTaskRequest> memberTaskList;
 
@@ -44,7 +44,7 @@ public class MemberRoutineRequest {
         .anchor(request.getAnchor())
         .status(request.getStatus())
         .isDeleted(request.getIsDeleted())
-        .isPush(request.getIsPush())
+//        .isPush(request.getIsPush())
         .build();
   }
 }
